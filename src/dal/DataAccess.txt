@@ -1,4 +1,4 @@
 server=10.176.111.31
-username=CSe21A_25
-pw=CSe21A_25
-database=MyTunes2021A
+username=CSe21A_24
+pw=CSe21A_24
+database=PrivateMovie

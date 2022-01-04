@@ -7,17 +7,16 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.Console;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaylistDAO {
+public class CategoryDAO {
 
     private DatabaseConnector DC;
 
-    public PlaylistDAO() throws IOException
+    public CategoryDAO() throws IOException
     {
         DC = new DatabaseConnector();
     }
@@ -256,9 +255,9 @@ public class PlaylistDAO {
 
     //test Main to test database stuff
     public static void main(String[] args) throws Exception {
-        PlaylistDAO DAO = new PlaylistDAO();
+        CategoryDAO DAO = new CategoryDAO();
 
-        if (true == false) //Set to true to run
+        if (true == true) //Set to true to run
         {
             //(re)creates new tables in database
             DAO.createPlaylistTable();
@@ -302,47 +301,43 @@ public class PlaylistDAO {
         ps.executeUpdate();
     }
 
-    //(re)creates a new playlistTable
-    //if swiching database run this in the test main to create new tables in new database
+    //recreates a new playlistTable
     public void createPlaylistTable() throws Exception
     {
         Connection connection = DC.getConnection();
 
-        String sql = "DROP TABLE playlistTable" +
-                "CREATE TABLE playlistTable (" +
-                "playlistID int IDENTITY(1,1) PRIMARY KEY," +
+        String sql = "DROP TABLE category;" +
+                "CREATE TABLE category (" +
                 "playlistName varchar(255)" +
                 ");";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.executeUpdate();
     }
 
-    //(re)creates a new playlistContentTable
-    //if swiching database run this in the test main to create new tables in new database
+    //recreates a new playlistContentTable
     public void createPlaylistContentTable() throws Exception
     {
         Connection connection = DC.getConnection();
-        String sql1 = "DROP TABLE playlistContentTable";
-        String sql2 = "CREATE TABLE playlistContentTable ( playlistID int, songID int, placement int );";
+        String sql1 = "DROP TABLE catMovie";
+        String sql2 = "CREATE TABLE catMovie ( ID int IDENTITY(1,1) PRIMARY KEY, playlistID int, songID int);";
         PreparedStatement ps1 = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
         ps1.executeUpdate();
         PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
         ps2.executeUpdate();
     }
 
-    //(re)creates a new songsTable
-    //if swiching database run this in the test main to create new tables in new database
+    //recreates a new songsTable
     public void createSongsTable() throws Exception
     {
         Connection connection = DC.getConnection();
 
-        String sql = "DROP TABLE songsTable" +
-                "CREATE TABLE songsTable(" +
-                "songID int IDENTITY(1,1) NOT NULL," +
-                "songName varchar(255)," +
-                "artist varchar(255)," +
-                "filePath varchar(255)," +
-                "songLength int" +
+        String sql = "DROP TABLE movie;" +
+                "CREATE TABLE movie(" +
+                "id int IDENTITY(1,1) NOT NULL," +
+                "name varchar(255)," +
+                "rating FLOAT(53)," +
+                "fileLink varchar(255)," +
+                "lastview TIMESTAMP" +
                 ");";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.executeUpdate();

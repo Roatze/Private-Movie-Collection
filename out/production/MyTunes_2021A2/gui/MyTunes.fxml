@@ -62,6 +62,7 @@
          </columns>
       </TableView>
       <TextField fx:id="txtNowPlaying" alignment="CENTER" editable="false" layoutX="321.0" layoutY="22.0" style="-fx-background-color: transparent;" text="No song is playing.">
+
          <font>
             <Font size="20.0" />
          </font></TextField>

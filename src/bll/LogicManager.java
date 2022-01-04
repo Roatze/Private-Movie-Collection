@@ -4,9 +4,8 @@ import be.Playlist;
 import be.Song;
 import bll.util.MusicPlayer;
 import bll.util.SongSearcher;
-import dal.PlaylistDAO;
-import dal.SongDAO;
-import javafx.collections.ObservableList;
+import dal.CategoryDAO;
+import dal.MovieDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,8 +17,8 @@ import java.util.TimerTask;
  */
 public class LogicManager
 {
-    SongDAO songDAO = new SongDAO();
-    PlaylistDAO playlistDAO = new PlaylistDAO();
+    MovieDAO songDAO = new MovieDAO();
+    CategoryDAO playlistDAO = new CategoryDAO();
     SongSearcher songSearcher = new SongSearcher();
     MusicPlayer mp;
 
@@ -67,7 +66,7 @@ public class LogicManager
     }
 
     /**
-     *Methods for SongDAO.
+     *Methods for MovieDAO.
      */
     // here we create a song with the input from the gui, sending it to Dal.
     public Song createSong (String name, String artistName, String filePath, String songLength) throws Exception
@@ -98,7 +97,7 @@ public class LogicManager
     }
 
     /**
-     * Methods for PlaylistDAO.
+     * Methods for CategoryDAO.
      */
 
     public List<Playlist> getAllPlaylists() throws Exception {

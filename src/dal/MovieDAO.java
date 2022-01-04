@@ -14,11 +14,11 @@ import java.sql.*;
 /**
  * This is where we access data for all songs.
  */
-public class SongDAO {
+public class MovieDAO {
 
     private DatabaseConnector DC;
 
-    public SongDAO() throws IOException
+    public MovieDAO() throws IOException
     {
         DC = new DatabaseConnector();
     }
