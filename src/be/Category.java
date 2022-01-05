@@ -16,13 +16,13 @@ public class Category
 {
     private StringProperty categoryName = new SimpleStringProperty();
     private List<Movie> listOfMovies = new ArrayList();
-    private IntegerProperty playlistSongCount = new SimpleIntegerProperty();
+    private IntegerProperty movieRating = new SimpleIntegerProperty();
     private StringProperty playlistTimelength = new SimpleStringProperty();
-    private int playlistId;
+    private int categoryId;
 
     public Category(int playlistID, String playlistName)
     {
-        this.playlistId = playlistID;
+        this.categoryId = playlistID;
         this.categoryName.setValue(playlistName);
 
     }
@@ -47,12 +47,12 @@ public class Category
         return playlistTimelength.get();
     }
 
-    public int getPlaylistSongCount() {
-        return playlistSongCount.get();
+    public int getMovieRating() {
+        return movieRating.get();
     }
 
-    public int getPlaylistId() {
-        return playlistId;
+    public int getCategoryId() {
+        return categoryId;
     }
 
     private void updatePlaylistSongCount()
@@ -64,7 +64,7 @@ public class Category
                 i++;
             }
         }
-        this.playlistSongCount.set(i);
+        this.movieRating.set(i);
     }
 
     private void updatePlaylistTimeLength()

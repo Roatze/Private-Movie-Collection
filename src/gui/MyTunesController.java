@@ -80,7 +80,7 @@ public class MyTunesController implements Initializable {
     public void updatePlaylist(ActionEvent actionEvent) throws Exception {
         if(tvPlaylists.getSelectionModel().getSelectedItem() != null) {
             String name = SimpleDialog.playlist();
-            Category pl = new Category(tvPlaylists.getSelectionModel().getSelectedItem().getPlaylistId(), name);
+            Category pl = new Category(tvPlaylists.getSelectionModel().getSelectedItem().getCategoryId(), name);
             myTunesModel.updatePlaylist(pl);
         }
     }

@@ -92,7 +92,7 @@ public class CategoryDAO {
     public List<Movie> getPlaylist(Category category) throws Exception
     {
         Connection connection = DC.getConnection();
-        int p_id = category.getPlaylistId();
+        int p_id = category.getCategoryId();
 
         String sql = "SELECT s.songID, s.songName , s.artist, s.filePath, s.songLength, pc.placement FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +" ORDER BY placement;";
 
@@ -120,7 +120,7 @@ public class CategoryDAO {
     //@param category
     public void deletePlaylist(Category category)
     {
-        int pId = category.getPlaylistId();
+        int pId = category.getCategoryId();
 
         String sql1 = "DELETE FROM playlistContentTable WHERE playlistID = (?); ";
         String sql2 = "DELETE FROM playlistTable WHERE playlistID=(?);";
@@ -150,9 +150,9 @@ public class CategoryDAO {
 
     {
         Connection connection = DC.getConnection();
-        int pId = category.getPlaylistId();
+        int pId = category.getCategoryId();
         int meId = movie.getSongId();
-        int index = category.getPlaylistSongCount();
+        int index = category.getMovieRating();
 
         String sql = "INSERT INTO playlistContentTable (playlistID , songID , placement) VALUES ((?), (?), (?)); ";
 
@@ -172,7 +172,7 @@ public class CategoryDAO {
     public void removeFromPlaylist(Category category, int i) throws Exception
     {
         Connection connection = DC.getConnection();
-        int pId = category.getPlaylistId();
+        int pId = category.getCategoryId();
         int index = i;
         System.out.println(index);
 
@@ -192,7 +192,7 @@ public class CategoryDAO {
     public void clearPlaylist(Category category) throws Exception
     {
         Connection connection = DC.getConnection();
-        int pId = category.getPlaylistId();
+        int pId = category.getCategoryId();
 
         String sql = "DELETE FROM playlistContentTable WHERE playlistID = (?); ";
 
@@ -210,7 +210,7 @@ public class CategoryDAO {
     public void moveSongsInPlaylist(Category category, int i, int j) throws Exception
     {
         Connection connection = DC.getConnection();
-        int pId = category.getPlaylistId();
+        int pId = category.getCategoryId();
         int index1 = i;
         int index2 = j;
 
@@ -245,7 +245,7 @@ public class CategoryDAO {
     {
         Connection connection = DC.getConnection();
 
-        int pId = category.getPlaylistId();
+        int pId = category.getCategoryId();
         String name = category.getPlaylistName();
 
         String sql = "UPDATE playlistTable SET playlistName = (?) WHERE playlistID = (?);";
