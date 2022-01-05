@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MyTunesController">
+<AnchorPane prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.MyTunesController">
    <children>
       <Label layoutX="38.0" layoutY="88.0" text="Playlists" />
       <TableView fx:id="tvPlaylists" layoutX="28.0" layoutY="105.0" onMouseClicked="#showPlaylist" prefHeight="382.0" prefWidth="200.0">

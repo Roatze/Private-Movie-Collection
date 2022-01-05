@@ -1,9 +1,11 @@
-package gui;
+package gui.Controllers;
 
 
 import be.Category;
 import be.Movie;
 
+import gui.MyTunesModel;
+import gui.SimpleDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

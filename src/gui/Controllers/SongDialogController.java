@@ -1,7 +1,8 @@
-package gui;
+package gui.Controllers;
 
 import be.Movie;
 import bll.util.ConvertTime;
+import gui.MyTunesModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
