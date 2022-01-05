@@ -89,8 +89,8 @@ public class MyTunesModel
     }
 
 
-    public ObservableList<Movie> getPlaylist (Category playlist) throws Exception {
-        playlistWithMovies.addAll(lm.getPlaylist(playlist));
+    public ObservableList<Movie> getPlaylist (Category category) throws Exception {
+        playlistWithMovies.addAll(lm.getPlaylist(category));
         return playlistWithMovies;
 
     }
