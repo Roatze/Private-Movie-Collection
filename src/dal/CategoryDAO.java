@@ -1,7 +1,10 @@
 package dal;
 
+
 import be.Category;
-import be.Song;
+
+import be.Movie;
+
 import bll.util.ConvertTime;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
@@ -69,8 +72,8 @@ public class CategoryDAO {
                 Category playlist = new Category(id, name);
 
                 // get songs in the playlist and put them in the playlists songlist
-                for (Song song : getPlaylist(playlist)) {
-                    playlist.addSongToList(song);
+                for (Movie movie : getPlaylist(playlist)) {
+                    playlist.addSongToList(movie);
                 }
                 playlist.updatePlaylist();
 
@@ -85,7 +88,8 @@ public class CategoryDAO {
     //returns a single playlist with its songs
     //@param playlist
     //@return a List of songs
-    public List<Song> getPlaylist(Category playlist) throws Exception
+<
+    public List<Movie> getPlaylist(Category playlist) throws Exception
     {
         Connection connection = DC.getConnection();
         int p_id = playlist.getPlaylistId();
@@ -94,7 +98,7 @@ public class CategoryDAO {
 
         Statement ps = connection.createStatement();
         ResultSet rs = ps.executeQuery(sql);
-        ArrayList<Song> playlistWithSongs = new ArrayList<>();
+        ArrayList<Movie> playlistWithMovies = new ArrayList<>();
         while (rs.next())
         {
             int id = rs.getInt("songID");
@@ -104,12 +108,12 @@ public class CategoryDAO {
             String length = ConvertTime.secToTime(rs.getInt("songLength"));
             int index = rs.getInt("placement");
 
-            Song med = new Song(id, title, artist, source, length);
+            Movie med = new Movie(id, title, artist, source, length);
 
-            playlistWithSongs.add(index,med);
+            playlistWithMovies.add(index,med);
 
         }
-        return playlistWithSongs;
+        return playlistWithMovies;
     }
 
     //Deletes a playlist
@@ -139,14 +143,15 @@ public class CategoryDAO {
 
     }
 
-    //Adds a song to a playlist
+    //Adds a movie to a playlist
     //@param playlist
     //@Param song
-    public void addToPlaylist(Category playlist, Song song) throws Exception
+    public void addToPlaylist(Category playlist, Movie movie) throws Exception
+
     {
         Connection connection = DC.getConnection();
         int pId = playlist.getPlaylistId();
-        int meId = song.getSongId();
+        int meId = movie.getSongId();
         int index = playlist.getPlaylistSongCount();
 
         String sql = "INSERT INTO playlistContentTable (playlistID , songID , placement) VALUES ((?), (?), (?)); ";

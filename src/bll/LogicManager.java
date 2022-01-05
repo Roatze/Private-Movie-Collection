@@ -1,7 +1,10 @@
 package bll;
 
+
 import be.Category;
-import be.Song;
+
+import be.Movie;
+
 import bll.util.MusicPlayer;
 import bll.util.SongSearcher;
 import dal.CategoryDAO;
@@ -41,9 +44,9 @@ public class LogicManager
     /**
      * Methods for playing Songs
      */
-    public void playSong(Song song)
+    public void playSong(Movie movie)
     {
-      mp.playSong(song.getFilePath());
+      mp.playSong(movie.getFilePath());
 
 
     }
@@ -56,43 +59,43 @@ public class LogicManager
         return mp.isPlaying();
     }
 
-    public void nextSong(Song song)
+    public void nextSong(Movie movie)
     {
-        mp.nextSong(song.getFilePath());
+        mp.nextSong(movie.getFilePath());
     }
-    public void previousSong(Song song)
+    public void previousSong(Movie movie)
     {
-        mp.previousSong(song.getFilePath());
+        mp.previousSong(movie.getFilePath());
     }
 
     /**
      *Methods for MovieDAO.
      */
     // here we create a song with the input from the gui, sending it to Dal.
-    public Song createSong (String name, String artistName, String filePath, String songLength) throws Exception
+    public Movie createSong (String name, String artistName, String filePath, String songLength) throws Exception
     {
        return(songDAO.createSong(name, artistName, filePath, songLength));
     }
     //Here we get all songs from the dal.
-    public List<Song> getAllSongs() throws SQLException
+    public List<Movie> getAllSongs() throws SQLException
     {
         return (songDAO.getAllSongs());
     }
-    // here we delete a song from the database.
-    public void deleteSong(Song song)
+    // here we delete a movie from the database.
+    public void deleteSong(Movie movie)
     {
-        songDAO.deleteSong(song);
+        songDAO.deleteSong(movie);
     }
-    //here we update a song in the database.
-    public void updateSong(Song song)
+    //here we update a movie in the database.
+    public void updateSong(Movie movie)
     {
-        songDAO.updateSong(song);
+        songDAO.updateSong(movie);
     }
 
-    public List<Song> searchSongs(String query) throws Exception {
-        List<Song> allSongs = getAllSongs();
-        List<Song> searchedSongs= songSearcher.SearchSongs(allSongs, query);
-        return searchedSongs;
+    public List<Movie> searchSongs(String query) throws Exception {
+        List<Movie> allMovies = getAllSongs();
+        List<Movie> searchedMovies = songSearcher.SearchSongs(allMovies, query);
+        return searchedMovies;
 
     }
 
@@ -107,9 +110,10 @@ public class LogicManager
     {
        return playlistDAO.createPlaylist(name);
     }
-    public List<Song> getPlaylist (Category playlist) throws Exception
+
+    public List<Movie> getPlaylist (Category category) throws Exception
     {
-        return playlistDAO.getPlaylist(playlist);
+        return playlistDAO.getPlaylist(category);
     }
 
     public void deletePlaylist(Category playlist)
@@ -117,9 +121,11 @@ public class LogicManager
         playlistDAO.deletePlaylist(playlist);
     }
 
-    public void addToPlaylist(Category playlist, Song song) throws Exception
+
+    public void addToPlaylist(Category category, Movie movie) throws Exception
+
     {
-        playlistDAO.addToPlaylist(playlist, song);
+        playlistDAO.addToPlaylist(category, movie);
     }
     public void removeFromPlaylist (Category playlist, int i) throws Exception
     {

@@ -1,7 +1,9 @@
 package gui;
 
+
 import be.Category;
-import be.Song;
+import be.Movie;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,9 +25,9 @@ public class MyTunesController implements Initializable {
     @FXML
     private Slider volumeController;
     @FXML
-    private TableView<Song> tvPlaylistSongTable;
+    private TableView<Movie> tvPlaylistSongTable;
     @FXML
-    private TableColumn<Song,String> tcPlaylistSongs;
+    private TableColumn<Movie,String> tcPlaylistSongs;
     @FXML
     private TableView<Category> tvPlaylists;
     @FXML
@@ -35,13 +37,13 @@ public class MyTunesController implements Initializable {
     @FXML
     private TableColumn<Category, String> tcPlaylistTime;
     @FXML
-    private TableView<Song> tvSongTable;
+    private TableView<Movie> tvSongTable;
     @FXML
-    private TableColumn<Song, String> tcSongTitle;
+    private TableColumn<Movie, String> tcSongTitle;
     @FXML
-    private TableColumn<Song, String> tcSongArtist;
+    private TableColumn<Movie, String> tcSongArtist;
     @FXML
-    private TableColumn<Song, String> tcSongTime;
+    private TableColumn<Movie, String> tcSongTime;
     @FXML
     private TextField txtSearchBar;
     @FXML
@@ -119,27 +121,27 @@ public class MyTunesController implements Initializable {
     }
 
     /**
-     * Opens a new Song Dialog window
+     * Opens a new Movie Dialog window
      */
     public void newSong(ActionEvent actionEvent) throws IOException, InterruptedException {
-        Stage stage = createSongDialog("New Song");
+        Stage stage = createSongDialog("New Movie");
         Stage mainStage = ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow()));
         stage.initOwner(mainStage);
         stage.showAndWait();
     }
 
     /**
-     * Opens a new Song Dialog window with the current info of the selected song already in the text fields
+     * Opens a new Movie Dialog window with the current info of the selected song already in the text fields
      */
     public void editSong(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(tvSongTable.getSelectionModel().getSelectedItem() != null) {
-            Stage stage = createSongDialog("Edit Song");
+            Stage stage = createSongDialog("Edit Movie");
             Stage mainStage = ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow()));
             stage.initOwner(mainStage);
 
-            Song song = tvSongTable.getSelectionModel().getSelectedItem();
-            String filepath = song.getFilePath().replace("file:/", "");
-            songController.setSongValues(song.getSongId(), song.getName(), song.getArtistName(), song.getSongLength(), filepath);
+            Movie movie = tvSongTable.getSelectionModel().getSelectedItem();
+            String filepath = movie.getFilePath().replace("file:/", "");
+            songController.setSongValues(movie.getSongId(), movie.getName(), movie.getArtistName(), movie.getSongLength(), filepath);
             stage.showAndWait();
         }
     }
@@ -309,7 +311,7 @@ public class MyTunesController implements Initializable {
         try{
             if(tvPlaylists.getSelectionModel().getSelectedItem() != null)
             {tvPlaylistSongTable.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));
-                tcPlaylistSongs.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
+                tcPlaylistSongs.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
                 tvPlaylistSongTable.getItems();}
         } catch (Exception e) {
             e.printStackTrace();
@@ -317,7 +319,7 @@ public class MyTunesController implements Initializable {
     }
 
     /**
-     * Creates the Song Dialog window for New song and Edit song
+     * Creates the Movie Dialog window for New song and Edit song
      */
     public Stage createSongDialog(String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -368,9 +370,9 @@ public class MyTunesController implements Initializable {
      * Method used for initializing the song table
      */
     private void setTvSongTable() {
-        tcSongArtist.setCellValueFactory(new PropertyValueFactory<Song, String>("artistName"));
-        tcSongTitle.setCellValueFactory(new PropertyValueFactory<Song, String>("name"));
-        tcSongTime.setCellValueFactory(new PropertyValueFactory<Song, String>("songLength"));
+        tcSongArtist.setCellValueFactory(new PropertyValueFactory<Movie, String>("artistName"));
+        tcSongTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
+        tcSongTime.setCellValueFactory(new PropertyValueFactory<Movie, String>("songLength"));
         try{
             tvSongTable.setItems(myTunesModel.getSonglist());
         } catch (Exception e) {

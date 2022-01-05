@@ -1,6 +1,6 @@
 package gui;
 
-import be.Song;
+import be.Movie;
 import bll.util.ConvertTime;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 
 /**
- * Handles the Song dialog window
+ * Handles the Movie dialog window
  */
 public class SongDialogController implements Initializable {
 
@@ -58,7 +58,7 @@ public class SongDialogController implements Initializable {
     }
 
     /**
-     * Closes the Song window when the Cancel button is clicked.
+     * Closes the Movie window when the Cancel button is clicked.
      */
     public void cancel(ActionEvent actionEvent) {
         ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow())).close();
@@ -73,8 +73,8 @@ public class SongDialogController implements Initializable {
             myTunesModel.createSong(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
 
         } else {
-            Song song = new Song(songID, txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
-            myTunesModel.updateSong(song);
+            Movie movie = new Movie(songID, txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
+            myTunesModel.updateSong(movie);
         }
         ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow())).close();
     }
