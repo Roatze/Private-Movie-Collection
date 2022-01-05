@@ -340,7 +340,7 @@ public class CategoryDAO {
                 "CREATE TABLE movie(" +
                 "id int IDENTITY(1,1) NOT NULL," +
                 "name varchar(255)," +
-                "rating FLOAT(53)," +
+                "rating varchar(255)," +
                 "fileLink varchar(255)," +
                 "lastview TIMESTAMP" +
                 ");";
