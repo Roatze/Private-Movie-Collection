@@ -15,7 +15,7 @@ import java.util.List;
 public class Category
 {
     private StringProperty categoryName = new SimpleStringProperty();
-    private List<Song> listOfMovies = new ArrayList();
+    private List<Movie> listOfMovies = new ArrayList();
     private IntegerProperty playlistSongCount = new SimpleIntegerProperty();
     private StringProperty playlistTimelength = new SimpleStringProperty();
     private int playlistId;
@@ -33,9 +33,9 @@ public class Category
     Here we want to return the list of songs
      */
 
-    public void addSongToList(Song song)
+    public void addSongToList(Movie movie)
     {
-        listOfMovies.add(song);
+        listOfMovies.add(movie);
     }
 
     public String getPlaylistName() {
@@ -58,8 +58,8 @@ public class Category
     private void updatePlaylistSongCount()
     {
         int i = 0;
-        for (Song song: listOfMovies) {
-            if (song != null)
+        for (Movie movie: listOfMovies) {
+            if (movie != null)
             {
                 i++;
             }
@@ -70,10 +70,10 @@ public class Category
     private void updatePlaylistTimeLength()
     {
         List<String> times = new ArrayList<>();
-        for (Song song: listOfMovies) {
-            if (song != null)
+        for (Movie movie: listOfMovies) {
+            if (movie != null)
             {
-                times.add(song.getSongLength());
+                times.add(movie.getSongLength());
             }
         }
         this.playlistTimelength.set(ConvertTime.sumTime(times));
