@@ -1,7 +1,7 @@
 package gui;
 
+import be.Movie;
 import be.Playlist;
-import be.Song;
 import bll.LogicManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,9 +16,9 @@ import java.util.TimerTask;
  */
 public class MyTunesModel
 {
-    private ObservableList<Song> songlist;
+    private ObservableList<Movie> songlist;
     private ObservableList<Playlist> playlistlist;
-    private ObservableList<Song> playlistWithSongs;
+    private ObservableList<Movie> playlistWithMovies;
     private LogicManager lm;
 
     public MyTunesModel() throws Exception{
@@ -27,11 +27,11 @@ public class MyTunesModel
         songlist.addAll(lm.getAllSongs());
         playlistlist = FXCollections.observableArrayList();
         playlistlist.addAll(lm.getAllPlaylists());
-        playlistWithSongs = FXCollections.observableArrayList();
+        playlistWithMovies = FXCollections.observableArrayList();
     }
 
-    public void playSong(Song song) {
-        lm.playSong(song);
+    public void playSong(Movie movie) {
+        lm.playSong(movie);
     }
 
     public void stopPlaying() {
@@ -42,34 +42,34 @@ public class MyTunesModel
         return lm.isPlaying();
     }
 
-    public void nextSong(Song song){
-        lm.nextSong(song);}
+    public void nextSong(Movie movie){
+        lm.nextSong(movie);}
 
-    public void previousSong(Song song) {
-        lm.previousSong(song);
+    public void previousSong(Movie movie) {
+        lm.previousSong(movie);
     }
 
     public void createSong(String name, String artistName, String filePath, String songLength) throws Exception {
         songlist.add(lm.createSong(name, artistName, filePath, songLength));
     }
 
-    public ObservableList<Song> getSonglist() {
+    public ObservableList<Movie> getSonglist() {
         return songlist;
     }
 
     public void searchSongs(String query) throws Exception {
-        List<Song> searchedSongs = lm.searchSongs(query);
+        List<Movie> searchedMovies = lm.searchSongs(query);
         songlist.clear();
-        songlist.addAll(searchedSongs);
+        songlist.addAll(searchedMovies);
     }
 
-    public void deleteSong(Song song) throws Exception {
-        lm.deleteSong(song);
-        songlist.remove(song);
+    public void deleteSong(Movie movie) throws Exception {
+        lm.deleteSong(movie);
+        songlist.remove(movie);
     }
 
-    public void updateSong(Song song) throws SQLException {
-        lm.updateSong(song);
+    public void updateSong(Movie movie) throws SQLException {
+        lm.updateSong(movie);
         songlist.clear();
         songlist.addAll(lm.getAllSongs());
     }
@@ -84,9 +84,9 @@ public class MyTunesModel
         playlistlist.addAll(lm.getAllPlaylists());
     }
 
-    public ObservableList<Song> getPlaylist (Playlist playlist) throws Exception {
-        playlistWithSongs.addAll(lm.getPlaylist(playlist));
-        return playlistWithSongs;
+    public ObservableList<Movie> getPlaylist (Playlist playlist) throws Exception {
+        playlistWithMovies.addAll(lm.getPlaylist(playlist));
+        return playlistWithMovies;
     }
 
     public void deletePlaylist (Playlist playlist) {
@@ -94,21 +94,21 @@ public class MyTunesModel
         lm.deletePlaylist(playlist);
     }
 
-    public void addToPlaylist(Playlist playlist, Song song) throws Exception {
-        lm.addToPlaylist(playlist, song);
-        playlistWithSongs.add(song);
+    public void addToPlaylist(Playlist playlist, Movie movie) throws Exception {
+        lm.addToPlaylist(playlist, movie);
+        playlistWithMovies.add(movie);
         updatePlaylist(playlist);
     }
 
-    public void removeFromPlaylist(Playlist playlist, Song song, int i) throws  Exception {
+    public void removeFromPlaylist(Playlist playlist, Movie movie, int i) throws  Exception {
         lm.removeFromPlaylist(playlist, i);
-        playlistWithSongs.remove(song);
+        playlistWithMovies.remove(movie);
         updatePlaylist(playlist);
     }
 
     public void clearPlaylist(Playlist playlist) throws Exception {
         lm.clearPlaylist(playlist);
-        playlistWithSongs.clear();
+        playlistWithMovies.clear();
     }
 
     public void updatePlaylist(Playlist playlist) throws  Exception {
@@ -118,7 +118,7 @@ public class MyTunesModel
     }
 
     public void swapSongsInPlaylist(Playlist playlist, int i, int j) throws Exception {
-        Collections.swap(playlistWithSongs, i, j);
+        Collections.swap(playlistWithMovies, i, j);
         lm.swapSongsInPlaylist(playlist, i, j);
     }
 

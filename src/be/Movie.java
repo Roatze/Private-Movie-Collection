@@ -6,9 +6,9 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * This is the Song class, here we specify what a Song is.
+ * This is the Movie class, here we specify what a Movie is.
  */
-public class Song
+public class Movie
 {
     private StringProperty name = new SimpleStringProperty();
     private StringProperty artistName = new SimpleStringProperty();
@@ -16,7 +16,7 @@ public class Song
     private IntegerProperty songId = new SimpleIntegerProperty();
     private String filePath;
 
-    public Song(int songID, String name, String artistName,String filePath,String songLength)
+    public Movie(int songID, String name, String artistName, String filePath, String songLength)
     {
         this.songId.set(songID);
         this.name.set(name);

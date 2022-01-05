@@ -1,7 +1,7 @@
 package dal;
 
 
-import be.Song;
+import be.Movie;
 import bll.util.ConvertTime;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -29,7 +29,7 @@ public class MovieDAO {
     }
 
     // This is the method to create a song in the Database. This is also where the song gets an ID.
-    public Song createSong(String songName, String artist, String filePath, String songLength) throws Exception
+    public Movie createSong(String songName, String artist, String filePath, String songLength) throws Exception
     {
         Connection con = DC.getConnection();
 
@@ -47,8 +47,8 @@ public class MovieDAO {
             if (rs.next())
             {
                 int id = rs.getInt(1);
-                Song song = new Song(id, songName, artist, filePath, songLength);
-                return song;
+                Movie movie = new Movie(id, songName, artist, filePath, songLength);
+                return movie;
             }
 
         }
@@ -56,7 +56,7 @@ public class MovieDAO {
     }
 
     // This is the method to get all available songs in the database.
-    public ObservableList<Song> getAllSongs() throws SQLException
+    public ObservableList<Movie> getAllSongs() throws SQLException
     {
         try(Connection connection = DC.getConnection())
         {
@@ -64,7 +64,7 @@ public class MovieDAO {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
-            ObservableList<Song> allSongs = FXCollections.observableArrayList();
+            ObservableList<Movie> allMovies = FXCollections.observableArrayList();
 
             while(rs.next())
             {
@@ -74,15 +74,15 @@ public class MovieDAO {
                 String filePath = rs.getString("filePath");
                 String songLength = ConvertTime.secToTime(rs.getInt("songLength"));
 
-                Song song = new Song(songÍD, songName,artistName,filePath,songLength);
-                allSongs.add(song);
+                Movie movie = new Movie(songÍD, songName,artistName,filePath,songLength);
+                allMovies.add(movie);
             }
 
-            return allSongs;
+            return allMovies;
         }
     }
 
-    public void deleteSong(Song song)
+    public void deleteSong(Movie movie)
     {
         String sql1 = "DELETE FROM playlistContentTable WHERE songID = (?);";
         String sql2 = "DELETE FROM songsTable WHERE songID = (?);";
@@ -92,8 +92,8 @@ public class MovieDAO {
             PreparedStatement ps1 = connection.prepareStatement(sql1,Statement.RETURN_GENERATED_KEYS);
             PreparedStatement ps2 = connection.prepareStatement(sql2,Statement.RETURN_GENERATED_KEYS);
 
-            ps1.setInt(1, song.getSongId());
-            ps2.setInt(1, song.getSongId());
+            ps1.setInt(1, movie.getSongId());
+            ps2.setInt(1, movie.getSongId());
             ps1.executeUpdate();
             ps2.executeUpdate();
 
@@ -104,18 +104,18 @@ public class MovieDAO {
         }
     }
 
-    public void updateSong(Song song)
+    public void updateSong(Movie movie)
     {
 
         String sql = "UPDATE songsTable SET songName= (?), artist=(?), songLength=(?), filePath=(?) WHERE songID = (?);";
         try(Connection connection = DC.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, song.getName());
-            statement.setString(2, song.getArtistName());
-            statement.setInt(3,ConvertTime.timeToSec(song.getSongLength()));
-            statement.setString(4, filePathToURI(song.getFilePath()));
-            statement.setInt(5,song.getSongId());
+            statement.setString(1, movie.getName());
+            statement.setString(2, movie.getArtistName());
+            statement.setInt(3,ConvertTime.timeToSec(movie.getSongLength()));
+            statement.setString(4, filePathToURI(movie.getFilePath()));
+            statement.setInt(5, movie.getSongId());
             statement.executeUpdate();
 
         } catch (SQLException throwables) {
