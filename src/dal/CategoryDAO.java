@@ -88,7 +88,7 @@ public class CategoryDAO {
     //returns a single playlist with its songs
     //@param playlist
     //@return a List of songs
-<
+
     public List<Movie> getPlaylist(Category playlist) throws Exception
     {
         Connection connection = DC.getConnection();
