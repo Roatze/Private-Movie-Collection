@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Here we describe the Playlist class, and what it can do.
+ * Here we describe the Category class, and what it can do.
  */
 public class Category
 {

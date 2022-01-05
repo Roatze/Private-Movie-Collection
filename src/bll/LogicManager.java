@@ -116,9 +116,9 @@ public class LogicManager
         return playlistDAO.getPlaylist(category);
     }
 
-    public void deletePlaylist(Category playlist)
+    public void deletePlaylist(Category category)
     {
-        playlistDAO.deletePlaylist(playlist);
+        playlistDAO.deletePlaylist(category);
     }
 
 
@@ -127,22 +127,22 @@ public class LogicManager
     {
         playlistDAO.addToPlaylist(category, movie);
     }
-    public void removeFromPlaylist (Category playlist, int i) throws Exception
+    public void removeFromPlaylist (Category category, int i) throws Exception
     {
-        playlistDAO.removeFromPlaylist(playlist, i);
+        playlistDAO.removeFromPlaylist(category, i);
     }
-    public void clearPlaylist(Category playlist) throws Exception
+    public void clearPlaylist(Category category) throws Exception
     {
-        playlistDAO.clearPlaylist(playlist);
+        playlistDAO.clearPlaylist(category);
     }
-    public void updatePlaylist (Category playlist) throws Exception
+    public void updatePlaylist (Category category) throws Exception
     {
-        playlistDAO.updatePlaylist(playlist);
+        playlistDAO.updatePlaylist(category);
     }
 
-    public void swapSongsInPlaylist(Category playlist, int i, int j) throws Exception
+    public void swapSongsInPlaylist(Category category, int i, int j) throws Exception
     {
-        playlistDAO.moveSongsInPlaylist(playlist, i, j);
+        playlistDAO.moveSongsInPlaylist(category, i, j);
     }
 
     public void setVolume(double volume)

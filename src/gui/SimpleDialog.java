@@ -30,6 +30,6 @@ public class SimpleDialog {
      * @return user input
      */
     public static String playlist(){
-        return JOptionPane.showInputDialog(null,"Playlist name: ", "New/Edit Playlist", JOptionPane.PLAIN_MESSAGE);
+        return JOptionPane.showInputDialog(null,"Category name: ", "New/Edit Category", JOptionPane.PLAIN_MESSAGE);
     }
 }

@@ -89,47 +89,47 @@ public class MyTunesModel
     }
 
 
-    public ObservableList<Movie> getPlaylist (Category playlist) throws Exception {
-        playlistWithMovies.addAll(lm.getPlaylist(playlist));
+    public ObservableList<Movie> getPlaylist (Category category) throws Exception {
+        playlistWithMovies.addAll(lm.getPlaylist(category));
         return playlistWithMovies;
 
     }
 
-    public void deletePlaylist (Category playlist) {
-        playlistlist.remove(playlist);
-        lm.deletePlaylist(playlist);
+    public void deletePlaylist (Category category) {
+        playlistlist.remove(category);
+        lm.deletePlaylist(category);
     }
 
 
-    public void addToPlaylist(Category playlist, Movie movie) throws Exception {
-        lm.addToPlaylist(playlist, movie);
+    public void addToPlaylist(Category category, Movie movie) throws Exception {
+        lm.addToPlaylist(category, movie);
         playlistWithMovies.add(movie);
-        updatePlaylist(playlist);
+        updatePlaylist(category);
     }
 
-    public void removeFromPlaylist(Category playlist, Movie movie, int i) throws  Exception {
+    public void removeFromPlaylist(Category category, Movie movie, int i) throws  Exception {
 
-        lm.removeFromPlaylist(playlist, i);
+        lm.removeFromPlaylist(category, i);
         playlistWithMovies.remove(movie);
-        updatePlaylist(playlist);
+        updatePlaylist(category);
     }
 
-    public void clearPlaylist(Category playlist) throws Exception {
-        lm.clearPlaylist(playlist);
+    public void clearPlaylist(Category category) throws Exception {
+        lm.clearPlaylist(category);
         playlistWithMovies.clear();
     }
 
-    public void updatePlaylist(Category playlist) throws  Exception {
-        lm.updatePlaylist(playlist);
+    public void updatePlaylist(Category category) throws  Exception {
+        lm.updatePlaylist(category);
         playlistlist.clear();
         playlistlist.addAll(lm.getAllPlaylists());
     }
 
 
-    public void swapSongsInPlaylist(Category playlist, int i, int j) throws Exception {
+    public void swapSongsInPlaylist(Category category, int i, int j) throws Exception {
         Collections.swap(playlistWithMovies, i, j);
 
-        lm.swapSongsInPlaylist(playlist, i, j);
+        lm.swapSongsInPlaylist(category, i, j);
     }
 
     public void timer(TimerTask t) {
