@@ -1,6 +1,6 @@
 package gui;
 
-import be.Playlist;
+import be.Category;
 import be.Song;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,13 +27,13 @@ public class MyTunesController implements Initializable {
     @FXML
     private TableColumn<Song,String> tcPlaylistSongs;
     @FXML
-    private TableView<Playlist> tvPlaylists;
+    private TableView<Category> tvPlaylists;
     @FXML
-    private TableColumn<Playlist, String> tcPlaylistName;
+    private TableColumn<Category, String> tcPlaylistName;
     @FXML
-    private TableColumn<Playlist, Integer> tcNumberSongs;
+    private TableColumn<Category, Integer> tcNumberSongs;
     @FXML
-    private TableColumn<Playlist, String> tcPlaylistTime;
+    private TableColumn<Category, String> tcPlaylistTime;
     @FXML
     private TableView<Song> tvSongTable;
     @FXML
@@ -78,7 +78,7 @@ public class MyTunesController implements Initializable {
     public void updatePlaylist(ActionEvent actionEvent) throws Exception {
         if(tvPlaylists.getSelectionModel().getSelectedItem() != null) {
             String name = SimpleDialog.playlist();
-            Playlist pl = new Playlist(tvPlaylists.getSelectionModel().getSelectedItem().getPlaylistId(), name);
+            Category pl = new Category(tvPlaylists.getSelectionModel().getSelectedItem().getPlaylistId(), name);
             myTunesModel.updatePlaylist(pl);
         }
     }
@@ -354,9 +354,9 @@ public class MyTunesController implements Initializable {
      * Method used for initializing the playlists
      */
     public void setTcPlaylistTable() {
-        tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistName"));
-        tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Playlist, String>("playlistTimelength"));
-        tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("playlistSongCount"));
+        tcPlaylistName.setCellValueFactory(new PropertyValueFactory<Category, String>("playlistName"));
+        tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Category, String>("playlistTimelength"));
+        tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Category, Integer>("playlistSongCount"));
         try {
             tvPlaylists.setItems(myTunesModel.getAllPlaylists());
         } catch (Exception e) {

@@ -12,18 +12,18 @@ import java.util.List;
 /**
  * Here we describe the Playlist class, and what it can do.
  */
-public class Playlist
+public class Category
 {
-    private StringProperty playlistName = new SimpleStringProperty();
-    private List<Song> listOfSongs = new ArrayList();
+    private StringProperty categoryName = new SimpleStringProperty();
+    private List<Song> listOfMovies = new ArrayList();
     private IntegerProperty playlistSongCount = new SimpleIntegerProperty();
     private StringProperty playlistTimelength = new SimpleStringProperty();
     private int playlistId;
 
-    public Playlist(int playlistID, String playlistName)
+    public Category(int playlistID, String playlistName)
     {
         this.playlistId = playlistID;
-        this.playlistName.setValue(playlistName);
+        this.categoryName.setValue(playlistName);
 
     }
     /*
@@ -35,11 +35,11 @@ public class Playlist
 
     public void addSongToList(Song song)
     {
-        listOfSongs.add(song);
+        listOfMovies.add(song);
     }
 
     public String getPlaylistName() {
-        return playlistName.get();
+        return categoryName.get();
     }
 
     //is being used by a PropertyValueFactory in MTC.
@@ -58,7 +58,7 @@ public class Playlist
     private void updatePlaylistSongCount()
     {
         int i = 0;
-        for (Song song: listOfSongs) {
+        for (Song song: listOfMovies) {
             if (song != null)
             {
                 i++;
@@ -70,7 +70,7 @@ public class Playlist
     private void updatePlaylistTimeLength()
     {
         List<String> times = new ArrayList<>();
-        for (Song song: listOfSongs) {
+        for (Song song: listOfMovies) {
             if (song != null)
             {
                 times.add(song.getSongLength());

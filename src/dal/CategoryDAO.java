@@ -1,6 +1,6 @@
 package dal;
 
-import be.Playlist;
+import be.Category;
 import be.Song;
 import bll.util.ConvertTime;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -24,7 +24,7 @@ public class CategoryDAO {
     //creates a new playlist
     //@param name
     //@return Playlist
-    public Playlist createPlaylist(String name) throws Exception
+    public Category createPlaylist(String name) throws Exception
     {
         Connection connection = DC.getConnection();
 
@@ -38,7 +38,7 @@ public class CategoryDAO {
             if (rs.next())
             {
                 int id = rs.getInt(1);
-                Playlist playlist = new Playlist(id, name);
+                Category playlist = new Category(id, name);
                 return playlist;
             }
 
@@ -48,7 +48,7 @@ public class CategoryDAO {
 
     //returns an ObservableList with playlists from playlist table
     //@return ObservableList with playlists
-    public ObservableList<Playlist> getAllPlaylist() throws Exception
+    public ObservableList<Category> getAllPlaylist() throws Exception
     {
         try (Connection connection = DC.getConnection())
         {
@@ -57,7 +57,7 @@ public class CategoryDAO {
             ResultSet rs = statement.executeQuery(sql);
 
             // new empty list to hold all playlists
-            ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
+            ObservableList<Category> allPlaylist = FXCollections.observableArrayList();
 
             // get all playlists from database and put them in the list of playlists
             while (rs.next())
@@ -66,7 +66,7 @@ public class CategoryDAO {
                 String name = rs.getString("playlistName");
 
                 // save the playlist data in a new playlist object
-                Playlist playlist = new Playlist(id, name);
+                Category playlist = new Category(id, name);
 
                 // get songs in the playlist and put them in the playlists songlist
                 for (Song song : getPlaylist(playlist)) {
@@ -85,7 +85,7 @@ public class CategoryDAO {
     //returns a single playlist with its songs
     //@param playlist
     //@return a List of songs
-    public List<Song> getPlaylist(Playlist playlist) throws Exception
+    public List<Song> getPlaylist(Category playlist) throws Exception
     {
         Connection connection = DC.getConnection();
         int p_id = playlist.getPlaylistId();
@@ -114,7 +114,7 @@ public class CategoryDAO {
 
     //Deletes a playlist
     //@param playlist
-    public void deletePlaylist(Playlist playlist)
+    public void deletePlaylist(Category playlist)
     {
         int pId = playlist.getPlaylistId();
 
@@ -142,7 +142,7 @@ public class CategoryDAO {
     //Adds a song to a playlist
     //@param playlist
     //@Param song
-    public void addToPlaylist(Playlist playlist, Song song) throws Exception
+    public void addToPlaylist(Category playlist, Song song) throws Exception
     {
         Connection connection = DC.getConnection();
         int pId = playlist.getPlaylistId();
@@ -164,7 +164,7 @@ public class CategoryDAO {
     //removes a song from a single playlist
     //@param playlist
     //@param song
-    public void removeFromPlaylist(Playlist playlist, int i) throws Exception
+    public void removeFromPlaylist(Category playlist, int i) throws Exception
     {
         Connection connection = DC.getConnection();
         int pId = playlist.getPlaylistId();
@@ -184,7 +184,7 @@ public class CategoryDAO {
 
     //removes all songs from a single playlist
     //@param playlist
-    public void clearPlaylist(Playlist playlist) throws Exception
+    public void clearPlaylist(Category playlist) throws Exception
     {
         Connection connection = DC.getConnection();
         int pId = playlist.getPlaylistId();
@@ -202,7 +202,7 @@ public class CategoryDAO {
     //moves a song in a single playlist
     //@param playlist
     //@param song
-    public void moveSongsInPlaylist(Playlist playlist, int i, int j) throws Exception
+    public void moveSongsInPlaylist(Category playlist, int i, int j) throws Exception
     {
         Connection connection = DC.getConnection();
         int pId = playlist.getPlaylistId();
@@ -236,7 +236,7 @@ public class CategoryDAO {
 
     //updates a single playlist with is new name
     //@param playlist
-    public void updatePlaylist(Playlist playlist) throws Exception
+    public void updatePlaylist(Category playlist) throws Exception
     {
         Connection connection = DC.getConnection();
 

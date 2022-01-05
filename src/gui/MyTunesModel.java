@@ -1,6 +1,6 @@
 package gui;
 
-import be.Playlist;
+import be.Category;
 import be.Song;
 import bll.LogicManager;
 import javafx.collections.FXCollections;
@@ -17,7 +17,7 @@ import java.util.TimerTask;
 public class MyTunesModel
 {
     private ObservableList<Song> songlist;
-    private ObservableList<Playlist> playlistlist;
+    private ObservableList<Category> playlistlist;
     private ObservableList<Song> playlistWithSongs;
     private LogicManager lm;
 
@@ -74,7 +74,7 @@ public class MyTunesModel
         songlist.addAll(lm.getAllSongs());
     }
 
-    public ObservableList<Playlist> getAllPlaylists() throws Exception {
+    public ObservableList<Category> getAllPlaylists() throws Exception {
         return playlistlist;
     }
 
@@ -84,40 +84,40 @@ public class MyTunesModel
         playlistlist.addAll(lm.getAllPlaylists());
     }
 
-    public ObservableList<Song> getPlaylist (Playlist playlist) throws Exception {
+    public ObservableList<Song> getPlaylist (Category playlist) throws Exception {
         playlistWithSongs.addAll(lm.getPlaylist(playlist));
         return playlistWithSongs;
     }
 
-    public void deletePlaylist (Playlist playlist) {
+    public void deletePlaylist (Category playlist) {
         playlistlist.remove(playlist);
         lm.deletePlaylist(playlist);
     }
 
-    public void addToPlaylist(Playlist playlist, Song song) throws Exception {
+    public void addToPlaylist(Category playlist, Song song) throws Exception {
         lm.addToPlaylist(playlist, song);
         playlistWithSongs.add(song);
         updatePlaylist(playlist);
     }
 
-    public void removeFromPlaylist(Playlist playlist, Song song, int i) throws  Exception {
+    public void removeFromPlaylist(Category playlist, Song song, int i) throws  Exception {
         lm.removeFromPlaylist(playlist, i);
         playlistWithSongs.remove(song);
         updatePlaylist(playlist);
     }
 
-    public void clearPlaylist(Playlist playlist) throws Exception {
+    public void clearPlaylist(Category playlist) throws Exception {
         lm.clearPlaylist(playlist);
         playlistWithSongs.clear();
     }
 
-    public void updatePlaylist(Playlist playlist) throws  Exception {
+    public void updatePlaylist(Category playlist) throws  Exception {
         lm.updatePlaylist(playlist);
         playlistlist.clear();
         playlistlist.addAll(lm.getAllPlaylists());
     }
 
-    public void swapSongsInPlaylist(Playlist playlist, int i, int j) throws Exception {
+    public void swapSongsInPlaylist(Category playlist, int i, int j) throws Exception {
         Collections.swap(playlistWithSongs, i, j);
         lm.swapSongsInPlaylist(playlist, i, j);
     }

@@ -1,6 +1,6 @@
 package bll;
 
-import be.Playlist;
+import be.Category;
 import be.Song;
 import bll.util.MusicPlayer;
 import bll.util.SongSearcher;
@@ -100,41 +100,41 @@ public class LogicManager
      * Methods for CategoryDAO.
      */
 
-    public List<Playlist> getAllPlaylists() throws Exception {
+    public List<Category> getAllPlaylists() throws Exception {
         return playlistDAO.getAllPlaylist();
     }
-    public Playlist createPlaylist(String name) throws Exception
+    public Category createPlaylist(String name) throws Exception
     {
        return playlistDAO.createPlaylist(name);
     }
-    public List<Song> getPlaylist (Playlist playlist) throws Exception
+    public List<Song> getPlaylist (Category playlist) throws Exception
     {
         return playlistDAO.getPlaylist(playlist);
     }
 
-    public void deletePlaylist(Playlist playlist)
+    public void deletePlaylist(Category playlist)
     {
         playlistDAO.deletePlaylist(playlist);
     }
 
-    public void addToPlaylist(Playlist playlist, Song song) throws Exception
+    public void addToPlaylist(Category playlist, Song song) throws Exception
     {
         playlistDAO.addToPlaylist(playlist, song);
     }
-    public void removeFromPlaylist (Playlist playlist, int i) throws Exception
+    public void removeFromPlaylist (Category playlist, int i) throws Exception
     {
         playlistDAO.removeFromPlaylist(playlist, i);
     }
-    public void clearPlaylist(Playlist playlist) throws Exception
+    public void clearPlaylist(Category playlist) throws Exception
     {
         playlistDAO.clearPlaylist(playlist);
     }
-    public void updatePlaylist (Playlist playlist) throws Exception
+    public void updatePlaylist (Category playlist) throws Exception
     {
         playlistDAO.updatePlaylist(playlist);
     }
 
-    public void swapSongsInPlaylist(Playlist playlist, int i, int j) throws Exception
+    public void swapSongsInPlaylist(Category playlist, int i, int j) throws Exception
     {
         playlistDAO.moveSongsInPlaylist(playlist, i, j);
     }
