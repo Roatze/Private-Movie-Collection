@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Here we describe the Playlist class, and what it can do.
+ * Here we describe the Category class, and what it can do.
  */
 public class Category
 {
     private StringProperty categoryName = new SimpleStringProperty();
-    private List<Song> listOfMovies = new ArrayList();
-    private IntegerProperty playlistSongCount = new SimpleIntegerProperty();
+    private List<Movie> listOfMovies = new ArrayList();
+    private IntegerProperty movieRating = new SimpleIntegerProperty();
     private StringProperty playlistTimelength = new SimpleStringProperty();
-    private int playlistId;
+    private int categoryId;
 
     public Category(int playlistID, String playlistName)
     {
-        this.playlistId = playlistID;
+        this.categoryId = playlistID;
         this.categoryName.setValue(playlistName);
 
     }
@@ -33,9 +33,9 @@ public class Category
     Here we want to return the list of songs
      */
 
-    public void addSongToList(Song song)
+    public void addSongToList(Movie movie)
     {
-        listOfMovies.add(song);
+        listOfMovies.add(movie);
     }
 
     public String getPlaylistName() {
@@ -47,33 +47,33 @@ public class Category
         return playlistTimelength.get();
     }
 
-    public int getPlaylistSongCount() {
-        return playlistSongCount.get();
+    public int getMovieRating() {
+        return movieRating.get();
     }
 
-    public int getPlaylistId() {
-        return playlistId;
+    public int getCategoryId() {
+        return categoryId;
     }
 
     private void updatePlaylistSongCount()
     {
         int i = 0;
-        for (Song song: listOfMovies) {
-            if (song != null)
+        for (Movie movie: listOfMovies) {
+            if (movie != null)
             {
                 i++;
             }
         }
-        this.playlistSongCount.set(i);
+        this.movieRating.set(i);
     }
 
     private void updatePlaylistTimeLength()
     {
         List<String> times = new ArrayList<>();
-        for (Song song: listOfMovies) {
-            if (song != null)
+        for (Movie movie: listOfMovies) {
+            if (movie != null)
             {
-                times.add(song.getSongLength());
+                times.add(movie.getSongLength());
             }
         }
         this.playlistTimelength.set(ConvertTime.sumTime(times));

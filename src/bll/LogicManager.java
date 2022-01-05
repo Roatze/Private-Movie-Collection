@@ -20,8 +20,8 @@ import java.util.TimerTask;
  */
 public class LogicManager
 {
-    MovieDAO songDAO = new MovieDAO();
-    CategoryDAO playlistDAO = new CategoryDAO();
+    MovieDAO movieDAO = new MovieDAO();
+    CategoryDAO categoryDAO = new CategoryDAO();
     SongSearcher songSearcher = new SongSearcher();
     MusicPlayer mp;
 
@@ -74,22 +74,22 @@ public class LogicManager
     // here we create a song with the input from the gui, sending it to Dal.
     public Movie createSong (String name, String artistName, String filePath, String songLength) throws Exception
     {
-       return(songDAO.createSong(name, artistName, filePath, songLength));
+       return(movieDAO.createSong(name, artistName, filePath, songLength));
     }
     //Here we get all songs from the dal.
     public List<Movie> getAllSongs() throws SQLException
     {
-        return (songDAO.getAllSongs());
+        return (movieDAO.getAllSongs());
     }
     // here we delete a movie from the database.
     public void deleteSong(Movie movie)
     {
-        songDAO.deleteSong(movie);
+        movieDAO.deleteSong(movie);
     }
     //here we update a movie in the database.
     public void updateSong(Movie movie)
     {
-        songDAO.updateSong(movie);
+        movieDAO.updateSong(movie);
     }
 
     public List<Movie> searchSongs(String query) throws Exception {
@@ -104,45 +104,45 @@ public class LogicManager
      */
 
     public List<Category> getAllPlaylists() throws Exception {
-        return playlistDAO.getAllPlaylist();
+        return categoryDAO.getAllPlaylist();
     }
     public Category createPlaylist(String name) throws Exception
     {
-       return playlistDAO.createPlaylist(name);
+       return categoryDAO.createPlaylist(name);
     }
 
     public List<Movie> getPlaylist (Category category) throws Exception
     {
-        return playlistDAO.getPlaylist(category);
+        return categoryDAO.getPlaylist(category);
     }
 
-    public void deletePlaylist(Category playlist)
+    public void deletePlaylist(Category category)
     {
-        playlistDAO.deletePlaylist(playlist);
+        categoryDAO.deletePlaylist(category);
     }
 
 
     public void addToPlaylist(Category category, Movie movie) throws Exception
 
     {
-        playlistDAO.addToPlaylist(category, movie);
+        categoryDAO.addToPlaylist(category, movie);
     }
-    public void removeFromPlaylist (Category playlist, int i) throws Exception
+    public void removeFromPlaylist (Category category, int i) throws Exception
     {
-        playlistDAO.removeFromPlaylist(playlist, i);
+        categoryDAO.removeFromPlaylist(category, i);
     }
-    public void clearPlaylist(Category playlist) throws Exception
+    public void clearPlaylist(Category category) throws Exception
     {
-        playlistDAO.clearPlaylist(playlist);
+        categoryDAO.clearPlaylist(category);
     }
-    public void updatePlaylist (Category playlist) throws Exception
+    public void updatePlaylist (Category category) throws Exception
     {
-        playlistDAO.updatePlaylist(playlist);
+        categoryDAO.updatePlaylist(category);
     }
 
-    public void swapSongsInPlaylist(Category playlist, int i, int j) throws Exception
+    public void swapSongsInPlaylist(Category category, int i, int j) throws Exception
     {
-        playlistDAO.moveSongsInPlaylist(playlist, i, j);
+        categoryDAO.moveSongsInPlaylist(category, i, j);
     }
 
     public void setVolume(double volume)
