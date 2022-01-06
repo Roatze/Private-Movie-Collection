@@ -24,8 +24,8 @@ public class Movie
         this.songId.set(songID);
         this.movieName.set(movieName);
         this.publicRating.set(publicRating);
-        this.fileLink = fileLink;
         this.privateRating.set(privateRating);
+        this.fileLink = fileLink;
     }
 
     /*
