@@ -73,7 +73,7 @@ public class Category
         for (Movie movie: listOfMovies) {
             if (movie != null)
             {
-                times.add(movie.getSongLength());
+                times.add(movie.getPrivateRating());
             }
         }
         this.playlistTimelength.set(ConvertTime.sumTime(times));

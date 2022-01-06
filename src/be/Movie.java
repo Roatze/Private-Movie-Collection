@@ -12,28 +12,28 @@ import java.sql.Timestamp;
  */
 public class Movie
 {
-    private StringProperty name = new SimpleStringProperty();
-    private StringProperty artistName = new SimpleStringProperty();
-    private StringProperty songLength = new SimpleStringProperty();
     private IntegerProperty songId = new SimpleIntegerProperty();
-    private String filePath;
+    private StringProperty movieName = new SimpleStringProperty();
+    private StringProperty publicRating = new SimpleStringProperty();
+    private StringProperty privateRating = new SimpleStringProperty();
+    private String fileLink;
     private Timestamp lastview;
 
-    public Movie(int songID, String name, String artistName, String filePath, String songLength)
+    public Movie(int songID, String movieName, String publicRating, String fileLink, String privateRating)
     {
         this.songId.set(songID);
-        this.name.set(name);
-        this.artistName.set(artistName);
-        this.filePath = filePath;
-        this.songLength.set(songLength);
+        this.movieName.set(movieName);
+        this.publicRating.set(publicRating);
+        this.fileLink = fileLink;
+        this.privateRating.set(privateRating);
     }
 
     /*
     Beneath we have getters and setters for the different properties of the class,
     we don't have a setter for ID since we want our database to handle the ID.
      */
-    public String getName() {
-        return name.get();
+    public String getMovieName() {
+        return movieName.get();
     }
 
 
@@ -41,21 +41,21 @@ public class Movie
         return songId.get();
     }
 
-    public String getArtistName() {
-        return artistName.get();
+    public String getPublicRating() {
+        return publicRating.get();
     }
 
 
 
 
-    public String getSongLength() {
-        return songLength.get();
+    public String getPrivateRating() {
+        return privateRating.get();
     }
 
 
 
-    public String getFilePath() {
-        return filePath;
+    public String getFileLink() {
+        return fileLink;
     }
 
 
