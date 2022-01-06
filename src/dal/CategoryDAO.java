@@ -51,11 +51,11 @@ public class CategoryDAO {
 
     //returns an ObservableList with playlists from playlist table
     //@return ObservableList with playlists
-    public ObservableList<Category> getAllPlaylist() throws Exception
+    public ObservableList<Category> getAllCategory() throws Exception
     {
         try (Connection connection = DC.getConnection())
         {
-            String sql = "SELECT * FROM playlistTable;";
+            String sql = "SELECT * FROM category;";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
@@ -65,14 +65,14 @@ public class CategoryDAO {
             // get all playlists from database and put them in the list of playlists
             while (rs.next())
             {
-                int id = rs.getInt("playlistID");
-                String name = rs.getString("playlistName");
+                int id = rs.getInt("categoryID");
+                String name = rs.getString("categoryName");
 
                 // save the category data in a new category object
                 Category category = new Category(id, name);
 
                 // get songs in the category and put them in the playlists songlist
-                for (Movie movie : getPlaylist(category)) {
+                for (Movie movie : getCategory(category)) {
                     category.addSongToList(movie);
                 }
                 category.updatePlaylist();
@@ -89,12 +89,12 @@ public class CategoryDAO {
     //@param playlist
     //@return a List of songs
 
-    public List<Movie> getPlaylist(Category category) throws Exception
+    public List<Movie> getCategory(Category category) throws Exception
     {
         Connection connection = DC.getConnection();
         int p_id = category.getCategoryId();
 
-        String sql = "SELECT s.songID, s.songName , s.artist, s.filePath, s.songLength, pc.placement FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +" ORDER BY placement;";
+        String sql = "SELECT s.songID, s.songName , s.artist, s.filePath, s.songLength FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +" ORDER BY placement;";
 
         Statement ps = connection.createStatement();
         ResultSet rs = ps.executeQuery(sql);
@@ -106,11 +106,10 @@ public class CategoryDAO {
             String artist = rs.getString("artist");
             String source = rs.getString("filePath");
             String length = ConvertTime.secToTime(rs.getInt("songLength"));
-            int index = rs.getInt("placement");
 
             Movie med = new Movie(id, title, artist, source, length);
 
-            playlistWithMovies.add(index,med);
+            //playlistWithMovies.add(index,med);
 
         }
         return playlistWithMovies;
@@ -313,7 +312,8 @@ public class CategoryDAO {
 
         String sql = "DROP TABLE category;" +
                 "CREATE TABLE category (" +
-                "playlistName varchar(255)" +
+                "categoryID int IDENTITY(1,1)," +
+                "categoryName varchar(255)" +
                 ");";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.executeUpdate();
