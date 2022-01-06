@@ -93,9 +93,9 @@ public class CategoryDAO {
     public List<Movie> getCategory(Category category) throws Exception
     {
         Connection connection = DC.getConnection();
-        int p_id = category.getCategoryId();
+        int c_id = category.getCategoryId();
 
-        String sql = "SELECT s.songID, s.songName , s.artist, s.filePath, s.songLength FROM songsTable s, playlistContentTable pc WHERE s.songID = pc.songID AND pc.playlistID ="+ p_id +" ORDER BY placement;";
+        String sql = "SELECT m.movieID, m.movieName , m.movieRating, m.movieFileLink, m.lastview FROM movie m, catMovie cm WHERE m.movieID = cm.movieID AND cm.categoryID ="+ c_id +" ORDER BY movieName;";
 
         Statement ps = connection.createStatement();
         ResultSet rs = ps.executeQuery(sql);
@@ -325,7 +325,7 @@ public class CategoryDAO {
     {
         Connection connection = DC.getConnection();
         String sql1 = "DROP TABLE catMovie";
-        String sql2 = "CREATE TABLE catMovie ( ID int IDENTITY(1,1) PRIMARY KEY, playlistID int, songID int);";
+        String sql2 = "CREATE TABLE catMovie ( ID int IDENTITY(1,1) PRIMARY KEY, categoryID int, movieID int);";
         PreparedStatement ps1 = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
         ps1.executeUpdate();
         PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
@@ -339,10 +339,10 @@ public class CategoryDAO {
 
         String sql = "DROP TABLE movie;" +
                 "CREATE TABLE movie(" +
-                "id int IDENTITY(1,1) NOT NULL," +
-                "name varchar(255)," +
-                "rating varchar(255)," +
-                "fileLink varchar(255)," +
+                "movieID int IDENTITY(1,1) NOT NULL," +
+                "movieName varchar(255)," +
+                "movieRating varchar(255)," +
+                "movieFileLink varchar(255)," +
                 "lastview TIMESTAMP" +
                 ");";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
