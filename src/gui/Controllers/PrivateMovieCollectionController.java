@@ -45,6 +45,8 @@ public class PrivateMovieCollectionController implements Initializable {
     private TextField txtSearchBar;
     @FXML
     private TextField txtNowPlaying;
+    @FXML
+    private Button addMovie;
 
 
     private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
@@ -413,5 +415,14 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     public void removeGenre(ActionEvent actionEvent) {
+    }
+
+    public void clearEntertainmentTableSelection(MouseEvent mouseEvent) {
+    }
+
+    public void clearMovieTable(MouseEvent mouseEvent) {
+    }
+
+    public void clearGenreTableSelection(MouseEvent mouseEvent) {
     }
 }
