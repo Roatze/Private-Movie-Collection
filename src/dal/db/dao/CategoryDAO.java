@@ -95,20 +95,20 @@ public class CategoryDAO {
         Connection connection = DC.getConnection();
         int c_id = category.getCategoryId();
 
-        String sql = "SELECT m.movieID, m.movieName , m.movieRating, m.movieFileLink, m.lastview FROM movie m, catMovie cm WHERE m.movieID = cm.movieID AND cm.categoryID ="+ c_id +" ORDER BY movieName;";
+        String sql = "SELECT m.movieID, m.movieName , m.movieRating, m.fileLink, m.lastview FROM movie m, catMovie cm WHERE m.movieID = cm.movieID AND cm.categoryID ="+ c_id +" ORDER BY movieName;";
 
         Statement ps = connection.createStatement();
         ResultSet rs = ps.executeQuery(sql);
         ArrayList<Movie> playlistWithMovies = new ArrayList<>();
         while (rs.next())
         {
-            int id = rs.getInt("songID");
-            String title = rs.getString("songName");
-            String artist = rs.getString("artist");
-            String source = rs.getString("filePath");
-            String length = ConvertTime.secToTime(rs.getInt("songLength"));
+            int id = rs.getInt("movieID");
+            String name = rs.getString("movieName");
+            String rating = rs.getString("movieRating");
+            String source = rs.getString("fileLink");
+            String lastview = rs.getString("lastview");
 
-            Movie med = new Movie(id, title, artist, source, length);
+            Movie med = new Movie(id, name, rating, source, lastview);
 
             //playlistWithMovies.add(index,med);
 
@@ -342,7 +342,7 @@ public class CategoryDAO {
                 "movieID int IDENTITY(1,1) NOT NULL," +
                 "movieName varchar(255)," +
                 "movieRating varchar(255)," +
-                "movieFileLink varchar(255)," +
+                "fileLink varchar(255)," +
                 "lastview TIMESTAMP" +
                 ");";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
