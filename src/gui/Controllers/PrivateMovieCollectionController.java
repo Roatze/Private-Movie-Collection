@@ -58,11 +58,31 @@ public class PrivateMovieCollectionController implements Initializable {
 
     }
 
-    public void addMovie(ActionEvent actionEvent) {
+    public void addMovie(ActionEvent actionEvent) throws IOException {
+        Stage stage = createMovieDialog("New Movie");
+        Stage mainStage = ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow()));
+        stage.initOwner(mainStage);
+        stage.showAndWait();
+    }
+    public Stage createMovieDialog(String windowTitle) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("MovieDialog.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle(windowTitle);
+        stage.initModality(Modality.WINDOW_MODAL);
+        songController = fxmlLoader.getController();
+        songController.setModel(PrivateMovieCollectionModel);
+        return stage;
     }
 
-    public void removeMovie(ActionEvent actionEvent) {
+    public void deleteSong(ActionEvent actionEvent) throws Exception {
+        if (SimpleDialog.delete() && tvMovieTable.getSelectionModel().getSelectedItem() != null) {
+            PrivateMovieCollectionModel.deleteSong(tvMovieTable.getSelectionModel().getSelectedItem());
+        }
     }
+
 
     public void addGenre(ActionEvent actionEvent) {
     }
