@@ -402,4 +402,16 @@ public class PrivateMovieCollectionController implements Initializable {
     {
         PrivateMovieCollectionModel.setVolume(volumeController.getValue());
     }
+
+    public void addMovie(ActionEvent actionEvent) {
+    }
+
+    public void removeMovie(ActionEvent actionEvent) {
+    }
+
+    public void addGenre(ActionEvent actionEvent) {
+    }
+
+    public void removeGenre(ActionEvent actionEvent) {
+    }
 }
