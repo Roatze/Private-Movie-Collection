@@ -7,8 +7,8 @@ import be.Movie;
 
 import bll.util.MusicPlayer;
 import bll.util.SongSearcher;
-import dal.CategoryDAO;
-import dal.MovieDAO;
+import dal.db.dao.CategoryDAO;
+import dal.db.dao.MovieDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
