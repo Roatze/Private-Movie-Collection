@@ -104,11 +104,12 @@ public class CategoryDAO {
         {
             int id = rs.getInt("movieID");
             String name = rs.getString("movieName");
-            String rating = rs.getString("movieRating");
+            String publicRating = ConvertTime.combinedToPublic(rs.getString("movieRating"));
+            String privateRating = ConvertTime.combinedToPersonal(rs.getString("movieRating"));
             String source = rs.getString("fileLink");
             String lastview = rs.getString("lastview");
 
-            Movie med = new Movie(id, name, rating, source, lastview);
+            Movie med = new Movie(id, name, publicRating, source, privateRating);
 
             //playlistWithMovies.add(index,med);
 
