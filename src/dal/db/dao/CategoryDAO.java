@@ -122,8 +122,8 @@ public class CategoryDAO {
     {
         int pId = category.getCategoryId();
 
-        String sql1 = "DELETE FROM playlistContentTable WHERE playlistID = (?); ";
-        String sql2 = "DELETE FROM playlistTable WHERE playlistID=(?);";
+        String sql1 = "DELETE FROM catMovie WHERE categoryID = (?);";
+        String sql2 = "DELETE FROM category WHERE categoryID = (?);";
 
         try(Connection connection = DC.getConnection())
         {
@@ -150,16 +150,16 @@ public class CategoryDAO {
 
     {
         Connection connection = DC.getConnection();
-        int pId = category.getCategoryId();
-        int meId = movie.getSongId();
+        int cId = category.getCategoryId();
+        int mId = movie.getSongId();
         int index = category.getMovieRating();
 
         String sql = "INSERT INTO playlistContentTable (playlistID , songID , placement) VALUES ((?), (?), (?)); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
-        pst.setInt(1, pId);
-        pst.setInt(2, meId);
+        pst.setInt(1, cId);
+        pst.setInt(2, mId);
         pst.setInt(3, index);
 
         pst.executeUpdate();
@@ -176,7 +176,7 @@ public class CategoryDAO {
         int index = i;
         System.out.println(index);
 
-        String sql = "DELETE FROM playlistContentTable WHERE playlistID = (?) AND placement=(?); ";
+        String sql = "DELETE FROM catMovie WHERE categoryID = (?) AND placement=(?); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
@@ -194,7 +194,7 @@ public class CategoryDAO {
         Connection connection = DC.getConnection();
         int pId = category.getCategoryId();
 
-        String sql = "DELETE FROM playlistContentTable WHERE playlistID = (?); ";
+        String sql = "DELETE FROM catMovie WHERE categoryID = (?); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
@@ -210,14 +210,14 @@ public class CategoryDAO {
     {
         Connection connection = DC.getConnection();
 
-        int pId = category.getCategoryId();
+        int cId = category.getCategoryId();
         String name = category.getPlaylistName();
 
-        String sql = "UPDATE playlistTable SET playlistName = (?) WHERE playlistID = (?);";
+        String sql = "UPDATE category SET categoryName = (?) WHERE categoryID = (?);";
 
         PreparedStatement pst = connection.prepareStatement(sql);
         pst.setString(1, name);
-        pst.setInt(2, pId);
+        pst.setInt(2, cId);
 
         pst.executeUpdate();
 
@@ -234,10 +234,6 @@ public class CategoryDAO {
             DAO.createMovieCategoryTable();
             DAO.createMovieTable();
 
-            //clears all data in tables
-            //DAO.clearPlaylistTable();
-            //DAO.clearPlaylistContentTable();
-            //DAO.clearSongsTable();
         }
     }
 

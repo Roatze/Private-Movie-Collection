@@ -30,15 +30,15 @@ public class MovieDAO {
     }
 
     // This is the method to create a song in the Database. This is also where the song gets an ID.
-    public Movie createSong(String songName, String artist, String filePath, String songLength) throws Exception
+    public Movie createSong(String movieName, String rating, String fileLink, String songLength) throws Exception
     {
         Connection con = DC.getConnection();
 
-        String sql = "INSERT INTO songsTable (songName,artist,filePath,songLength) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO movie (movieName,movieRating,fileLink,lastview) VALUES (?,?,?,?);";
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, songName);
-        ps.setString(2, artist);
-        ps.setString(3, filePathToURI(filePath));
+        ps.setString(1, movieName);
+        ps.setString(2, rating);
+        ps.setString(3, filePathToURI(fileLink));
         ps.setInt(4, ConvertTime.timeToSec(songLength));
 
         int affectedRows = ps.executeUpdate();
@@ -48,7 +48,7 @@ public class MovieDAO {
             if (rs.next())
             {
                 int id = rs.getInt(1);
-                Movie movie = new Movie(id, songName, artist, filePath, songLength);
+                Movie movie = new Movie(id, movieName, rating, fileLink, songLength);
                 return movie;
             }
 
