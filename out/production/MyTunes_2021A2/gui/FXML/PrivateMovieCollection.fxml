@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="570.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
+
+   <children>
+      <Label layoutX="28.0" layoutY="88.0" text="Files" />
+      <TableView fx:id="tvEntertainmentTable" layoutX="28.0" layoutY="105.0" onMouseClicked="#clearEntertainmentTableSelection" prefHeight="382.0" prefWidth="150.0">
+        <columns>
+          <TableColumn fx:id="tcEntertainment" prefWidth="150.0" text="Entertainment" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tvMovieTable" layoutX="348.0" layoutY="105.0" onMouseClicked="#clearMovieTable" prefHeight="382.0" prefWidth="530.0">
+         <columns>
+            <TableColumn fx:id="tcTitle" prefWidth="310.0" text="Titel" />
+            <TableColumn fx:id="tcPersonalRating" prefWidth="108.0" text="Personal Rating" />
+            <TableColumn fx:id="tcIMDBRating" prefWidth="111.0" text="IMDB Rating" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txtSearchBar" layoutX="712.0" layoutY="26.0" prefHeight="26.0" prefWidth="150.0" />
+      <Label layoutX="677.0" layoutY="30.0" text="Filter:" />
+      <Label layoutX="188.0" layoutY="88.0" text="Category" />
+      <Label layoutX="347.0" layoutY="88.0" text="Media" />
+      <Button fx:id="ButtonAddMovie" layoutX="538.0" layoutY="498.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="150.0" text="Add Movie" />
+      <Button fx:id="ButtonRemoveButton" layoutX="538.0" layoutY="534.0" mnemonicParsing="false" onAction="#removeMovie" prefHeight="25.0" prefWidth="150.0" text="Remove Movie" />
+      <Button fx:id="ButtonAddGenre" layoutX="188.0" layoutY="498.0" mnemonicParsing="false" onAction="#addGenre" prefHeight="25.0" prefWidth="150.0" text="Add Genre" />
+      <Button fx:id="ButtonRemoveGenre" layoutX="188.0" layoutY="534.0" mnemonicParsing="false" onAction="#removeGenre" prefHeight="25.0" prefWidth="150.0" text="Remove Genre" />
+      <TableView fx:id="tvGenreTable" layoutX="188.0" layoutY="105.0" onMouseClicked="#clearGenreTableSelection" prefHeight="382.0" prefWidth="150.0">
+         <columns>
+            <TableColumn fx:id="tcGenre" prefWidth="150.0" text="Genre" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txtNowPlaying" alignment="CENTER" editable="false" layoutX="331.0" layoutY="25.0" style="-fx-background-color: transparent;" text="No movie is selected.">
+
+         <font>
+            <Font size="20.0" />
+         </font></TextField>
+   </children>
+</AnchorPane>
