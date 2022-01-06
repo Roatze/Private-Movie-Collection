@@ -1,4 +1,4 @@
-package dal;
+package dal.db.dao;
 
 
 import be.Category;
@@ -7,6 +7,7 @@ import be.Movie;
 
 import bll.util.ConvertTime;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.db.DatabaseConnector;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
