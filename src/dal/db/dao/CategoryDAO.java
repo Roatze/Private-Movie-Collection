@@ -32,7 +32,7 @@ public class CategoryDAO {
     {
         Connection connection = DC.getConnection();
 
-        String sql = "INSERT INTO playlistTable (playlistName) VALUES (?);";
+        String sql = "INSERT INTO category (categoryName) VALUES (?);";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, name);
         int affectedRows = ps.executeUpdate();
