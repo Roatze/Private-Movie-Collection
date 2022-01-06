@@ -26,7 +26,7 @@ public class AddMovieController {
         swich.setScene(scene);
     }
 
-    public void getSongInfo(ActionEvent actionEvent) {
+    public void getMovieInfo(ActionEvent actionEvent) {
     }
 
     public void chooseFile(ActionEvent actionEvent) {
