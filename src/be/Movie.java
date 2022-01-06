@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.sql.Timestamp;
+
 /**
  * This is the Movie class, here we specify what a Movie is.
  */
@@ -15,6 +17,7 @@ public class Movie
     private StringProperty songLength = new SimpleStringProperty();
     private IntegerProperty songId = new SimpleIntegerProperty();
     private String filePath;
+    private Timestamp lastview;
 
     public Movie(int songID, String name, String artistName, String filePath, String songLength)
     {
