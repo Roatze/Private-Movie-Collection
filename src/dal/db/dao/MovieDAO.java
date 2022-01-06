@@ -112,10 +112,10 @@ public class MovieDAO {
         try(Connection connection = DC.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, movie.getName());
-            statement.setString(2, movie.getArtistName());
-            statement.setInt(3,ConvertTime.timeToSec(movie.getSongLength()));
-            statement.setString(4, filePathToURI(movie.getFilePath()));
+            statement.setString(1, movie.getMovieName());
+            statement.setString(2, movie.getPublicRating());
+            statement.setInt(3,ConvertTime.timeToSec(movie.getPrivateRating()));
+            statement.setString(4, filePathToURI(movie.getFileLink()));
             statement.setInt(5, movie.getSongId());
             statement.executeUpdate();
 

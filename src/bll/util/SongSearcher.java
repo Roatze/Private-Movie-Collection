@@ -27,7 +27,7 @@ public class SongSearcher {
      */
     private boolean compareToArtistName(String query, Movie movie)
     {
-        return movie.getArtistName().toLowerCase().contains(query.toLowerCase());
+        return movie.getPublicRating().toLowerCase().contains(query.toLowerCase());
     }
 
     /**
@@ -36,6 +36,6 @@ public class SongSearcher {
      */
     private boolean compareToSongName(String query, Movie movie)
     {
-        return movie.getName().toLowerCase().contains(query.toLowerCase());
+        return movie.getMovieName().toLowerCase().contains(query.toLowerCase());
     }
 }

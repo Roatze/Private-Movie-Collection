@@ -46,7 +46,7 @@ public class LogicManager
      */
     public void playSong(Movie movie)
     {
-      mp.playSong(movie.getFilePath());
+      mp.playSong(movie.getFileLink());
 
 
     }
@@ -61,11 +61,11 @@ public class LogicManager
 
     public void nextSong(Movie movie)
     {
-        mp.nextSong(movie.getFilePath());
+        mp.nextSong(movie.getFileLink());
     }
     public void previousSong(Movie movie)
     {
-        mp.previousSong(movie.getFilePath());
+        mp.previousSong(movie.getFileLink());
     }
 
     /**

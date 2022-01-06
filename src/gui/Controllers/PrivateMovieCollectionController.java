@@ -137,8 +137,8 @@ public class PrivateMovieCollectionController implements Initializable {
             stage.initOwner(mainStage);
 
             Movie movie = tvSongTable.getSelectionModel().getSelectedItem();
-            String filepath = movie.getFilePath().replace("file:/", "");
-            songController.setSongValues(movie.getSongId(), movie.getName(), movie.getArtistName(), movie.getSongLength(), filepath);
+            String filepath = movie.getFileLink().replace("file:/", "");
+            songController.setSongValues(movie.getSongId(), movie.getMovieName(), movie.getPublicRating(), movie.getPrivateRating(), filepath);
             stage.showAndWait();
         }
     }
