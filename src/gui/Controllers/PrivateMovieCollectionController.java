@@ -77,7 +77,7 @@ public class PrivateMovieCollectionController implements Initializable {
         return stage;
     }
 
-    public void deleteSong(ActionEvent actionEvent) throws Exception {
+    public void removeMovie(ActionEvent actionEvent) throws Exception {
         if (SimpleDialog.delete() && tvMovieTable.getSelectionModel().getSelectedItem() != null) {
             PrivateMovieCollectionModel.deleteSong(tvMovieTable.getSelectionModel().getSelectedItem());
         }
