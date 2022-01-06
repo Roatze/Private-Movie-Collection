@@ -104,7 +104,7 @@ public class LogicManager
      */
 
     public List<Category> getAllPlaylists() throws Exception {
-        return categoryDAO.getAllPlaylist();
+        return categoryDAO.getAllCategory();
     }
     public Category createPlaylist(String name) throws Exception
     {
@@ -113,7 +113,7 @@ public class LogicManager
 
     public List<Movie> getPlaylist (Category category) throws Exception
     {
-        return categoryDAO.getPlaylist(category);
+        return categoryDAO.getCategory(category);
     }
 
     public void deletePlaylist(Category category)

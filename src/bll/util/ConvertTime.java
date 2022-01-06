@@ -149,7 +149,7 @@ public class ConvertTime {
         return secToTime(i);
     }
 
-    
+
     public static String combinedToPersonal(String combined)
     {
         String personalRating;
