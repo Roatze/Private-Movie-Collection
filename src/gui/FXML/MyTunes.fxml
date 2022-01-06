@@ -19,7 +19,7 @@
       </TableView>
       <TableView fx:id="tvMovieTable" layoutX="348.0" layoutY="105.0" onMouseClicked="#clearPlaylistSongTable" prefHeight="382.0" prefWidth="530.0">
          <columns>
-            <TableColumn fx:id="tcFileTitle" prefWidth="310.0" text="Titel" />
+            <TableColumn fx:id="tcTitle" prefWidth="310.0" text="Titel" />
             <TableColumn fx:id="tcPersonalRating" prefWidth="108.0" text="Personal Rating" />
             <TableColumn fx:id="tcIMDBRating" prefWidth="111.0" text="IMDB Rating" />
          </columns>
