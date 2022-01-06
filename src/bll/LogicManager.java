@@ -142,7 +142,7 @@ public class LogicManager
 
     public void swapSongsInPlaylist(Category category, int i, int j) throws Exception
     {
-        categoryDAO.moveSongsInPlaylist(category, i, j);
+        //categoryDAO.moveSongsInPlaylist(category, i, j);
     }
 
     public void setVolume(double volume)

@@ -32,7 +32,7 @@ public class CategoryDAO {
     {
         Connection connection = DC.getConnection();
 
-        String sql = "INSERT INTO playlistTable (playlistName) VALUES (?);";
+        String sql = "INSERT INTO category (categoryName) VALUES (?);";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, name);
         int affectedRows = ps.executeUpdate();
@@ -204,41 +204,6 @@ public class CategoryDAO {
 
     }
 
-    //moves a song in a single category
-    //@param category
-    //@param song
-    public void moveSongsInPlaylist(Category category, int i, int j) throws Exception
-    {
-        Connection connection = DC.getConnection();
-        int pId = category.getCategoryId();
-        int index1 = i;
-        int index2 = j;
-
-        String sql1 = "Update playlistContentTable SET placement = -1 WHERE playlistID = (?) AND placement=(?); ";
-        String sql2 = "Update playlistContentTable SET placement = (?) WHERE playlistID = (?) AND placement=(?); ";
-        String sql3 = "Update playlistContentTable SET placement = (?) WHERE playlistID = (?) AND placement=-1; ";
-
-        PreparedStatement pst1 = connection.prepareStatement(sql1);
-        PreparedStatement pst2 = connection.prepareStatement(sql2);
-        PreparedStatement pst3 = connection.prepareStatement(sql3);
-
-        //Fancy sql magic to switch placement of two songs
-        pst1.setInt(1, pId);
-        pst1.setInt(2, index2);
-
-        pst2.setInt(1, index2);
-        pst2.setInt(2, pId);
-        pst2.setInt(3, index1);
-
-        pst3.setInt(1, index1);
-        pst3.setInt(2, pId);
-
-        pst1.executeUpdate();
-        pst2.executeUpdate();
-        pst3.executeUpdate();
-
-    }
-
     //updates a single category with is new name
     //@param category
     public void updatePlaylist(Category category) throws Exception
@@ -274,36 +239,6 @@ public class CategoryDAO {
             //DAO.clearPlaylistContentTable();
             //DAO.clearSongsTable();
         }
-    }
-
-    //clears playlistTable of all data
-    public void clearPlaylistTable() throws Exception
-    {
-        Connection connection = DC.getConnection();
-
-        String sql = "DELETE FROM category";
-        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.executeUpdate();
-    }
-
-    //clears playlistContentTable of all data
-    public void clearPlaylistContentTable() throws Exception
-    {
-        Connection connection = DC.getConnection();
-
-        String sql = "DELETE FROM catMovie";
-        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.executeUpdate();
-    }
-
-    //clears songsTable of all data
-    public void clearSongsTable() throws Exception
-    {
-        Connection connection = DC.getConnection();
-
-        String sql = "DELETE FROM movie";
-        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        ps.executeUpdate();
     }
 
     //recreates a new playlistTable
