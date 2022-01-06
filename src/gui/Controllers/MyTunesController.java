@@ -24,40 +24,35 @@ import java.util.ResourceBundle;
 import java.util.TimerTask;
 
 public class MyTunesController implements Initializable {
+
     @FXML
-    private Slider volumeController;
+    private TableView<Movie> tvEntertainmentTable;
     @FXML
-    private TableView<Movie> tvPlaylistSongTable;
+    private TableColumn<Category,String> tcEntertainment;
     @FXML
-    private TableColumn<Movie,String> tcPlaylistSongs;
+    private TableView<Category> tvGenreTable;
     @FXML
-    private TableView<Category> tvPlaylists;
+    private TableColumn<Category, String> tcGenre;
     @FXML
-    private TableColumn<Category, String> tcPlaylistName;
+    private TableView<Movie> tvMovieTable;
     @FXML
-    private TableColumn<Category, Integer> tcNumberSongs;
+    private TableColumn<Movie, String> tcTitle;
     @FXML
-    private TableColumn<Category, String> tcPlaylistTime;
+    private TableColumn<Movie, Integer> tcPersonalRating;
     @FXML
-    private TableView<Movie> tvSongTable;
-    @FXML
-    private TableColumn<Movie, String> tcSongTitle;
-    @FXML
-    private TableColumn<Movie, String> tcSongArtist;
-    @FXML
-    private TableColumn<Movie, String> tcSongTime;
+    private TableColumn<Movie, Integer> tcIMDBRating;
     @FXML
     private TextField txtSearchBar;
     @FXML
     private TextField txtNowPlaying;
 
 
-    private MyTunesModel myTunesModel;
+    private MyTunesModel PrivateMovieCollectionModel;
     private SongDialogController songController;
 
 
     public MyTunesController() throws Exception {
-        myTunesModel = new MyTunesModel();
+        PrivateMovieCollectionModel = new MyTunesModel();
 
     }
 
@@ -65,7 +60,7 @@ public class MyTunesController implements Initializable {
      * Adds the selected song to the selected playlist when then button is pressed
      */
     public void addToPlaylist(ActionEvent actionEvent) throws Exception {
-        myTunesModel.addToPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(), tvSongTable.getSelectionModel().getSelectedItem());
+        PrivateMovieCollectionModel.addToPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(), tvSongTable.getSelectionModel().getSelectedItem());
     }
 
     /**
@@ -73,7 +68,7 @@ public class MyTunesController implements Initializable {
      */
     public void newPlaylist(ActionEvent actionEvent) throws Exception {
         String name = SimpleDialog.playlist();
-        myTunesModel.createPlaylist(name);
+        PrivateMovieCollectionModel.createPlaylist(name);
     }
 
     /**
@@ -83,7 +78,7 @@ public class MyTunesController implements Initializable {
         if(tvPlaylists.getSelectionModel().getSelectedItem() != null) {
             String name = SimpleDialog.playlist();
             Category pl = new Category(tvPlaylists.getSelectionModel().getSelectedItem().getCategoryId(), name);
-            myTunesModel.updatePlaylist(pl);
+            PrivateMovieCollectionModel.updatePlaylist(pl);
         }
     }
 
@@ -92,7 +87,7 @@ public class MyTunesController implements Initializable {
      */
     public void deletePlaylist(ActionEvent actionEvent) {
         if(SimpleDialog.delete())
-            myTunesModel.deletePlaylist(tvPlaylists.getSelectionModel().getSelectedItem());
+            PrivateMovieCollectionModel.deletePlaylist(tvPlaylists.getSelectionModel().getSelectedItem());
         tvPlaylists.refresh();
     }
 
@@ -106,7 +101,7 @@ public class MyTunesController implements Initializable {
     }
 
     private void changeOrderInPlaylist(int upOrDown) throws Exception {
-        myTunesModel.swapSongsInPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(),tvPlaylistSongTable.getSelectionModel().getSelectedIndex(),
+        PrivateMovieCollectionModel.swapSongsInPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(),tvPlaylistSongTable.getSelectionModel().getSelectedIndex(),
                 tvPlaylistSongTable.getSelectionModel().getSelectedIndex() + upOrDown);
     }
 
@@ -116,7 +111,7 @@ public class MyTunesController implements Initializable {
     public void removeFromPlaylist(ActionEvent actionEvent) throws Exception {
         if(SimpleDialog.delete())
         {
-         myTunesModel.removeFromPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(),
+            PrivateMovieCollectionModel.removeFromPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(),
                  tvPlaylistSongTable.getSelectionModel().getSelectedItem(),
                  tvPlaylistSongTable.getSelectionModel().getSelectedIndex());
         }
@@ -153,7 +148,7 @@ public class MyTunesController implements Initializable {
      */
     public void deleteSong(ActionEvent actionEvent) throws Exception {
         if(SimpleDialog.delete() && tvSongTable.getSelectionModel().getSelectedItem() != null) {
-            myTunesModel.deleteSong(tvSongTable.getSelectionModel().getSelectedItem());
+            PrivateMovieCollectionModel.deleteSong(tvSongTable.getSelectionModel().getSelectedItem());
         }
     }
 
@@ -163,28 +158,28 @@ public class MyTunesController implements Initializable {
      */
     public void playPause(ActionEvent actionEvent)
     {
-        if(!myTunesModel.isPlaying())
+        if(!PrivateMovieCollectionModel.isPlaying())
         {
             if(tvPlaylistSongTable.getSelectionModel().getSelectedItem() != null)
             {
-                myTunesModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                PrivateMovieCollectionModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
                 txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
             }
             else if (tvSongTable.getSelectionModel().getSelectedItem()!= null)
             {
                 txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
-                myTunesModel.playSong(tvSongTable.getSelectionModel().getSelectedItem());
+                PrivateMovieCollectionModel.playSong(tvSongTable.getSelectionModel().getSelectedItem());
 
             }
 
         }
-        else if(myTunesModel.isPlaying())
-            myTunesModel.stopPlaying();
+        else if(PrivateMovieCollectionModel.isPlaying())
+            PrivateMovieCollectionModel.stopPlaying();
         else if (tvSongTable.getSelectionModel().getSelectedItem() == null && tvPlaylistSongTable.getItems() != null)
         {
             System.out.println("test");
             tvPlaylistSongTable.getSelectionModel().select(1);
-            myTunesModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+            PrivateMovieCollectionModel.playSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
         }
 
     }
@@ -198,11 +193,11 @@ public class MyTunesController implements Initializable {
             if (tvPlaylistSongTable.getSelectionModel().getSelectedIndex() == 0) {
                 tvPlaylistSongTable.getSelectionModel().selectLast();
                 txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
-                myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                PrivateMovieCollectionModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
             } else {
                 tvPlaylistSongTable.getSelectionModel().selectPrevious();
                 txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
-                myTunesModel.previousSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                PrivateMovieCollectionModel.previousSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
             }
         }
         else
@@ -211,12 +206,12 @@ public class MyTunesController implements Initializable {
             {
                 tvSongTable.getSelectionModel().selectLast();
                 txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
-                myTunesModel.previousSong(tvSongTable.getSelectionModel().getSelectedItem());}
+                PrivateMovieCollectionModel.previousSong(tvSongTable.getSelectionModel().getSelectedItem());}
             else
             {
                 tvSongTable.getSelectionModel().selectPrevious();
                 txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
-                myTunesModel.previousSong(tvSongTable.getSelectionModel().getSelectedItem());
+                PrivateMovieCollectionModel.previousSong(tvSongTable.getSelectionModel().getSelectedItem());
             }
         }
 
@@ -233,13 +228,13 @@ public class MyTunesController implements Initializable {
             {
                 tvPlaylistSongTable.getSelectionModel().selectFirst();
                 txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
-                myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                PrivateMovieCollectionModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
             }
             else
             {
                 tvPlaylistSongTable.getSelectionModel().selectNext();
                 txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
-                myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                PrivateMovieCollectionModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
             }
         }
         else
@@ -248,13 +243,13 @@ public class MyTunesController implements Initializable {
             {
                 tvSongTable.getSelectionModel().selectFirst();
                 txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
-                myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
+                PrivateMovieCollectionModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
             }
             else
             {
                 tvSongTable.getSelectionModel().selectNext();
                 txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
-                myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
+                PrivateMovieCollectionModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
             }
         }
     }
@@ -267,20 +262,20 @@ public class MyTunesController implements Initializable {
         TimerTask t = new TimerTask() {
             @Override
             public void run()
-            {{if(myTunesModel.isSongFinished())
+            {{if(PrivateMovieCollectionModel.isSongFinished())
                 if(tvSongTable.getSelectionModel().getSelectedItem() == null && tvPlaylistSongTable.getSelectionModel().getSelectedItem() != null)
                 {
                     if(tvPlaylistSongTable.getSelectionModel().getSelectedIndex()+1 == tvPlaylistSongTable.getItems().size())
                     {
                         tvPlaylistSongTable.getSelectionModel().selectFirst();
                         txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
-                        myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                        PrivateMovieCollectionModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
                     }
                     else
                     {
                         tvPlaylistSongTable.getSelectionModel().selectNext();
                         txtNowPlaying.setText(tvPlaylistSongTable.getSelectionModel().getSelectedItem().getName());
-                        myTunesModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
+                        PrivateMovieCollectionModel.nextSong(tvPlaylistSongTable.getSelectionModel().getSelectedItem());
                     }
                 }
                 else if (tvSongTable.getSelectionModel().getSelectedItem() != null)
@@ -289,17 +284,17 @@ public class MyTunesController implements Initializable {
                     {
                         tvSongTable.getSelectionModel().selectFirst();
                         txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
-                        myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
+                        PrivateMovieCollectionModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
                     }
                     else
                     {
                         tvSongTable.getSelectionModel().selectNext();
                         txtNowPlaying.setText(tvSongTable.getSelectionModel().getSelectedItem().getName());
-                        myTunesModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
+                        PrivateMovieCollectionModel.nextSong(tvSongTable.getSelectionModel().getSelectedItem());
                     }
                 }
             }
-            myTunesModel.setSongFinished(false);
+                PrivateMovieCollectionModel.setSongFinished(false);
             }
         };
         return t;
@@ -312,7 +307,7 @@ public class MyTunesController implements Initializable {
         tvPlaylistSongTable.getItems().clear();
         try{
             if(tvPlaylists.getSelectionModel().getSelectedItem() != null)
-            {tvPlaylistSongTable.setItems(myTunesModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));
+            {tvPlaylistSongTable.setItems(PrivateMovieCollectionModel.getPlaylist(tvPlaylists.getSelectionModel().getSelectedItem()));
                 tcPlaylistSongs.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
                 tvPlaylistSongTable.getItems();}
         } catch (Exception e) {
@@ -332,7 +327,7 @@ public class MyTunesController implements Initializable {
         stage.setTitle(windowTitle);
         stage.initModality(Modality.WINDOW_MODAL);
         songController = fxmlLoader.getController();
-        songController.setModel(myTunesModel);
+        songController.setModel(PrivateMovieCollectionModel);
         return stage;
     }
 
@@ -344,10 +339,10 @@ public class MyTunesController implements Initializable {
         setTvSongTable();
         setTcPlaylistTable();
 
-        myTunesModel.timer(continuePlaying());
+        PrivateMovieCollectionModel.timer(continuePlaying());
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try{
-                myTunesModel.searchSongs(newValue);
+                PrivateMovieCollectionModel.searchSongs(newValue);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -362,7 +357,7 @@ public class MyTunesController implements Initializable {
         tcPlaylistTime.setCellValueFactory(new PropertyValueFactory<Category, String>("playlistTimelength"));
         tcNumberSongs.setCellValueFactory(new PropertyValueFactory<Category, Integer>("playlistSongCount"));
         try {
-            tvPlaylists.setItems(myTunesModel.getAllPlaylists());
+            tvPlaylists.setItems(PrivateMovieCollectionModel.getAllPlaylists());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -376,7 +371,7 @@ public class MyTunesController implements Initializable {
         tcSongTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
         tcSongTime.setCellValueFactory(new PropertyValueFactory<Movie, String>("songLength"));
         try{
-            tvSongTable.setItems(myTunesModel.getSonglist());
+            tvSongTable.setItems(PrivateMovieCollectionModel.getSonglist());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -399,12 +394,12 @@ public class MyTunesController implements Initializable {
 
     public void setVolume(MouseEvent mouseDragEvent)
     {
-        myTunesModel.setVolume(volumeController.getValue());
+        PrivateMovieCollectionModel.setVolume(volumeController.getValue());
         System.out.println(volumeController.getValue());
     }
 
     public void setFinishVolume(MouseEvent mouseDragEvent)
     {
-        myTunesModel.setVolume(volumeController.getValue());
+        PrivateMovieCollectionModel.setVolume(volumeController.getValue());
     }
 }
