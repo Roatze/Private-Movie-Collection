@@ -4,7 +4,7 @@ package gui.Controllers;
 import be.Category;
 import be.Movie;
 
-import gui.Model.MyTunesModel;
+import gui.Model.PrivateMovieCollectionModel;
 import gui.SimpleDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.TimerTask;
 
-public class MyTunesController implements Initializable {
+public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private TableView<Movie> tvEntertainmentTable;
@@ -47,12 +47,12 @@ public class MyTunesController implements Initializable {
     private TextField txtNowPlaying;
 
 
-    private MyTunesModel PrivateMovieCollectionModel;
+    private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
     private SongDialogController songController;
 
 
-    public MyTunesController() throws Exception {
-        PrivateMovieCollectionModel = new MyTunesModel();
+    public PrivateMovieCollectionController() throws Exception {
+        PrivateMovieCollectionModel = new PrivateMovieCollectionModel();
 
     }
 

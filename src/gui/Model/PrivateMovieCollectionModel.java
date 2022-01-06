@@ -16,7 +16,7 @@ import java.util.TimerTask;
 /**
  * In this class we acces the bll, to handle the connection from gui to bll.
  */
-public class MyTunesModel
+public class PrivateMovieCollectionModel
 {
 
 
@@ -25,7 +25,7 @@ public class MyTunesModel
     private ObservableList<Movie> playlistWithMovies;
     private LogicManager lm;
 
-    public MyTunesModel() throws Exception{
+    public PrivateMovieCollectionModel() throws Exception{
         lm = new LogicManager();
         songlist= FXCollections.observableArrayList();
         songlist.addAll(lm.getAllSongs());

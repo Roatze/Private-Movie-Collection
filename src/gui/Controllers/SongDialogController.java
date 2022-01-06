@@ -2,7 +2,7 @@ package gui.Controllers;
 
 import be.Movie;
 import bll.util.ConvertTime;
-import gui.Model.MyTunesModel;
+import gui.Model.PrivateMovieCollectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +34,7 @@ public class SongDialogController implements Initializable {
 
     private int songID;
     private boolean edit;
-    private MyTunesModel myTunesModel;
+    private PrivateMovieCollectionModel privateMovieCollectionModel;
 
 
     public SongDialogController() throws Exception {
@@ -71,11 +71,11 @@ public class SongDialogController implements Initializable {
      */
     public void save(ActionEvent actionEvent) throws Exception {
         if (!edit) {
-            myTunesModel.createSong(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
+            privateMovieCollectionModel.createSong(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
 
         } else {
             Movie movie = new Movie(songID, txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
-            myTunesModel.updateSong(movie);
+            privateMovieCollectionModel.updateSong(movie);
         }
         ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow())).close();
     }
@@ -119,7 +119,7 @@ public class SongDialogController implements Initializable {
         edit = false;
     }
 
-    public void setModel(MyTunesModel model) {
-        myTunesModel = model;
+    public void setModel(PrivateMovieCollectionModel model) {
+        privateMovieCollectionModel = model;
     }
 }
