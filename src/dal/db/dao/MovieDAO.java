@@ -30,7 +30,7 @@ public class MovieDAO {
     }
 
     // This is the method to create a song in the Database. This is also where the song gets an ID.
-    public Movie createSong(String movieName, String publicRating, String privateRating, String fileLink) throws Exception
+    public Movie createMovie(String movieName, String publicRating, String privateRating, String fileLink) throws Exception
     {
         Connection con = DC.getConnection();
         String rating = ConvertUtil.toCombined(publicRating,privateRating);
@@ -57,7 +57,7 @@ public class MovieDAO {
     }
 
     // This is the method to get all available songs in the database.
-    public ObservableList<Movie> getAllSongs() throws SQLException
+    public ObservableList<Movie> getAllMovie() throws SQLException
     {
         try(Connection connection = DC.getConnection())
         {
@@ -83,7 +83,7 @@ public class MovieDAO {
         }
     }
 
-    public void deleteSong(Movie movie)
+    public void deleteMovie(Movie movie)
     {
         String sql1 = "DELETE FROM catMovie WHERE movieID = (?);";
         String sql2 = "DELETE FROM movie WHERE movieID = (?);";
@@ -105,7 +105,7 @@ public class MovieDAO {
         }
     }
 
-    public void updateSong(Movie movie)
+    public void updateMovie(Movie movie)
     {
 
         String rating = ConvertUtil.toCombined(movie.getPublicRating(),movie.getPrivateRating());
