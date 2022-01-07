@@ -84,7 +84,13 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
 
-    public void addGenre(ActionEvent actionEvent) {
+    public void addToGenre(ActionEvent actionEvent) throws Exception {
+            PrivateMovieCollectionModel.addToPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(), tvMovieTable.getSelectionModel().getSelectedItem());
+    }
+
+    public void addGenre(ActionEvent actionEvent) throws Exception {
+        String name = SimpleDialog.playlist();
+        PrivateMovieCollectionModel.createPlaylist(name);
     }
 
     public void removeGenre(ActionEvent actionEvent) {
