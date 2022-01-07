@@ -121,16 +121,19 @@ public class LogicManager
         categoryDAO.deleteCategory(category);
     }
 
-
     public void addToPlaylist(Category category, Movie movie) throws Exception
 
     {
         categoryDAO.addToCategory(category, movie);
     }
+
+    //deleteCategory
     public void removeFromPlaylist (Category category, int i) throws Exception
     {
         //categoryDAO.removeFromCategory(category, i);
     }
+
+
     public void clearPlaylist(Category category) throws Exception
     {
         categoryDAO.clearCategory(category);

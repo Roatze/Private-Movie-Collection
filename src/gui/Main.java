@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("FXML/PrivateMovieCollection.fxml"));
         primaryStage.setTitle("MyTunes");
-        primaryStage.setScene(new Scene(root, 900, 550));
+        primaryStage.setScene(new Scene(root, 900, 570));
         primaryStage.show();
 
     }
