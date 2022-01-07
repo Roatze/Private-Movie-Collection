@@ -2,7 +2,7 @@ package dal.db.dao;
 
 
 import be.Movie;
-import bll.util.ConvertTime;
+import bll.util.ConvertUtil;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import dal.db.DatabaseConnector;
@@ -30,17 +30,16 @@ public class MovieDAO {
     }
 
     // This is the method to create a song in the Database. This is also where the song gets an ID.
-    public Movie createSong(String movieName, String publicRating, String privateRating, String fileLink, String songLength) throws Exception
+    public Movie createSong(String movieName, String publicRating, String privateRating, String fileLink) throws Exception
     {
         Connection con = DC.getConnection();
-        String rating = ConvertTime.toCombined(publicRating,privateRating);
+        String rating = ConvertUtil.toCombined(publicRating,privateRating);
 
-        String sql = "INSERT INTO movie (movieName,movieRating,fileLink,lastview) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO movie (movieName,movieRating,fileLink) VALUES (?,?,?);";
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, movieName);
         ps.setString(2, rating);
         ps.setString(3, filePathToURI(fileLink));
-        ps.setInt(4, ConvertTime.timeToSec(songLength));
 
         int affectedRows = ps.executeUpdate();
         if (affectedRows == 1)
@@ -49,7 +48,7 @@ public class MovieDAO {
             if (rs.next())
             {
                 int id = rs.getInt(1);
-                Movie movie = new Movie(id, movieName, rating, fileLink, songLength);
+                Movie movie = new Movie(id, movieName, publicRating, privateRating, fileLink);
                 return movie;
             }
 
@@ -62,7 +61,7 @@ public class MovieDAO {
     {
         try(Connection connection = DC.getConnection())
         {
-            String sql = "SELECT * FROM songsTable;";
+            String sql = "SELECT * FROM movie;";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
@@ -70,13 +69,13 @@ public class MovieDAO {
 
             while(rs.next())
             {
-                int songÍD = rs.getInt("songID");
-                String songName = rs.getString("songName");
-                String artistName = rs.getString("artist");
-                String filePath = rs.getString("filePath");
-                String songLength = ConvertTime.secToTime(rs.getInt("songLength"));
+                int id = rs.getInt("movieID");
+                String movieName = rs.getString("movieName");
+                String publicRating = ConvertUtil.combinedToPublic(rs.getString("movieRating"));
+                String privateRating = ConvertUtil.combinedToPersonal(rs.getString("movieRating"));
+                String fileLink = rs.getString("fileLink");
 
-                Movie movie = new Movie(songÍD, songName,artistName,filePath,songLength);
+                Movie movie = new Movie(id, movieName, publicRating, privateRating, fileLink);
                 allMovies.add(movie);
             }
 
@@ -86,16 +85,16 @@ public class MovieDAO {
 
     public void deleteSong(Movie movie)
     {
-        String sql1 = "DELETE FROM playlistContentTable WHERE songID = (?);";
-        String sql2 = "DELETE FROM songsTable WHERE songID = (?);";
+        String sql1 = "DELETE FROM catMovie WHERE movieID = (?);";
+        String sql2 = "DELETE FROM movie WHERE movieID = (?);";
 
         try(Connection connection = DC.getConnection())
         {
             PreparedStatement ps1 = connection.prepareStatement(sql1,Statement.RETURN_GENERATED_KEYS);
             PreparedStatement ps2 = connection.prepareStatement(sql2,Statement.RETURN_GENERATED_KEYS);
 
-            ps1.setInt(1, movie.getSongId());
-            ps2.setInt(1, movie.getSongId());
+            ps1.setInt(1, movie.getMovieId());
+            ps2.setInt(1, movie.getMovieId());
             ps1.executeUpdate();
             ps2.executeUpdate();
 
@@ -109,15 +108,16 @@ public class MovieDAO {
     public void updateSong(Movie movie)
     {
 
-        String sql = "UPDATE songsTable SET songName= (?), artist=(?), songLength=(?), filePath=(?) WHERE songID = (?);";
+        String rating = ConvertUtil.toCombined(movie.getPublicRating(),movie.getPrivateRating());
+
+        String sql = "UPDATE movie SET movieName= (?), movieRating=(?), fileLink=(?) WHERE movieID = (?);";
         try(Connection connection = DC.getConnection())
         {
             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, movie.getMovieName());
-            statement.setString(2, movie.getPublicRating());
-            statement.setInt(3,ConvertTime.timeToSec(movie.getPrivateRating()));
-            statement.setString(4, filePathToURI(movie.getFileLink()));
-            statement.setInt(5, movie.getSongId());
+            statement.setString(2, rating);
+            statement.setString(3, filePathToURI(movie.getFileLink()));
+            statement.setInt(4, movie.getMovieId());
             statement.executeUpdate();
 
         } catch (SQLException throwables) {

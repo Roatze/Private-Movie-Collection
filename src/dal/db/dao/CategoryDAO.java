@@ -5,7 +5,7 @@ import be.Category;
 
 import be.Movie;
 
-import bll.util.ConvertTime;
+import bll.util.ConvertUtil;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 import javafx.collections.FXCollections;
@@ -28,7 +28,7 @@ public class CategoryDAO {
     //creates a new playlist
     //@param name
     //@return Category
-    public Category createPlaylist(String name) throws Exception
+    public Category createCategory(String name) throws Exception
     {
         Connection connection = DC.getConnection();
 
@@ -74,9 +74,8 @@ public class CategoryDAO {
 
                 // get songs in the category and put them in the playlists songlist
                 for (Movie movie : getCategory(category)) {
-                    category.addSongToList(movie);
+                    category.addMovieToList(movie);
                 }
-                category.updatePlaylist();
 
                 // add the complete category to the list of playlists
                 allCategory.add(category);
@@ -104,12 +103,12 @@ public class CategoryDAO {
         {
             int id = rs.getInt("movieID");
             String name = rs.getString("movieName");
-            String publicRating = ConvertTime.combinedToPublic(rs.getString("movieRating"));
-            String privateRating = ConvertTime.combinedToPersonal(rs.getString("movieRating"));
+            String publicRating = ConvertUtil.combinedToPublic(rs.getString("movieRating"));
+            String privateRating = ConvertUtil.combinedToPersonal(rs.getString("movieRating"));
             String source = rs.getString("fileLink");
             String lastview = rs.getString("lastview");
 
-            Movie med = new Movie(id, name, publicRating, source, privateRating);
+            Movie med = new Movie(id, name, publicRating, privateRating, source);
 
             //playlistWithMovies.add(index,med);
 
@@ -119,7 +118,7 @@ public class CategoryDAO {
 
     //Deletes a category
     //@param category
-    public void deletePlaylist(Category category)
+    public void deleteCategory(Category category)
     {
         int pId = category.getCategoryId();
 
@@ -147,21 +146,19 @@ public class CategoryDAO {
     //Adds a movie to a category
     //@param category
     //@Param song
-    public void addToPlaylist(Category category, Movie movie) throws Exception
+    public void addToCategory(Category category, Movie movie) throws Exception
 
     {
         Connection connection = DC.getConnection();
         int cId = category.getCategoryId();
-        int mId = movie.getSongId();
-        int index = category.getMovieRating();
+        int mId = movie.getMovieId();
 
-        String sql = "INSERT INTO playlistContentTable (playlistID , songID , placement) VALUES ((?), (?), (?)); ";
+        String sql = "INSERT INTO catMovie (categoryID , movieID) VALUES ((?), (?)); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
         pst.setInt(1, cId);
         pst.setInt(2, mId);
-        pst.setInt(3, index);
 
         pst.executeUpdate();
 
@@ -170,19 +167,18 @@ public class CategoryDAO {
     //removes a song from a single category
     //@param category
     //@param song
-    public void removeFromPlaylist(Category category, int i) throws Exception
+    public void removeFromCategory(Category category, Movie movie) throws Exception
     {
         Connection connection = DC.getConnection();
-        int pId = category.getCategoryId();
-        int index = i;
-        System.out.println(index);
+        int cId = category.getCategoryId();
+        int mId = movie.getMovieId();
 
-        String sql = "DELETE FROM catMovie WHERE categoryID = (?) AND placement=(?); ";
+        String sql = "DELETE FROM catMovie WHERE categoryID = (?) AND movieID = (?); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
-        pst.setInt(1, pId);
-        pst.setInt(2, index);
+        pst.setInt(1, cId);
+        pst.setInt(2, mId);
 
         pst.executeUpdate();
 
@@ -190,7 +186,7 @@ public class CategoryDAO {
 
     //removes all songs from a single category
     //@param category
-    public void clearPlaylist(Category category) throws Exception
+    public void clearCategory(Category category) throws Exception
     {
         Connection connection = DC.getConnection();
         int pId = category.getCategoryId();
@@ -207,12 +203,12 @@ public class CategoryDAO {
 
     //updates a single category with is new name
     //@param category
-    public void updatePlaylist(Category category) throws Exception
+    public void updateCategory(Category category) throws Exception
     {
         Connection connection = DC.getConnection();
 
         int cId = category.getCategoryId();
-        String name = category.getPlaylistName();
+        String name = category.getCategoryName();
 
         String sql = "UPDATE category SET categoryName = (?) WHERE categoryID = (?);";
 

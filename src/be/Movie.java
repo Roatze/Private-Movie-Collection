@@ -19,7 +19,7 @@ public class Movie
     private String fileLink;
     private Timestamp lastview;
 
-    public Movie(int songID, String movieName, String publicRating, String fileLink, String privateRating)
+    public Movie(int songID, String movieName, String publicRating, String privateRating, String fileLink)
     {
         this.songId.set(songID);
         this.movieName.set(movieName);
@@ -36,8 +36,7 @@ public class Movie
         return movieName.get();
     }
 
-
-    public int getSongId() {
+    public int getMovieId() {
         return songId.get();
     }
 
@@ -45,18 +44,12 @@ public class Movie
         return publicRating.get();
     }
 
-
-
-
     public String getPrivateRating() {
         return privateRating.get();
     }
 
-
-
     public String getFileLink() {
         return fileLink;
     }
-
 
 }
