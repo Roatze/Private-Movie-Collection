@@ -72,9 +72,9 @@ public class LogicManager
      *Methods for MovieDAO.
      */
     // here we create a song with the input from the gui, sending it to Dal.
-    public Movie createSong (String name, String artistName, String filePath, String songLength) throws Exception
+    public Movie createSong (String name, String publicRating, String privateRating, String fileLink) throws Exception
     {
-       return(movieDAO.createMovie(name, artistName, filePath, songLength));
+       return(movieDAO.createMovie(name, publicRating, privateRating, fileLink));
     }
     //Here we get all songs from the dal.
     public List<Movie> getAllSongs() throws SQLException
