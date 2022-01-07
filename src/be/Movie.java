@@ -19,7 +19,7 @@ public class Movie
     private String fileLink;
     private Timestamp lastview;
 
-    public Movie(int songID, String movieName, String publicRating, String fileLink, String privateRating)
+    public Movie(int songID, String movieName, String publicRating, String privateRating, String fileLink)
     {
         this.songId.set(songID);
         this.movieName.set(movieName);

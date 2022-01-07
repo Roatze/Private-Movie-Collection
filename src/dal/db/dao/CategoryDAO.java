@@ -109,7 +109,7 @@ public class CategoryDAO {
             String source = rs.getString("fileLink");
             String lastview = rs.getString("lastview");
 
-            Movie med = new Movie(id, name, publicRating, source, privateRating);
+            Movie med = new Movie(id, name, publicRating, privateRating, source);
 
             //playlistWithMovies.add(index,med);
 
