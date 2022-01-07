@@ -48,5 +48,7 @@
       <Button fx:id="buttonAddToGenre" layoutX="528.0" layoutY="106.0" mnemonicParsing="false" onAction="#addToGenre" rotate="90.0" text="▼" />
       <Button fx:id="ButtonRemoveFromGenre" layoutX="193.0" layoutY="498.0" mnemonicParsing="false" onAction="#removeFromGenre" prefHeight="25.0" prefWidth="150.0" text="Remove from Genre" />
       <Label layoutX="415.0" layoutY="88.0" text="Rating" />
+      <Button fx:id="ButtonpositionDown" layoutX="496.0" layoutY="498.0" mnemonicParsing="false" onAction="#positionDown" text="▼" />
+      <Button fx:id="ButtonpositionUp" layoutX="460.0" layoutY="498.0" mnemonicParsing="false" onAction="#positionUp" text="▲" />
    </children>
 </AnchorPane>

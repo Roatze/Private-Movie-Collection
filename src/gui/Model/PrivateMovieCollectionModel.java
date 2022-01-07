@@ -130,6 +130,10 @@ public class PrivateMovieCollectionModel
         lm.timer(t);
     }
 
+    public void swapMoviesInGenre(Category selectedItem, int selectedIndex, int i){
+
+    }
+
     public boolean isSongFinished() {
         return lm.isSongFinished();
     }

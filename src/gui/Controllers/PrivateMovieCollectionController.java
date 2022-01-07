@@ -42,6 +42,12 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private TableColumn<Movie, Integer> tcIMDBRating;
     @FXML
+    private TableColumn<Movie, String> tcTitleCat;
+    @FXML
+    private TableColumn<Movie, Integer> tcPersonalRatingCat;
+    @FXML
+    private TableColumn<Movie, Integer> tcIMDBRatingCat;
+    @FXML
     private TextField txtSearchBar;
     @FXML
     private TextField txtNowPlaying;
@@ -92,22 +98,69 @@ public class PrivateMovieCollectionController implements Initializable {
         String name = SimpleDialog.playlist();
         PrivateMovieCollectionModel.createPlaylist(name);
     }
-
-    public void removeGenre(ActionEvent actionEvent) {
+    public void updateCategory(ActionEvent actionEvent) throws Exception {
+        if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {
+            String name = SimpleDialog.playlist();
+            Category pl = new Category(tvGenreTable.getSelectionModel().getSelectedItem().getCategoryId(), name);
+            PrivateMovieCollectionModel.updatePlaylist(pl);
+        }
     }
 
+    public void removeGenre(ActionEvent actionEvent) {
+        if(SimpleDialog.delete())
+            PrivateMovieCollectionModel.deletePlaylist(tvGenreTable.getSelectionModel().getSelectedItem());
+        tvGenreTable.refresh();
+    }
+
+
+    public void positionUp(ActionEvent actionEvent) throws Exception  {
+        changeOrderInPlaylist(-1);
+    }
+
+    public void positionDown(ActionEvent actionEvent) throws Exception  {
+        changeOrderInPlaylist(+1);
+    }
+
+    private void changeOrderInPlaylist(int upOrDown) throws Exception {
+        PrivateMovieCollectionModel.swapMoviesInGenre(tvGenreTable.getSelectionModel().getSelectedItem(),tvEntertainmentTable.getSelectionModel().getSelectedIndex(),
+                tvEntertainmentTable.getSelectionModel().getSelectedIndex() + upOrDown);
+    }
+
+    public void removeFromGenre(ActionEvent actionEvent) throws Exception {
+        if (SimpleDialog.delete()) {
+            PrivateMovieCollectionModel.removeFromPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(),
+                    tvEntertainmentTable.getSelectionModel().getSelectedItem(),
+                    tvEntertainmentTable.getSelectionModel().getSelectedIndex());
+        }
+    }
+    public void showGenre(MouseEvent mouseEvent) {
+        tvEntertainmentTable.getItems().clear();
+        try{
+            if(tvGenreTable.getSelectionModel().getSelectedItem() != null)
+            {tvEntertainmentTable.setItems(PrivateMovieCollectionModel.getPlaylist(tvGenreTable.getSelectionModel().getSelectedItem()));
+                tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
+                tvGenreTable.getItems();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public void clearEntertainmentTableSelection(MouseEvent mouseEvent) {
+        tvEntertainmentTable.getSelectionModel().clearSelection();
     }
 
     public void clearMovieTable(MouseEvent mouseEvent) {
+        tvMovieTable.getSelectionModel().clearSelection();
     }
 
     public void clearGenreTableSelection(MouseEvent mouseEvent) {
+        tvGenreTable.getSelectionModel().clearSelection();
     }
 
-    public void removeFromGenre(ActionEvent actionEvent) {
-    }
-    /*
+
+
+    /*å
     /**
      * Adds the selected song to the selected playlist when then button is pressed
      */
@@ -116,7 +169,7 @@ public class PrivateMovieCollectionController implements Initializable {
         PrivateMovieCollectionModel.addToCategory(tvPlaylists.getSelectionModel().getSelectedItem(), tvSongTable.getSelectionModel().getSelectedItem());
     }
 
-    /**
+    /**å
      * Opens the dialog to get user input to name a new playlist, then creates playlist with that name
      */
     /*
@@ -125,7 +178,7 @@ public class PrivateMovieCollectionController implements Initializable {
         PrivateMovieCollectionModel.createCategory(name);
     }
 
-    /**
+    /**å
      * Opens the dialog to get user input for the name of the playlist, then updates the selected playlist with the new name
      */
     /*
@@ -137,7 +190,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    /**
+    /**å
      * Creates a dialog to ask the user to confirm the deletion, then deletes the selected playlist
      */
     /*
@@ -161,7 +214,7 @@ public class PrivateMovieCollectionController implements Initializable {
                 tvPlaylistSongTable.getSelectionModel().getSelectedIndex() + upOrDown);
     }
 
-    /**
+    /**å
      * Creates a dialog to ask the user to confirm the deletion, then removes the selected song from the current playlist
      */
     /*
@@ -174,7 +227,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    /**
+    /**å
      * Opens a new Movie Dialog window
      */
     /*
@@ -202,7 +255,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    /**
+    /**å
      * Creates a dialog to ask the user to confirm the deletion, then deletes the selected song
      */
     /*
@@ -212,7 +265,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    /**
+    /**ååååå
      * Plays or pauses a song - it detects both if the music player is playing or if it is paused
      * it also checks if there is no song selected from the song table and tries to play the start of a playlist.
      */
@@ -245,7 +298,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     }
 
-    /**
+    /**ååååå
      * Gets the previous song from the playlist or song table
      */
     /*
@@ -279,7 +332,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     }
 
-    /**
+    /**åååå
      * Gets the next song from the playlist or song table
      */
     /*
@@ -317,7 +370,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    /**
+    /**åååå
      * Handles the autoplay functionality
      */
     /*
@@ -364,7 +417,7 @@ public class PrivateMovieCollectionController implements Initializable {
         return t;
     }
 
-    /**
+    /**å
      * When a playlist is clicked then songs on the playlist are shown in the middle table
      */
     /*
@@ -380,7 +433,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    /**
+    /**å
      * Creates the Movie Dialog window for New song and Edit song
      */
     /*
@@ -403,10 +456,9 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //setTvSongTable();
-        //setTcPlaylistTable();
+        //setTvMovieTable();
+        //setTcGenreTable();
 
-        //PrivateMovieCollectionModel.timer(continuePlaying());
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try{
                 PrivateMovieCollectionModel.searchSongs(newValue);
@@ -417,7 +469,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
 
-
+    /*
     /**
      * Method used for initializing the playlists
      */
