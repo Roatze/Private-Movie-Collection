@@ -59,7 +59,7 @@ public class AddMovieController{
         fileChooser.setTitle("Select Movie");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")+ System.getProperty("file.separator") +"Desktop"));
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Audio Files",  "*.mp4", "*.mpeg4", "*.aac"),
+                new FileChooser.ExtensionFilter("Movie Files",  "*.mp4", "*.mpeg4"),
                 new FileChooser.ExtensionFilter("All Files", "*.*")
         );
 
