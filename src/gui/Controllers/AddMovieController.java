@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -70,5 +67,13 @@ public class AddMovieController{
             //insert data from file
             fileBar.setText(selectedFile.getAbsolutePath());
         }
+    }
+
+    /*
+    Error metode.
+     */
+    private void error(String text){
+        Alert alert = new Alert(Alert.AlertType.ERROR,text,ButtonType.YES);
+        alert.showAndWait();
     }
 }
