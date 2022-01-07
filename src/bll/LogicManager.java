@@ -74,22 +74,22 @@ public class LogicManager
     // here we create a song with the input from the gui, sending it to Dal.
     public Movie createSong (String name, String artistName, String filePath, String songLength) throws Exception
     {
-       return(movieDAO.createSong(name, artistName, filePath, songLength));
+       return(movieDAO.createMovie(name, artistName, filePath, songLength));
     }
     //Here we get all songs from the dal.
     public List<Movie> getAllSongs() throws SQLException
     {
-        return (movieDAO.getAllSongs());
+        return (movieDAO.getAllMovie());
     }
     // here we delete a movie from the database.
     public void deleteSong(Movie movie)
     {
-        movieDAO.deleteSong(movie);
+        movieDAO.deleteMovie(movie);
     }
     //here we update a movie in the database.
     public void updateSong(Movie movie)
     {
-        movieDAO.updateSong(movie);
+        movieDAO.updateMovie(movie);
     }
 
     public List<Movie> searchSongs(String query) throws Exception {

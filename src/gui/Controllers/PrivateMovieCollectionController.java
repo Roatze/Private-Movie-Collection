@@ -203,9 +203,9 @@ public class PrivateMovieCollectionController implements Initializable {
      * Creates a dialog to ask the user to confirm the deletion, then deletes the selected song
      */
     /*
-    public void deleteSong(ActionEvent actionEvent) throws Exception {
+    public void deleteMovie(ActionEvent actionEvent) throws Exception {
         if(SimpleDialog.delete() && tvSongTable.getSelectionModel().getSelectedItem() != null) {
-            PrivateMovieCollectionModel.deleteSong(tvSongTable.getSelectionModel().getSelectedItem());
+            PrivateMovieCollectionModel.deleteMovie(tvSongTable.getSelectionModel().getSelectedItem());
         }
     }
 
