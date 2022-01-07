@@ -129,7 +129,7 @@ public class LogicManager
     }
     public void removeFromPlaylist (Category category, int i) throws Exception
     {
-        categoryDAO.removeFromPlaylist(category, i);
+        //categoryDAO.removeFromPlaylist(category, i);
     }
     public void clearPlaylist(Category category) throws Exception
     {

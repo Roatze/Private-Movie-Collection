@@ -5,7 +5,7 @@ import be.Category;
 
 import be.Movie;
 
-import bll.util.ConvertTime;
+import bll.util.ConvertUtil;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.DatabaseConnector;
 import javafx.collections.FXCollections;
@@ -76,7 +76,6 @@ public class CategoryDAO {
                 for (Movie movie : getCategory(category)) {
                     category.addSongToList(movie);
                 }
-                category.updatePlaylist();
 
                 // add the complete category to the list of playlists
                 allCategory.add(category);
@@ -104,8 +103,8 @@ public class CategoryDAO {
         {
             int id = rs.getInt("movieID");
             String name = rs.getString("movieName");
-            String publicRating = ConvertTime.combinedToPublic(rs.getString("movieRating"));
-            String privateRating = ConvertTime.combinedToPersonal(rs.getString("movieRating"));
+            String publicRating = ConvertUtil.combinedToPublic(rs.getString("movieRating"));
+            String privateRating = ConvertUtil.combinedToPersonal(rs.getString("movieRating"));
             String source = rs.getString("fileLink");
             String lastview = rs.getString("lastview");
 
@@ -153,15 +152,13 @@ public class CategoryDAO {
         Connection connection = DC.getConnection();
         int cId = category.getCategoryId();
         int mId = movie.getSongId();
-        int index = category.getMovieRating();
 
-        String sql = "INSERT INTO playlistContentTable (playlistID , songID , placement) VALUES ((?), (?), (?)); ";
+        String sql = "INSERT INTO catMovie (categoryID , movieID) VALUES ((?), (?)); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
         pst.setInt(1, cId);
         pst.setInt(2, mId);
-        pst.setInt(3, index);
 
         pst.executeUpdate();
 
@@ -170,19 +167,18 @@ public class CategoryDAO {
     //removes a song from a single category
     //@param category
     //@param song
-    public void removeFromPlaylist(Category category, int i) throws Exception
+    public void removeFromPlaylist(Category category, Movie movie) throws Exception
     {
         Connection connection = DC.getConnection();
-        int pId = category.getCategoryId();
-        int index = i;
-        System.out.println(index);
+        int cId = category.getCategoryId();
+        int mId = movie.getSongId();
 
-        String sql = "DELETE FROM catMovie WHERE categoryID = (?) AND placement=(?); ";
+        String sql = "DELETE FROM catMovie WHERE categoryID = (?) AND movieID = (?); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
-        pst.setInt(1, pId);
-        pst.setInt(2, index);
+        pst.setInt(1, cId);
+        pst.setInt(2, mId);
 
         pst.executeUpdate();
 

@@ -1,8 +1,5 @@
 package be;
 
-import bll.util.ConvertTime;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -16,8 +13,6 @@ public class Category
 {
     private StringProperty categoryName = new SimpleStringProperty();
     private List<Movie> listOfMovies = new ArrayList();
-    private IntegerProperty movieRating = new SimpleIntegerProperty();
-    private StringProperty playlistTimelength = new SimpleStringProperty();
     private int categoryId;
 
     public Category(int playlistID, String playlistName)
@@ -42,42 +37,8 @@ public class Category
         return categoryName.get();
     }
 
-    //is being used by a PropertyValueFactory in MTC.
-    public String getPlaylistTimelength() {
-        return playlistTimelength.get();
-    }
-
-    public int getMovieRating() {
-        return movieRating.get();
-    }
-
     public int getCategoryId() {
         return categoryId;
     }
 
-    private void updatePlaylistSongCount()
-    {
-        int i = 0;
-        for (Movie movie: listOfMovies) {
-            if (movie != null)
-            {
-                i++;
-            }
-        }
-        this.movieRating.set(i);
-    }
-
-    private void updatePlaylistTimeLength()
-    {
-        List<String> times = new ArrayList<>();
-        for (Movie movie: listOfMovies) {
-            if (movie != null)
-            {
-                times.add(movie.getPrivateRating());
-            }
-        }
-        this.playlistTimelength.set(ConvertTime.sumTime(times));
-    }
-
-    public void updatePlaylist(){ updatePlaylistTimeLength(); updatePlaylistSongCount(); }
 }

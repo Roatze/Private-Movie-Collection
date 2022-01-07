@@ -1,7 +1,7 @@
 package gui.Controllers;
 
 import be.Movie;
-import bll.util.ConvertTime;
+import bll.util.ConvertUtil;
 import gui.Model.PrivateMovieCollectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,7 +92,7 @@ public class SongDialogController implements Initializable {
         mediaPlayer.setOnReady(new Runnable() {
             @Override
             public void run() {
-                txtTime.setText(ConvertTime.doubleSecToTime(mediaPlayer.getMedia().getDuration().toSeconds()));
+                txtTime.setText(ConvertUtil.doubleSecToTime(mediaPlayer.getMedia().getDuration().toSeconds()));
             }
         });
     }

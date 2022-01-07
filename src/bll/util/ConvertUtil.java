@@ -2,7 +2,7 @@ package bll.util;
 
 import java.util.List;
 
-public class ConvertTime {
+public class ConvertUtil {
 
     public static String secToTime(int sec)
     {
@@ -148,7 +148,6 @@ public class ConvertTime {
         }
         return secToTime(i);
     }
-
 
     public static String combinedToPersonal(String combined)
     {

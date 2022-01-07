@@ -36,7 +36,6 @@ public class Movie
         return movieName.get();
     }
 
-
     public int getSongId() {
         return songId.get();
     }
@@ -45,18 +44,12 @@ public class Movie
         return publicRating.get();
     }
 
-
-
-
     public String getPrivateRating() {
         return privateRating.get();
     }
 
-
-
     public String getFileLink() {
         return fileLink;
     }
-
 
 }

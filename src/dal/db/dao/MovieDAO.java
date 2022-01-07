@@ -2,7 +2,7 @@ package dal.db.dao;
 
 
 import be.Movie;
-import bll.util.ConvertTime;
+import bll.util.ConvertUtil;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import dal.db.DatabaseConnector;
@@ -33,7 +33,7 @@ public class MovieDAO {
     public Movie createSong(String movieName, String publicRating, String privateRating, String fileLink) throws Exception
     {
         Connection con = DC.getConnection();
-        String rating = ConvertTime.toCombined(publicRating,privateRating);
+        String rating = ConvertUtil.toCombined(publicRating,privateRating);
 
         String sql = "INSERT INTO movie (movieName,movieRating,fileLink) VALUES (?,?,?);";
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -71,8 +71,8 @@ public class MovieDAO {
             {
                 int id = rs.getInt("movieID");
                 String movieName = rs.getString("movieName");
-                String publicRating = ConvertTime.combinedToPublic(rs.getString("movieRating"));
-                String privateRating = ConvertTime.combinedToPersonal(rs.getString("movieRating"));
+                String publicRating = ConvertUtil.combinedToPublic(rs.getString("movieRating"));
+                String privateRating = ConvertUtil.combinedToPersonal(rs.getString("movieRating"));
                 String fileLink = rs.getString("fileLink");
 
                 Movie movie = new Movie(id, movieName, publicRating, privateRating, fileLink);
@@ -108,7 +108,7 @@ public class MovieDAO {
     public void updateSong(Movie movie)
     {
 
-        String rating = ConvertTime.toCombined(movie.getPublicRating(),movie.getPrivateRating());
+        String rating = ConvertUtil.toCombined(movie.getPublicRating(),movie.getPrivateRating());
 
         String sql = "UPDATE movie SET movieName= (?), movieRating=(?), fileLink=(?) WHERE movieID = (?);";
         try(Connection connection = DC.getConnection())
