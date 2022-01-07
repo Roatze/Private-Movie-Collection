@@ -104,6 +104,9 @@ public class PrivateMovieCollectionController implements Initializable {
 
     public void clearGenreTableSelection(MouseEvent mouseEvent) {
     }
+
+    public void removeFromGenre(ActionEvent actionEvent) {
+    }
     /*
     /**
      * Adds the selected song to the selected playlist when then button is pressed
@@ -412,6 +415,8 @@ public class PrivateMovieCollectionController implements Initializable {
             }
         });
     }
+
+
 
     /**
      * Method used for initializing the playlists
