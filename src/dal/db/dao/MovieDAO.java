@@ -33,7 +33,7 @@ public class MovieDAO {
     public Movie createSong(String movieName, String publicRating, String privateRating, String fileLink, String songLength) throws Exception
     {
         Connection con = DC.getConnection();
-        String rating = ConvertTime.toCombined(publicRating,privateRating)
+        String rating = ConvertTime.toCombined(publicRating,privateRating);
 
         String sql = "INSERT INTO movie (movieName,movieRating,fileLink,lastview) VALUES (?,?,?,?);";
         PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
