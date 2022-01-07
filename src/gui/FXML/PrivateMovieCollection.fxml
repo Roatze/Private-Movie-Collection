@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="570.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
+<AnchorPane prefHeight="570.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
 
    <children>
       <Label layoutX="193.0" layoutY="88.0" text="Movies in Category" />
