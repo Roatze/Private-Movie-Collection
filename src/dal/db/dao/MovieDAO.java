@@ -93,8 +93,8 @@ public class MovieDAO {
             PreparedStatement ps1 = connection.prepareStatement(sql1,Statement.RETURN_GENERATED_KEYS);
             PreparedStatement ps2 = connection.prepareStatement(sql2,Statement.RETURN_GENERATED_KEYS);
 
-            ps1.setInt(1, movie.getSongId());
-            ps2.setInt(1, movie.getSongId());
+            ps1.setInt(1, movie.getMovieId());
+            ps2.setInt(1, movie.getMovieId());
             ps1.executeUpdate();
             ps2.executeUpdate();
 
@@ -117,7 +117,7 @@ public class MovieDAO {
             statement.setString(1, movie.getMovieName());
             statement.setString(2, rating);
             statement.setString(3, filePathToURI(movie.getFileLink()));
-            statement.setInt(4, movie.getSongId());
+            statement.setInt(4, movie.getMovieId());
             statement.executeUpdate();
 
         } catch (SQLException throwables) {

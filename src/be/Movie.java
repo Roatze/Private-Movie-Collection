@@ -36,7 +36,7 @@ public class Movie
         return movieName.get();
     }
 
-    public int getSongId() {
+    public int getMovieId() {
         return songId.get();
     }
 

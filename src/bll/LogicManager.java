@@ -108,7 +108,7 @@ public class LogicManager
     }
     public Category createPlaylist(String name) throws Exception
     {
-       return categoryDAO.createPlaylist(name);
+       return categoryDAO.createCategory(name);
     }
 
     public List<Movie> getPlaylist (Category category) throws Exception
@@ -118,26 +118,26 @@ public class LogicManager
 
     public void deletePlaylist(Category category)
     {
-        categoryDAO.deletePlaylist(category);
+        categoryDAO.deleteCategory(category);
     }
 
 
     public void addToPlaylist(Category category, Movie movie) throws Exception
 
     {
-        categoryDAO.addToPlaylist(category, movie);
+        categoryDAO.addToCategory(category, movie);
     }
     public void removeFromPlaylist (Category category, int i) throws Exception
     {
-        //categoryDAO.removeFromPlaylist(category, i);
+        //categoryDAO.removeFromCategory(category, i);
     }
     public void clearPlaylist(Category category) throws Exception
     {
-        categoryDAO.clearPlaylist(category);
+        categoryDAO.clearCategory(category);
     }
     public void updatePlaylist (Category category) throws Exception
     {
-        categoryDAO.updatePlaylist(category);
+        categoryDAO.updateCategory(category);
     }
 
     public void swapSongsInPlaylist(Category category, int i, int j) throws Exception

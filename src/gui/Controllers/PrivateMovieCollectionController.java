@@ -103,8 +103,8 @@ public class PrivateMovieCollectionController implements Initializable {
      * Adds the selected song to the selected playlist when then button is pressed
      */
     /*
-    public void addToPlaylist(ActionEvent actionEvent) throws Exception {
-        PrivateMovieCollectionModel.addToPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(), tvSongTable.getSelectionModel().getSelectedItem());
+    public void addToCategory(ActionEvent actionEvent) throws Exception {
+        PrivateMovieCollectionModel.addToCategory(tvPlaylists.getSelectionModel().getSelectedItem(), tvSongTable.getSelectionModel().getSelectedItem());
     }
 
     /**
@@ -113,18 +113,18 @@ public class PrivateMovieCollectionController implements Initializable {
     /*
     public void newPlaylist(ActionEvent actionEvent) throws Exception {
         String name = SimpleDialog.playlist();
-        PrivateMovieCollectionModel.createPlaylist(name);
+        PrivateMovieCollectionModel.createCategory(name);
     }
 
     /**
      * Opens the dialog to get user input for the name of the playlist, then updates the selected playlist with the new name
      */
     /*
-    public void updatePlaylist(ActionEvent actionEvent) throws Exception {
+    public void updateCategory(ActionEvent actionEvent) throws Exception {
         if(tvPlaylists.getSelectionModel().getSelectedItem() != null) {
             String name = SimpleDialog.playlist();
             Category pl = new Category(tvPlaylists.getSelectionModel().getSelectedItem().getCategoryId(), name);
-            PrivateMovieCollectionModel.updatePlaylist(pl);
+            PrivateMovieCollectionModel.updateCategory(pl);
         }
     }
 
@@ -132,9 +132,9 @@ public class PrivateMovieCollectionController implements Initializable {
      * Creates a dialog to ask the user to confirm the deletion, then deletes the selected playlist
      */
     /*
-    public void deletePlaylist(ActionEvent actionEvent) {
+    public void deleteCategory(ActionEvent actionEvent) {
         if(SimpleDialog.delete())
-            PrivateMovieCollectionModel.deletePlaylist(tvPlaylists.getSelectionModel().getSelectedItem());
+            PrivateMovieCollectionModel.deleteCategory(tvPlaylists.getSelectionModel().getSelectedItem());
         tvPlaylists.refresh();
     }
 
@@ -156,10 +156,10 @@ public class PrivateMovieCollectionController implements Initializable {
      * Creates a dialog to ask the user to confirm the deletion, then removes the selected song from the current playlist
      */
     /*
-    public void removeFromPlaylist(ActionEvent actionEvent) throws Exception {
+    public void removeFromCategory(ActionEvent actionEvent) throws Exception {
         if(SimpleDialog.delete())
         {
-            PrivateMovieCollectionModel.removeFromPlaylist(tvPlaylists.getSelectionModel().getSelectedItem(),
+            PrivateMovieCollectionModel.removeFromCategory(tvPlaylists.getSelectionModel().getSelectedItem(),
                  tvPlaylistSongTable.getSelectionModel().getSelectedItem(),
                  tvPlaylistSongTable.getSelectionModel().getSelectedIndex());
         }
@@ -188,7 +188,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
             Movie movie = tvSongTable.getSelectionModel().getSelectedItem();
             String filepath = movie.getFileLink().replace("file:/", "");
-            songController.setSongValues(movie.getSongId(), movie.getMovieName(), movie.getPublicRating(), movie.getPrivateRating(), filepath);
+            songController.setSongValues(movie.getMovieId(), movie.getMovieName(), movie.getPublicRating(), movie.getPrivateRating(), filepath);
             stage.showAndWait();
         }
     }

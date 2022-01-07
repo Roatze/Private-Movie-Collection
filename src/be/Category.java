@@ -28,12 +28,12 @@ public class Category
     Here we want to return the list of songs
      */
 
-    public void addSongToList(Movie movie)
+    public void addMovieToList(Movie movie)
     {
         listOfMovies.add(movie);
     }
 
-    public String getPlaylistName() {
+    public String getCategoryName() {
         return categoryName.get();
     }
 

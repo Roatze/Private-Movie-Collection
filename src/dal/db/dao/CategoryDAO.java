@@ -28,7 +28,7 @@ public class CategoryDAO {
     //creates a new playlist
     //@param name
     //@return Category
-    public Category createPlaylist(String name) throws Exception
+    public Category createCategory(String name) throws Exception
     {
         Connection connection = DC.getConnection();
 
@@ -74,7 +74,7 @@ public class CategoryDAO {
 
                 // get songs in the category and put them in the playlists songlist
                 for (Movie movie : getCategory(category)) {
-                    category.addSongToList(movie);
+                    category.addMovieToList(movie);
                 }
 
                 // add the complete category to the list of playlists
@@ -118,7 +118,7 @@ public class CategoryDAO {
 
     //Deletes a category
     //@param category
-    public void deletePlaylist(Category category)
+    public void deleteCategory(Category category)
     {
         int pId = category.getCategoryId();
 
@@ -146,12 +146,12 @@ public class CategoryDAO {
     //Adds a movie to a category
     //@param category
     //@Param song
-    public void addToPlaylist(Category category, Movie movie) throws Exception
+    public void addToCategory(Category category, Movie movie) throws Exception
 
     {
         Connection connection = DC.getConnection();
         int cId = category.getCategoryId();
-        int mId = movie.getSongId();
+        int mId = movie.getMovieId();
 
         String sql = "INSERT INTO catMovie (categoryID , movieID) VALUES ((?), (?)); ";
 
@@ -167,11 +167,11 @@ public class CategoryDAO {
     //removes a song from a single category
     //@param category
     //@param song
-    public void removeFromPlaylist(Category category, Movie movie) throws Exception
+    public void removeFromCategory(Category category, Movie movie) throws Exception
     {
         Connection connection = DC.getConnection();
         int cId = category.getCategoryId();
-        int mId = movie.getSongId();
+        int mId = movie.getMovieId();
 
         String sql = "DELETE FROM catMovie WHERE categoryID = (?) AND movieID = (?); ";
 
@@ -186,7 +186,7 @@ public class CategoryDAO {
 
     //removes all songs from a single category
     //@param category
-    public void clearPlaylist(Category category) throws Exception
+    public void clearCategory(Category category) throws Exception
     {
         Connection connection = DC.getConnection();
         int pId = category.getCategoryId();
@@ -203,12 +203,12 @@ public class CategoryDAO {
 
     //updates a single category with is new name
     //@param category
-    public void updatePlaylist(Category category) throws Exception
+    public void updateCategory(Category category) throws Exception
     {
         Connection connection = DC.getConnection();
 
         int cId = category.getCategoryId();
-        String name = category.getPlaylistName();
+        String name = category.getCategoryName();
 
         String sql = "UPDATE category SET categoryName = (?) WHERE categoryID = (?);";
 
