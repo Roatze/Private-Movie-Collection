@@ -18,7 +18,7 @@
         <TextField fx:id="imdbRaringBar" layoutX="113.0" layoutY="231.0" prefHeight="25.0" prefWidth="223.0" />
         <Button layoutX="347.0" layoutY="273.0" mnemonicParsing="false" onAction="#chooseFile" text="Choose..." />
         <Button layoutX="133.0" layoutY="-46.0" mnemonicParsing="false" text="Button" />
-        <Button layoutX="272.0" layoutY="119.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="More..." />
+        <Button fx:id="moreGenre" layoutX="272.0" layoutY="119.0" mnemonicParsing="false" onAction="#moreGenreBtn" prefHeight="26.0" prefWidth="62.0" text="More..." />
         <Button fx:id="returnMainMenu" layoutX="272.0" layoutY="312.0" mnemonicParsing="false" onAction="#goReturnMainMenu" prefHeight="25.0" prefWidth="64.0" text="Cancel" />
         <Button fx:id="movieSaveButton" layoutX="184.0" layoutY="311.0" mnemonicParsing="false" onAction="#getMovieInfo" prefHeight="26.0" prefWidth="70.0" text="Save" />
         <ComboBox fx:id="genreMenu" layoutX="111.0" layoutY="119.0" prefWidth="150.0" />

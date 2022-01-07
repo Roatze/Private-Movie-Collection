@@ -76,4 +76,11 @@ public class AddMovieController{
         Alert alert = new Alert(Alert.AlertType.ERROR,text,ButtonType.YES);
         alert.showAndWait();
     }
+
+    public void moreGenreBtn(ActionEvent event) throws IOException {
+        Stage swich = (Stage) returnMainMenu.getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../view/Genre.fxml"));
+        Scene scene = new Scene(parent);
+        swich.setScene(scene);
+    }
 }

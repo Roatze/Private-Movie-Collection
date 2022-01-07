@@ -126,12 +126,6 @@ public class PrivateMovieCollectionModel
     }
 
 
-    public void swapSongsInPlaylist(Category category, int i, int j) throws Exception {
-        Collections.swap(playlistWithMovies, i, j);
-
-        lm.swapSongsInPlaylist(category, i, j);
-    }
-
     public void timer(TimerTask t) {
         lm.timer(t);
     }
