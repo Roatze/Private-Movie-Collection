@@ -75,6 +75,7 @@ public class PrivateMovieCollectionController implements Initializable {
         Scene scene = new Scene(parent);
         swich.setScene(scene);
     }
+
     public Stage createMovieDialog(String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("MovieDialog.fxml"));
@@ -87,6 +88,8 @@ public class PrivateMovieCollectionController implements Initializable {
         songController.setModel(PrivateMovieCollectionModel);
         return stage;
     }
+
+
 
     public void removeMovie(ActionEvent actionEvent) throws Exception {
         if (SimpleDialog.delete() && tvMovieTable.getSelectionModel().getSelectedItem() != null) {

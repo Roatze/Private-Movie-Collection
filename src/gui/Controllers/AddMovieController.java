@@ -40,6 +40,9 @@ public class AddMovieController{
     @FXML
     public TextField fileBar;
 
+
+
+
     public void goReturnMainMenu(ActionEvent actionEvent) throws IOException {
         Stage swich = (Stage) returnMainMenu.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
@@ -47,13 +50,11 @@ public class AddMovieController{
         swich.setScene(scene);
     }
 
+
     public void getMovieInfo(ActionEvent actionEvent) {
     }
 
-    public void chooseFile(ActionEvent actionEvent) {
-    }
-
-    public void chooseFileMethod(ActionEvent actionEvent) throws FileNotFoundException {
+    public void chooseFile(ActionEvent actionEvent) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Movie");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")+ System.getProperty("file.separator") +"Desktop"));
