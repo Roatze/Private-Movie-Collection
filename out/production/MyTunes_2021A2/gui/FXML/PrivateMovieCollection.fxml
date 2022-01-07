@@ -8,11 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
-<AnchorPane prefHeight="570.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
-=======
-<AnchorPane prefHeight="570.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
->>>>>>> 5ea62f4bd0e38c7578e2f961da75db2fb3a6b80e
+<AnchorPane prefHeight="582.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
 
    <children>
       <Label layoutX="193.0" layoutY="88.0" text="Movies in Category" />
@@ -52,10 +48,7 @@
       <Button fx:id="buttonAddToGenre" layoutX="528.0" layoutY="106.0" mnemonicParsing="false" onAction="#addToGenre" rotate="90.0" text="▼" />
       <Button fx:id="ButtonRemoveFromGenre" layoutX="193.0" layoutY="498.0" mnemonicParsing="false" onAction="#removeFromGenre" prefHeight="25.0" prefWidth="150.0" text="Remove from Genre" />
       <Label layoutX="415.0" layoutY="88.0" text="Rating" />
-<<<<<<< HEAD
       <Button fx:id="ButtonpositionDown" layoutX="496.0" layoutY="498.0" mnemonicParsing="false" onAction="#positionDown" text="▼" />
       <Button fx:id="ButtonpositionUp" layoutX="460.0" layoutY="498.0" mnemonicParsing="false" onAction="#positionUp" text="▲" />
-=======
->>>>>>> 5ea62f4bd0e38c7578e2f961da75db2fb3a6b80e
    </children>
 </AnchorPane>

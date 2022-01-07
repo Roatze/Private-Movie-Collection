@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -53,6 +54,10 @@ public class PrivateMovieCollectionController implements Initializable {
     private TextField txtNowPlaying;
     @FXML
     private Button addMovie;
+    @FXML
+    private Button ButtonAddGenre;
+
+
 
 
     private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
@@ -65,10 +70,10 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     public void addMovie(ActionEvent actionEvent) throws IOException {
-        Stage stage = createMovieDialog("New Movie");
-        Stage mainStage = ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow()));
-        stage.initOwner(mainStage);
-        stage.showAndWait();
+        Stage swich = (Stage) ButtonAddGenre.getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddMovie.fxml"));
+        Scene scene = new Scene(parent);
+        swich.setScene(scene);
     }
     public Stage createMovieDialog(String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -95,8 +100,10 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     public void addGenre(ActionEvent actionEvent) throws Exception {
-        String name = SimpleDialog.playlist();
-        PrivateMovieCollectionModel.createPlaylist(name);
+        Stage swich = (Stage) ButtonAddGenre.getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/Genre.fxml"));
+        Scene scene = new Scene(parent);
+        swich.setScene(scene);
     }
     public void updateCategory(ActionEvent actionEvent) throws Exception {
         if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {

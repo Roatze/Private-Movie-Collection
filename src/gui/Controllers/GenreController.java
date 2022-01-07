@@ -28,7 +28,7 @@ public class GenreController {
 
     public void genreCancelBtn(ActionEvent event) throws IOException {
         Stage swich = (Stage) genreCancel.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../view/PrivateMovieCollection.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
         swich.setScene(scene);
     }
