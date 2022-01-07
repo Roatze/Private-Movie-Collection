@@ -459,15 +459,15 @@ public class PrivateMovieCollectionController implements Initializable {
         songController.setModel(PrivateMovieCollectionModel);
         return stage;
     }
-
+*/
     /**
-     * Initializes the songs, playlists, autoplay timer and search function when the program is launched
+     * Initializes MOVIE AND PLAYLIST
+     *
      */
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //setTvMovieTable();
-        //setTcGenreTable();
+        setTvMovieTable();
+        // setTcGenreTable();
 
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try{
@@ -477,6 +477,39 @@ public class PrivateMovieCollectionController implements Initializable {
             }
         });
     }
+
+    /**
+     * Method used for initializing the genre table
+     * VIRKER FØRST NÅR DATABASEN ER FIKSET. tcmovieCAT is null
+     */
+    /*
+    public void setTcGenreTable() {
+        tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieTitle"));
+        tcPersonalRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("personaRating"));
+        tcIMDBRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("IMDBRating"));
+        try {
+            tvGenreTable.setItems(PrivateMovieCollectionModel.getAllPlaylists());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    */
+    /**
+     * Method used for initializing the movie table.
+     *
+     */
+
+    private void setTvMovieTable() {
+        tcTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieTitle"));
+        tcPersonalRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("personaRating"));
+        tcIMDBRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("IMDBRating"));
+        try{
+            tvMovieTable.setItems(PrivateMovieCollectionModel.getSonglist());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     /*
@@ -510,7 +543,7 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    /**
+    /**åå
      * Clears the selected song on the song table
      */
     /*
@@ -518,7 +551,7 @@ public class PrivateMovieCollectionController implements Initializable {
         tvSongTable.getSelectionModel().clearSelection();
     }
 
-    /**
+    /**åå
      * Clears the selected song on the playlist song table
      */
     /*
