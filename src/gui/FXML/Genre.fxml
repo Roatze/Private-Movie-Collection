@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="203.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FXML.Genre">
+<AnchorPane prefHeight="203.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.GenreController">
    <children>
       <Button fx:id="genreCancel" layoutX="237.0" layoutY="151.0" mnemonicParsing="false" onAction="#genreCancelBtn" prefHeight="25.0" prefWidth="79.0" text="Cancel" />
       <Button fx:id="genreSave" layoutX="148.0" layoutY="151.0" mnemonicParsing="false" onAction="#genreSaveBtn" prefHeight="25.0" prefWidth="79.0" text="Save" />
