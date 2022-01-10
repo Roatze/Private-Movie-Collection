@@ -28,10 +28,6 @@ public class Movie
         this.fileLink = fileLink;
     }
 
-    /*
-    Beneath we have getters and setters for the different properties of the class,
-    we don't have a setter for ID since we want our database to handle the ID.
-     */
     public String getMovieName() {
         return movieName.get();
     }
