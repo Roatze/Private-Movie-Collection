@@ -50,8 +50,8 @@ public class CategoryDAO {
         return null;
     }
 
-    //returns an ObservableList with playlists from playlist table
-    //@return ObservableList with playlists
+    //returns an ObservableList with categories from category table
+    //@return ObservableList with categories
     public ObservableList<Category> getAllCategory() throws Exception
     {
         try (Connection connection = DC.getConnection())
@@ -85,9 +85,9 @@ public class CategoryDAO {
         }
     }
 
-    //returns a single playlist with its songs
-    //@param playlist
-    //@return a List of songs
+    //returns a single category with its movies
+    //@param category
+    //@return a List of movies
 
     public List<Movie> getCategory(Category category) throws Exception
     {
@@ -110,8 +110,7 @@ public class CategoryDAO {
 
             Movie med = new Movie(id, name, publicRating, privateRating, source);
 
-            //playlistWithMovies.add(index,med);
-
+            playlistWithMovies.add(med);
         }
         return playlistWithMovies;
     }
@@ -145,7 +144,7 @@ public class CategoryDAO {
 
     //Adds a movie to a category
     //@param category
-    //@Param song
+    //@Param movie
     public void addToCategory(Category category, Movie movie) throws Exception
 
     {
@@ -164,9 +163,9 @@ public class CategoryDAO {
 
     }
 
-    //removes a song from a single category
+    //removes a movie from a single category
     //@param category
-    //@param song
+    //@param movie
     public void removeFromCategory(Category category, Movie movie) throws Exception
     {
         Connection connection = DC.getConnection();
@@ -184,18 +183,18 @@ public class CategoryDAO {
 
     }
 
-    //removes all songs from a single category
+    //removes all movies from a single category
     //@param category
     public void clearCategory(Category category) throws Exception
     {
         Connection connection = DC.getConnection();
-        int pId = category.getCategoryId();
+        int cId = category.getCategoryId();
 
         String sql = "DELETE FROM catMovie WHERE categoryID = (?); ";
 
         PreparedStatement pst = connection.prepareStatement(sql);
 
-        pst.setInt(1, pId);
+        pst.setInt(1, cId);
 
         pst.executeUpdate();
 
@@ -226,7 +225,12 @@ public class CategoryDAO {
 
         if (true == true) //Set to true to run
         {
-            //(re)creates new tables in database
+            //removes old tables in database
+            DAO.deletePlaylistTable();
+            DAO.deleteMovieCategoryTable();
+            DAO.deleteMovieTable();
+
+            //creates new tables in database
             DAO.createPlaylistTable();
             DAO.createMovieCategoryTable();
             DAO.createMovieTable();
@@ -234,13 +238,41 @@ public class CategoryDAO {
         }
     }
 
-    //recreates a new playlistTable
+    //removes old playlistTable
+    public void deletePlaylistTable() throws Exception
+    {
+        Connection connection = DC.getConnection();
+
+        String sql = "DROP TABLE category;";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+    }
+
+    //removes old playlistContentTable
+    public void deleteMovieCategoryTable() throws Exception
+    {
+        Connection connection = DC.getConnection();
+        String sql = "DROP TABLE catMovie";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+    }
+
+    //removes old songsTable
+    public void deleteMovieTable() throws Exception
+    {
+        Connection connection = DC.getConnection();
+
+        String sql = "DROP TABLE movie;";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
+    }
+
+    //creates a new playlistTable
     public void createPlaylistTable() throws Exception
     {
         Connection connection = DC.getConnection();
 
-        String sql = "DROP TABLE category;" +
-                "CREATE TABLE category (" +
+        String sql = "CREATE TABLE category (" +
                 "categoryID int IDENTITY(1,1)," +
                 "categoryName varchar(255)" +
                 ");";
@@ -248,25 +280,21 @@ public class CategoryDAO {
         ps.executeUpdate();
     }
 
-    //recreates a new playlistContentTable
+    //creates a new playlistContentTable
     public void createMovieCategoryTable() throws Exception
     {
         Connection connection = DC.getConnection();
-        String sql1 = "DROP TABLE catMovie";
-        String sql2 = "CREATE TABLE catMovie ( ID int IDENTITY(1,1) PRIMARY KEY, categoryID int, movieID int);";
-        PreparedStatement ps1 = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
-        ps1.executeUpdate();
-        PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
-        ps2.executeUpdate();
+        String sql = "CREATE TABLE catMovie ( ID int IDENTITY(1,1) PRIMARY KEY, categoryID int, movieID int);";
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.executeUpdate();
     }
 
-    //recreates a new songsTable
+    //creates a new songsTable
     public void createMovieTable() throws Exception
     {
         Connection connection = DC.getConnection();
 
-        String sql = "DROP TABLE movie;" +
-                "CREATE TABLE movie(" +
+        String sql = "CREATE TABLE movie(" +
                 "movieID int IDENTITY(1,1) NOT NULL," +
                 "movieName varchar(255)," +
                 "movieRating varchar(255)," +
