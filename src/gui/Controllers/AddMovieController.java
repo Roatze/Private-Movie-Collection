@@ -1,6 +1,10 @@
 package gui.Controllers;
 
+import be.Category;
+import be.Movie;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import dal.db.dao.CategoryDAO;
+import gui.Model.PrivateMovieCollectionModel;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,15 +48,34 @@ public class AddMovieController {
 
     AddMovieController addMovieController;
 
+    PrivateMovieCollectionModel privateMovieCollectionModel = new PrivateMovieCollectionModel();
+
+    public AddMovieController() throws Exception {
+    }
 
     /**
      * Initialize metode, der instancierer songModel, men også sætter kategorierne i vores comboBox
      */
-    public void initialize() {
+    public void initialize() throws Exception {
+
+        CategoryDAO categoryDAO = new CategoryDAO();
 
         addMovieController = new AddMovieController();
-        genreMenu.setItems(FXCollections.observableArrayList());
+        genreMenu.setItems(categoryDAO.getAllCategory());
 
+    }
+    /**
+     * her uploades vores data til vores model layer, dataen får den fra getSongInfo.
+     * @param title
+     * @param artist
+     * @param category
+     * @throws IOException
+     * @throws SQLException
+     */
+    public void uploadSongInfo(String title, String artist, String category) throws Exception {
+        PrivateMovieCollectionModel privateMovieCollectionModel = new PrivateMovieCollectionModel();
+
+        privateMovieCollectionModel.createSong(title, artist, category, fileBar.getText());
     }
 
 
@@ -63,9 +86,50 @@ public class AddMovieController {
         swich.setScene(scene);
     }
 
+    /**
+     * her bliver songInfo læst og sendt videre til upload metoden ovenfor.
+     * @throws IOException
+     * @throws SQLException
+     */
+    public void getMovieInfo(ActionEvent actionEvent) throws Exception {
+        String uploadTitle = title();
+        String uploadPersonalRatng = personalRatng();
+        String uploadImdbRaring = imdbRaring();
+        uploadSongInfo(uploadTitle, uploadPersonalRatng, uploadImdbRaring);
 
-    public void getMovieInfo(ActionEvent actionEvent) {
+        Stage swich = (Stage) returnMainMenu.getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
+        Scene scene = new Scene(parent);
+        swich.setScene(scene);
+
     }
+
+
+
+    /**
+     * Metoder til at få texten fra textfields.
+     * @return "Txtfield".getTet();
+     */
+
+    public String title() {
+        String titleTemp = titleBar.getText();
+        return titleTemp;
+
+    }
+
+    public String personalRatng() {
+        String personalRatngBarTemp = personalRatngBar.getText();
+        return personalRatngBarTemp;
+    }
+
+    public String imdbRaring() {
+        String imdbRaringBarTemp = imdbRaringBar.getText();
+        return imdbRaringBarTemp;
+    }
+
+
+
+
 
     public void chooseFile(ActionEvent actionEvent) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
@@ -82,6 +146,7 @@ public class AddMovieController {
             fileBar.setText(selectedFile.getAbsolutePath());
         }
     }
+
 
     /*
     Error metode.

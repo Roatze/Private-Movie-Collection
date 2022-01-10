@@ -9,7 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -146,6 +145,8 @@ public class PrivateMovieCollectionModel
     {
         lm.setVolume(volume);
     }
+
+
 }
 
 
