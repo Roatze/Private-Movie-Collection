@@ -1,6 +1,7 @@
 package gui.Controllers;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 
-public class AddMovieController{
+public class AddMovieController {
+
 
     @FXML
     public Button returnMainMenu;
@@ -40,7 +42,18 @@ public class AddMovieController{
     @FXML
     public TextField fileBar;
 
+    AddMovieController addMovieController;
 
+
+    /**
+     * Initialize metode, der instancierer songModel, men også sætter kategorierne i vores comboBox
+     */
+    public void initialize() {
+
+        addMovieController = new AddMovieController();
+        genreMenu.setItems(FXCollections.observableArrayList());
+
+    }
 
 
     public void goReturnMainMenu(ActionEvent actionEvent) throws IOException {
@@ -57,9 +70,9 @@ public class AddMovieController{
     public void chooseFile(ActionEvent actionEvent) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Movie");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")+ System.getProperty("file.separator") +"Desktop"));
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Desktop"));
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Movie Files",  "*.mp4", "*.mpeg4"),
+                new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
                 new FileChooser.ExtensionFilter("All Files", "*.*")
         );
 
@@ -73,8 +86,8 @@ public class AddMovieController{
     /*
     Error metode.
      */
-    private void error(String text){
-        Alert alert = new Alert(Alert.AlertType.ERROR,text,ButtonType.YES);
+    private void error(String text) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.YES);
         alert.showAndWait();
     }
 

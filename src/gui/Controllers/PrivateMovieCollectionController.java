@@ -29,7 +29,7 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private TableView<Movie> tvEntertainmentTable;
     @FXML
-    private TableColumn<Category,String> tcEntertainment;
+    private TableColumn<Category, String> tcEntertainment;
     @FXML
     private TableView<Category> tvGenreTable;
     @FXML
@@ -56,8 +56,6 @@ public class PrivateMovieCollectionController implements Initializable {
     private Button addMovie;
     @FXML
     private Button ButtonAddGenre;
-
-
 
 
     private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
@@ -90,7 +88,6 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
 
-
     public void removeMovie(ActionEvent actionEvent) throws Exception {
         if (SimpleDialog.delete() && tvMovieTable.getSelectionModel().getSelectedItem() != null) {
             PrivateMovieCollectionModel.deleteSong(tvMovieTable.getSelectionModel().getSelectedItem());
@@ -99,7 +96,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
 
     public void addToGenre(ActionEvent actionEvent) throws Exception {
-            PrivateMovieCollectionModel.addToPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(), tvMovieTable.getSelectionModel().getSelectedItem());
+        PrivateMovieCollectionModel.addToPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(), tvMovieTable.getSelectionModel().getSelectedItem());
     }
 
     public void addGenre(ActionEvent actionEvent) throws Exception {
@@ -108,6 +105,7 @@ public class PrivateMovieCollectionController implements Initializable {
         Scene scene = new Scene(parent);
         swich.setScene(scene);
     }
+
     public void updateCategory(ActionEvent actionEvent) throws Exception {
         if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {
             String name = SimpleDialog.playlist();
@@ -117,22 +115,22 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     public void removeGenre(ActionEvent actionEvent) {
-        if(SimpleDialog.delete())
+        if (SimpleDialog.delete())
             PrivateMovieCollectionModel.deletePlaylist(tvGenreTable.getSelectionModel().getSelectedItem());
         tvGenreTable.refresh();
     }
 
 
-    public void positionUp(ActionEvent actionEvent) throws Exception  {
+    public void positionUp(ActionEvent actionEvent) throws Exception {
         changeOrderInPlaylist(-1);
     }
 
-    public void positionDown(ActionEvent actionEvent) throws Exception  {
+    public void positionDown(ActionEvent actionEvent) throws Exception {
         changeOrderInPlaylist(+1);
     }
 
     private void changeOrderInPlaylist(int upOrDown) throws Exception {
-        PrivateMovieCollectionModel.swapMoviesInGenre(tvGenreTable.getSelectionModel().getSelectedItem(),tvEntertainmentTable.getSelectionModel().getSelectedIndex(),
+        PrivateMovieCollectionModel.swapMoviesInGenre(tvGenreTable.getSelectionModel().getSelectedItem(), tvEntertainmentTable.getSelectionModel().getSelectedIndex(),
                 tvEntertainmentTable.getSelectionModel().getSelectedIndex() + upOrDown);
     }
 
@@ -143,13 +141,15 @@ public class PrivateMovieCollectionController implements Initializable {
                     tvEntertainmentTable.getSelectionModel().getSelectedIndex());
         }
     }
+
     public void showGenre(MouseEvent mouseEvent) {
         tvEntertainmentTable.getItems().clear();
-        try{
-            if(tvGenreTable.getSelectionModel().getSelectedItem() != null)
-            {tvEntertainmentTable.setItems(PrivateMovieCollectionModel.getPlaylist(tvGenreTable.getSelectionModel().getSelectedItem()));
+        try {
+            if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {
+                tvEntertainmentTable.setItems(PrivateMovieCollectionModel.getPlaylist(tvGenreTable.getSelectionModel().getSelectedItem()));
                 tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
-                tvGenreTable.getItems();}
+                tvGenreTable.getItems();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -460,9 +460,9 @@ public class PrivateMovieCollectionController implements Initializable {
         return stage;
     }
 */
+
     /**
      * Initializes MOVIE AND PLAYLIST
-     *
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -470,7 +470,7 @@ public class PrivateMovieCollectionController implements Initializable {
         // setTcGenreTable();
 
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            try{
+            try {
                 PrivateMovieCollectionModel.searchSongs(newValue);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -494,16 +494,16 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
     */
+
     /**
      * Method used for initializing the movie table.
-     *
      */
 
     private void setTvMovieTable() {
         tcTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieTitle"));
         tcPersonalRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("personaRating"));
         tcIMDBRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("IMDBRating"));
-        try{
+        try {
             tvMovieTable.setItems(PrivateMovieCollectionModel.getSonglist());
         } catch (Exception e) {
             e.printStackTrace();
