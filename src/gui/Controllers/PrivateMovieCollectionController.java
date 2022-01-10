@@ -527,7 +527,8 @@ public class PrivateMovieCollectionController implements Initializable {
             e.printStackTrace();
         }
     }
-
+    //*/
+    /*
     /**
      * Method used for initializing the song table
      */
