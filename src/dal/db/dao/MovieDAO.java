@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.*;
 
 /**
- * This is where we access data for all songs.
+ * This is where we access data for all movies.
  */
 public class MovieDAO {
 
