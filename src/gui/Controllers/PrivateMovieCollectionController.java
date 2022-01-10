@@ -500,9 +500,9 @@ public class PrivateMovieCollectionController implements Initializable {
      */
 
     private void setTvMovieTable() {
-        tcTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieTitle"));
-        tcPersonalRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("personaRating"));
-        tcIMDBRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("IMDBRating"));
+        tcTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieName"));
+        tcPersonalRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("privateRating"));
+        tcIMDBRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("publicRating"));
         try {
             tvMovieTable.setItems(PrivateMovieCollectionModel.getSonglist());
         } catch (Exception e) {
