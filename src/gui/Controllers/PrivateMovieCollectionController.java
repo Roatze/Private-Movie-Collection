@@ -165,6 +165,9 @@ public class PrivateMovieCollectionController implements Initializable {
 
     public void clearGenreTableSelection(MouseEvent mouseEvent) {
         tvGenreTable.getSelectionModel();
+        if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {
+            tvEntertainmentTable.setItems(tvGenreTable.getSelectionModel().getSelectedItem().getCategoryMovies());
+        }
     }
 
     public void editMovie(ActionEvent actionEvent) {
@@ -473,6 +476,7 @@ public class PrivateMovieCollectionController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setTvMovieTable();
         setTcGenreTable();
+        setTcEntertainmentTable();
 
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
@@ -487,11 +491,25 @@ public class PrivateMovieCollectionController implements Initializable {
      * Method used for initializing the genre table
      */
     public void setTcGenreTable() {
+        tcGenre.setCellValueFactory(new PropertyValueFactory<Category, String>("categoryName"));
+        try {
+            tvGenreTable.setItems(PrivateMovieCollectionModel.getAllPlaylists());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Method used for initializing the genre table
+     */
+    public void setTcEntertainmentTable() {
         tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieName"));
         tcPersonalRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("privateRating"));
         tcIMDBRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("publicRating"));
         try {
-            tvGenreTable.setItems(PrivateMovieCollectionModel.getAllPlaylists());
+            if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {
+                tvEntertainmentTable.setItems(tvGenreTable.getSelectionModel().getSelectedItem().getCategoryMovies());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
