@@ -472,7 +472,7 @@ public class PrivateMovieCollectionController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setTvMovieTable();
-        setTcGenreTable();
+        setTcMoviesInGenreTable();
 
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
@@ -486,7 +486,7 @@ public class PrivateMovieCollectionController implements Initializable {
     /**
      * Method used for initializing the genre table
      */
-    public void setTcGenreTable() {
+    public void setTcMoviesInGenreTable() {
         tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieName"));
         tcPersonalRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("privateRating"));
         tcIMDBRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("publicRating"));
@@ -500,7 +500,6 @@ public class PrivateMovieCollectionController implements Initializable {
     /**
      * Method used for initializing the movie table.
      */
-
     private void setTvMovieTable() {
         tcTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieName"));
         tcPersonalRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("privateRating"));
@@ -511,6 +510,7 @@ public class PrivateMovieCollectionController implements Initializable {
             e.printStackTrace();
         }
     }
+    
 
 
 
