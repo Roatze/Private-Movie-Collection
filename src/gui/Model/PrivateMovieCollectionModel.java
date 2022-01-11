@@ -51,8 +51,8 @@ public class PrivateMovieCollectionModel
         lm.previousSong(movie);
     }
 
-    public void createSong(String name, String artistName, String filePath, String songLength) throws Exception {
-        songlist.add(lm.createSong(name, artistName, filePath, songLength));
+    public void createMovie(String name, String artistName, String filePath, String songLength) throws Exception {
+        songlist.add(lm.createMovie(name, artistName, filePath, songLength));
     }
 
     public ObservableList<Movie> getSonglist() {
@@ -66,7 +66,7 @@ public class PrivateMovieCollectionModel
     }
 
     public void deleteMovie(Movie movie) throws Exception {
-        lm.deleteMovie(movie);
+        lm.removeMovie(movie);
         songlist.remove(movie);
     }
 
@@ -144,8 +144,6 @@ public class PrivateMovieCollectionModel
     {
         lm.setVolume(volume);
     }
-
-
 
 }
 
