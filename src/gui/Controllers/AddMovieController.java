@@ -104,8 +104,6 @@ public class AddMovieController {
 
     }
 
-
-
     /**
      * Metoder til at få texten fra textfields.
      * @return "Txtfield".getTet();

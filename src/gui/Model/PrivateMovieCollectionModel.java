@@ -18,8 +18,7 @@ import java.util.TimerTask;
 public class PrivateMovieCollectionModel
 {
 
-
-    private ObservableList<Movie> songlist;
+     private ObservableList<Movie> songlist;
     private ObservableList<Category> playlistlist;
     private ObservableList<Movie> playlistWithMovies;
     private LogicManager lm;
@@ -66,8 +65,8 @@ public class PrivateMovieCollectionModel
         songlist.addAll(searchedMovies);
     }
 
-    public void deleteSong(Movie movie) throws Exception {
-        lm.deleteSong(movie);
+    public void deleteMovie(Movie movie) throws Exception {
+        lm.deleteMovie(movie);
         songlist.remove(movie);
     }
 

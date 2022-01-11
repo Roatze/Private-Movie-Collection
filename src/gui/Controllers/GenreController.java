@@ -1,5 +1,6 @@
 package gui.Controllers;
 
+import be.Category;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,9 @@ public class GenreController {
     @FXML
     public Button genreCancel;
 
+    @FXML
+    private TableView<Category> tvGenreTable;
+
 
     public void genreCancelBtn(ActionEvent event) throws IOException {
         Stage swich = (Stage) genreCancel.getScene().getWindow();
@@ -33,11 +37,14 @@ public class GenreController {
         swich.setScene(scene);
     }
 
+
     public void genreSaveBtn(ActionEvent event) {
         
     }
 
+
     public void newGenreTxt(ActionEvent event) {
 
     }
+
 }

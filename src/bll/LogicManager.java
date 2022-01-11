@@ -82,7 +82,7 @@ public class LogicManager
         return (movieDAO.getAllMovie());
     }
     // here we delete a movie from the database.
-    public void deleteSong(Movie movie)
+    public void deleteMovie(Movie movie)
     {
         movieDAO.deleteMovie(movie);
     }
