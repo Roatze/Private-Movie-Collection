@@ -95,7 +95,7 @@ public class LogicManager
         movieDAO.updateMovie(movie);
     }
 
-    public List<Movie> searchSongs(String query) throws Exception {
+    public List<Movie> searchMovie(String query) throws Exception {
         List<Movie> allMovies = getAllSongs();
         List<Movie> searchedMovies = songSearcher.SearchSongs(allMovies, query);
         return searchedMovies;

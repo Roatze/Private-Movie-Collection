@@ -59,8 +59,8 @@ public class PrivateMovieCollectionModel
         return songlist;
     }
 
-    public void searchSongs(String query) throws Exception {
-        List<Movie> searchedMovies = lm.searchSongs(query);
+    public void searchedMovies(String query) throws Exception {
+        List<Movie> searchedMovies = lm.searchMovie(query);
         songlist.clear();
         songlist.addAll(searchedMovies);
     }

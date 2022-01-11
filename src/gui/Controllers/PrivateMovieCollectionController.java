@@ -483,7 +483,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
-                PrivateMovieCollectionModel.searchSongs(newValue);
+                PrivateMovieCollectionModel.searchedMovies(newValue);
             } catch (Exception e) {
                 e.printStackTrace();
             }
