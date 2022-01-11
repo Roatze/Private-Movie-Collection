@@ -28,7 +28,8 @@ public class GenreController {
     public Button genreCancel;
     @FXML
     public TextField newGenre;
-
+    @FXML
+    public Button genreSave;
     @FXML
     private TableView<Category> tvGenreTable;
 
@@ -41,12 +42,8 @@ public class GenreController {
     }
 
 
-    public void genreSaveBtn(ActionEvent event) {
 
-
-        
-    }
-    public void getGenreInfo(ActionEvent actionEvent) throws Exception {
+    public void genreSaveBtn(ActionEvent actionEvent) throws Exception {
         String uploadTitle = genre();
         uploadGenreInfo(uploadTitle);
 
