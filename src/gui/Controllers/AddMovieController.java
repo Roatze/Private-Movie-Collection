@@ -131,6 +131,8 @@ public class AddMovieController {
 
     public void chooseFile(ActionEvent actionEvent) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
+        File defaultDirectory = new File("src/dal/db/MovieFiles");
+        fileChooser.setInitialDirectory(defaultDirectory);
         fileChooser.setTitle("Select Movie");
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Desktop"));
         fileChooser.getExtensionFilters().addAll(
