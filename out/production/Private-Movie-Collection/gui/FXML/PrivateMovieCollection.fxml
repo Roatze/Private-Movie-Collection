@@ -50,5 +50,7 @@
       <Label layoutX="415.0" layoutY="88.0" text="Rating" />
       <Button fx:id="ButtonpositionDown" layoutX="496.0" layoutY="498.0" mnemonicParsing="false" onAction="#positionDown" text="▼" />
       <Button fx:id="ButtonpositionUp" layoutX="460.0" layoutY="498.0" mnemonicParsing="false" onAction="#positionUp" text="▲" />
+      <Button fx:id="ButtonEditMovie" layoutX="740.0" layoutY="498.0" mnemonicParsing="false" onAction="#editMovie" prefHeight="25.0" prefWidth="150.0" text="Edit Movie" />
+      <Button fx:id="ButtonEditGenre" layoutX="193.0" layoutY="534.0" mnemonicParsing="false" onAction="#editGenre" prefHeight="25.0" prefWidth="150.0" text="Edit Genre" />
    </children>
 </AnchorPane>

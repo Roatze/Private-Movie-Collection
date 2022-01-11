@@ -510,6 +510,12 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
+    public void editMovie(ActionEvent actionEvent) {
+    }
+
+    public void editGenre(ActionEvent actionEvent) {
+    }
+
 
 
     /*
