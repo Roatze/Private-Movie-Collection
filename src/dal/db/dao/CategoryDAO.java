@@ -223,18 +223,20 @@ public class CategoryDAO {
     public static void main(String[] args) throws Exception {
         CategoryDAO DAO = new CategoryDAO();
 
-        if (true == true) //Set to true to run
+        if (false) //Set to true to run
         {
-            //removes old tables in database
             DAO.deletePlaylistTable();
-            DAO.deleteMovieCategoryTable();
-            DAO.deleteMovieTable();
-
-            //creates new tables in database
             DAO.createPlaylistTable();
+        }
+        if (false)
+        {
+            DAO.deleteMovieCategoryTable();
             DAO.createMovieCategoryTable();
+        }
+        if (false)
+        {
+            DAO.deleteMovieTable();
             DAO.createMovieTable();
-
         }
     }
 
