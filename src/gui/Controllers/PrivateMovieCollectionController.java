@@ -155,17 +155,16 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-
     public void clearEntertainmentTableSelection(MouseEvent mouseEvent) {
-        tvEntertainmentTable.getSelectionModel().clearSelection();
+        tvEntertainmentTable.getSelectionModel();
     }
 
     public void clearMovieTable(MouseEvent mouseEvent) {
-        tvMovieTable.getSelectionModel().clearSelection();
+        tvMovieTable.getSelectionModel();
     }
 
     public void clearGenreTableSelection(MouseEvent mouseEvent) {
-        tvGenreTable.getSelectionModel().clearSelection();
+        tvGenreTable.getSelectionModel();
     }
 
     public void editMovie(ActionEvent actionEvent) {
