@@ -71,7 +71,7 @@ public class SongDialogController implements Initializable {
      */
     public void save(ActionEvent actionEvent) throws Exception {
         if (!edit) {
-            privateMovieCollectionModel.createSong(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
+            privateMovieCollectionModel.createMovie(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
 
         } else {
             Movie movie = new Movie(songID, txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());

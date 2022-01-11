@@ -61,7 +61,7 @@ public class AddMovieController {
         CategoryDAO categoryDAO = new CategoryDAO();
 
         addMovieController = new AddMovieController();
-        genreMenu.setItems(categoryDAO.getAllCategory());
+       
 
     }
     /**
@@ -75,7 +75,7 @@ public class AddMovieController {
     public void uploadMovieInfo(String title, String artist, String category) throws Exception {
         PrivateMovieCollectionModel privateMovieCollectionModel = new PrivateMovieCollectionModel();
 
-        privateMovieCollectionModel.createSong(title, artist, category, fileBar.getText());
+        privateMovieCollectionModel.createMovie(title, artist, category, fileBar.getText());
     }
 
 
