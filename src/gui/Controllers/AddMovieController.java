@@ -134,7 +134,6 @@ public class AddMovieController {
         File defaultDirectory = new File("src/dal/db/MovieFiles");
         fileChooser.setInitialDirectory(defaultDirectory);
         fileChooser.setTitle("Select Movie");
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home") + System.getProperty("file.separator") + "Desktop"));
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
                 new FileChooser.ExtensionFilter("All Files", "*.*")
