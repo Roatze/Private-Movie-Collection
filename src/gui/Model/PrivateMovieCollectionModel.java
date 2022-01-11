@@ -80,8 +80,8 @@ public class PrivateMovieCollectionModel
         return playlistlist;
     }
 
-    public void createPlaylist (String name) throws Exception {
-        lm.createPlaylist(name);
+    public void createGenre (String genre) throws Exception {
+        lm.createPlaylist(genre);
         playlistlist.clear();
         playlistlist.addAll(lm.getAllPlaylists());
     }
@@ -144,6 +144,7 @@ public class PrivateMovieCollectionModel
     {
         lm.setVolume(volume);
     }
+
 
 
 }

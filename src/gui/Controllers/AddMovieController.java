@@ -65,14 +65,14 @@ public class AddMovieController {
 
     }
     /**
-     * her uploades vores data til vores model layer, dataen får den fra getSongInfo.
+     * her uploades vores data til vores model layer, dataen får den fra LogicManger.
      * @param title
      * @param artist
      * @param category
      * @throws IOException
      * @throws SQLException
      */
-    public void uploadSongInfo(String title, String artist, String category) throws Exception {
+    public void uploadMovieInfo(String title, String artist, String category) throws Exception {
         PrivateMovieCollectionModel privateMovieCollectionModel = new PrivateMovieCollectionModel();
 
         privateMovieCollectionModel.createSong(title, artist, category, fileBar.getText());
@@ -95,7 +95,7 @@ public class AddMovieController {
         String uploadTitle = title();
         String uploadPersonalRatng = personalRatng();
         String uploadImdbRaring = imdbRaring();
-        uploadSongInfo(uploadTitle, uploadPersonalRatng, uploadImdbRaring);
+        uploadMovieInfo(uploadTitle, uploadPersonalRatng, uploadImdbRaring);
 
         Stage swich = (Stage) returnMainMenu.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
