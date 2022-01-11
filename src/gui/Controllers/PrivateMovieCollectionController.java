@@ -482,18 +482,18 @@ public class PrivateMovieCollectionController implements Initializable {
      * Method used for initializing the genre table
      * VIRKER FØRST NÅR DATABASEN ER FIKSET. tcmovieCAT is null
      */
-    /*
+    //*
     public void setTcGenreTable() {
-        tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieTitle"));
-        tcPersonalRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("personaRating"));
-        tcIMDBRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("IMDBRating"));
+        tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieName"));
+        tcPersonalRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("privateRating"));
+        tcIMDBRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("publicRating"));
         try {
             tvGenreTable.setItems(PrivateMovieCollectionModel.getAllPlaylists());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    */
+    //*/
 
     /**
      * Method used for initializing the movie table.
@@ -508,6 +508,12 @@ public class PrivateMovieCollectionController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void editMovie(ActionEvent actionEvent) {
+    }
+
+    public void editGenre(ActionEvent actionEvent) {
     }
 
 
