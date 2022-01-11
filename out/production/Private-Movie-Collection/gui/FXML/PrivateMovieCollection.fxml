@@ -14,7 +14,7 @@
       <Label layoutX="193.0" layoutY="88.0" text="Movies in Category" />
       <TableView fx:id="tvEntertainmentTable" layoutX="193.0" layoutY="105.0" onMouseClicked="#clearEntertainmentTableSelection" prefHeight="382.0" prefWidth="330.0">
         <columns>
-          <TableColumn fx:id="tcTitelCat" prefWidth="223.0" text="Titel" />
+          <TableColumn fx:id="tcTitleCat" prefWidth="223.0" text="Titel" />
             <TableColumn fx:id="tcPersonalRatingCat" minWidth="0.0" prefWidth="53.0" text="Personal" />
             <TableColumn fx:id="tcIMDBRatingCat" minWidth="0.0" prefWidth="53.0" text="IMDB" />
         </columns>
