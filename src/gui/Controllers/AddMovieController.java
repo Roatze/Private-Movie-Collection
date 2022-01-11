@@ -125,10 +125,6 @@ public class AddMovieController {
         return imdbRaringBarTemp;
     }
 
-
-
-
-
     public void chooseFile(ActionEvent actionEvent) throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("src/dal/db/MovieFiles"));
@@ -162,4 +158,6 @@ public class AddMovieController {
         Scene scene = new Scene(parent);
         swich.setScene(scene);
     }
+
+
 }

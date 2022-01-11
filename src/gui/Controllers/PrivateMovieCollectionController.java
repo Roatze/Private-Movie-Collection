@@ -61,8 +61,9 @@ public class PrivateMovieCollectionController implements Initializable {
 
 
 
+
     private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
-    private SongDialogController songController;
+    private MovieDialogController movieDialogController;
 
 
     public PrivateMovieCollectionController() throws Exception {
@@ -85,8 +86,8 @@ public class PrivateMovieCollectionController implements Initializable {
         stage.setScene(scene);
         stage.setTitle(windowTitle);
         stage.initModality(Modality.WINDOW_MODAL);
-        songController = fxmlLoader.getController();
-        songController.setModel(PrivateMovieCollectionModel);
+        movieDialogController = fxmlLoader.getController();
+        movieDialogController.setModel(PrivateMovieCollectionModel);
         return stage;
     }
 
@@ -173,11 +174,41 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    public void editMovie(ActionEvent actionEvent) {
-    }
 
     public void editGenre(ActionEvent actionEvent) {
     }
+
+    /**
+     * Opens a new Movie Dialog window with the current info of the selected Movie already in the text fields
+     */
+    public void editMovie(ActionEvent actionEvent) throws IOException, InterruptedException {
+        if(tvMovieTable.getSelectionModel().getSelectedItem() != null) {
+            Stage stage = createSongDialog("Edit Movie");
+            Stage mainStage = ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow()));
+            stage.initOwner(mainStage);
+
+            Movie movie = tvMovieTable.getSelectionModel().getSelectedItem();
+            String filepath = movie.getFileLink().replace("file:/", "");
+            movieDialogController.setSongValues(movie.getMovieId(), movie.getMovieName(), movie.getPublicRating(), movie.getPrivateRating(), filepath);
+            stage.showAndWait();
+        }
+    }
+
+    /**
+     * Creates the movie Dialog window for New Movie and Edit song
+     */
+    public Stage createSongDialog(String windowTitle) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("../FXML/AddMovie.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle(windowTitle);
+        stage.initModality(Modality.WINDOW_MODAL);
+        movieDialogController = fxmlLoader.getController();
+        return stage;
+    }
+
 
 
 
