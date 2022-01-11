@@ -61,7 +61,7 @@ public class AddMovieController {
         CategoryDAO categoryDAO = new CategoryDAO();
 
         addMovieController = new AddMovieController();
-        genreMenu.setItems(categoryDAO.getAllCategory());
+       
 
     }
     /**
