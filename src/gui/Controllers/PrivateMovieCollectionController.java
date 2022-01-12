@@ -61,6 +61,8 @@ public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
     private Button ButtonEditMovie;
+    @FXML
+    private Button ButtonEditGenre;
 
 
 
@@ -193,6 +195,10 @@ public class PrivateMovieCollectionController implements Initializable {
 
 
     public void editGenre(ActionEvent actionEvent) {
+        Stage swich = (Stage) ButtonEditGenre.getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
+        Scene scene = new Scene(parent);
+        swich.setScene(scene);
     }
 
     public void editMovie(ActionEvent actionEvent) throws IOException {
