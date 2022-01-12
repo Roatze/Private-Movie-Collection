@@ -59,10 +59,15 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private Button ButtonAddMovie;
 
+    @FXML
+    private Button ButtonEditMovie;
+
+
+
 
 
     private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
-    private SongDialogController songController;
+    private MovieDialogController movieDialogController;
 
 
     public PrivateMovieCollectionController() throws Exception {
@@ -87,8 +92,8 @@ public class PrivateMovieCollectionController implements Initializable {
         stage.setScene(scene);
         stage.setTitle(windowTitle);
         stage.initModality(Modality.WINDOW_MODAL);
-        songController = fxmlLoader.getController();
-        songController.setModel(PrivateMovieCollectionModel);
+        movieDialogController = fxmlLoader.getController();
+        movieDialogController.setModel(PrivateMovieCollectionModel);
         return stage;
     }
 
@@ -186,10 +191,15 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    public void editMovie(ActionEvent actionEvent) {
-    }
 
     public void editGenre(ActionEvent actionEvent) {
+    }
+
+    public void editMovie(ActionEvent actionEvent) throws IOException {
+        Stage swich = (Stage) ButtonEditMovie.getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddMovie.fxml"));
+        Scene scene = new Scene(parent);
+        swich.setScene(scene);
     }
 
     /**

@@ -99,7 +99,6 @@ public class LogicManager
         List<Movie> allMovies = getAllSongs();
         List<Movie> searchedMovies = songSearcher.SearchSongs(allMovies, query);
         return searchedMovies;
-
     }
 
     /**

@@ -21,7 +21,7 @@ import java.util.ResourceBundle;
 /**
  * Handles the Movie dialog window
  */
-public class SongDialogController implements Initializable {
+public class MovieDialogController implements Initializable {
 
     @FXML
     private TextField txtTitle;
@@ -37,7 +37,7 @@ public class SongDialogController implements Initializable {
     private PrivateMovieCollectionModel privateMovieCollectionModel;
 
 
-    public SongDialogController() throws Exception {
+    public MovieDialogController() throws Exception {
         songID = 0;
     }
 
@@ -100,14 +100,15 @@ public class SongDialogController implements Initializable {
     /**
      * Sets the fields to contain the current information of the song that is being edited
      */
-    public void setSongValues(int id, String title, String artist, String time, String path) {
-        txtTitle.setText(title);
-        txtArtist.setText(artist);
-        txtTime.setText(time);
-        txtPath.setText(path);
+    public void setSongValues(int id, String movieName, String publicRating, String privateRating, String fileLink) {
+        txtTitle.setText(movieName);
+        txtArtist.setText(publicRating);
+        txtTime.setText(privateRating);
+        txtPath.setText(fileLink);
         songID = id;
         edit = true;
     }
+
 
 
     @Override

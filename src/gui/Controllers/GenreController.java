@@ -46,7 +46,6 @@ public class GenreController {
     public void genreSaveBtn(ActionEvent actionEvent) throws Exception {
         String uploadTitle = genre();
         uploadGenreInfo(uploadTitle);
-
         Stage swich = (Stage) genreCancel.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
