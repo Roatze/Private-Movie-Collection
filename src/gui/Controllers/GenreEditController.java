@@ -26,6 +26,13 @@ import java.sql.SQLException;
 public class GenreEditController {
     @FXML
     public Button genreEditCancel;
+    public TextField editGenre;
+    public TextField genreId;
+
+    PrivateMovieCollectionModel privateMovieCollectionModel = new PrivateMovieCollectionModel();
+
+    public GenreEditController() throws Exception {
+    }
 
 
     public void genreCancelEditBtn(ActionEvent actionEvent) throws IOException {
@@ -35,7 +42,20 @@ public class GenreEditController {
         swich.setScene(scene);
     }
 
-    public void genreSaveEditBtn(ActionEvent actionEvent) {
+    /**
+     * OnAction knappen der gør at vi kan edit en playlist, her udfylder den textfielded, så man ændrer på det rigtige
+     * navn og playlist.
+     * @param actionEvent
+     * @throws IOException
+     */
+    public void genreSaveEditBtn(ActionEvent actionEvent) throws Exception {
+        int updatePlaylistId = Integer.parseInt(genreId.getText());
+        String updatePlaylistName = editGenre.getText();
+
+        Category category = new Category(updatePlaylistId, updatePlaylistName);
+        privateMovieCollectionModel.updatePlaylist(category);
+
+        genreCancelEditBtn(actionEvent);
     }
 
     public void newGenreEditTxt(ActionEvent actionEvent) {

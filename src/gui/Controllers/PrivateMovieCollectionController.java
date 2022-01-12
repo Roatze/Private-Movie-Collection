@@ -194,9 +194,9 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
 
-    public void editGenre(ActionEvent actionEvent) {
+    public void editGenre(ActionEvent actionEvent) throws IOException {
         Stage swich = (Stage) ButtonEditGenre.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/GenreEdit.fxml"));
         Scene scene = new Scene(parent);
         swich.setScene(scene);
     }
