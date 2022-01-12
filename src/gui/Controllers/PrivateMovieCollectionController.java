@@ -59,6 +59,10 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private Button ButtonAddMovie;
 
+    @FXML
+    private Button ButtonEditMovie;
+
+
 
 
 
@@ -181,6 +185,7 @@ public class PrivateMovieCollectionController implements Initializable {
     /**
      * Opens a new Movie Dialog window with the current info of the selected Movie already in the text fields
      */
+    /*
     public void editMovie(ActionEvent actionEvent) throws IOException, InterruptedException {
         if(tvMovieTable.getSelectionModel().getSelectedItem() != null) {
             Stage stage = createSongDialog("Edit Movie");
@@ -189,7 +194,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
             Movie movie = tvMovieTable.getSelectionModel().getSelectedItem();
             String filepath = movie.getFileLink().replace("file:/", "");
-            movieDialogController.setSongValues(movie.getMovieId(), movie.getMovieName(), movie.getPublicRating(), movie.getPrivateRating(), filepath);
+            movieDialogController.setSongValues(movie.getMovieId(), movie.getMovieName(), movie.getPublicRating(), movie.getPrivateRating(), movie.getFileLink());
             stage.showAndWait();
         }
     }
@@ -197,6 +202,7 @@ public class PrivateMovieCollectionController implements Initializable {
     /**
      * Creates the movie Dialog window for New Movie and Edit song
      */
+    /*
     public Stage createSongDialog(String windowTitle) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("../FXML/AddMovie.fxml"));
@@ -208,8 +214,15 @@ public class PrivateMovieCollectionController implements Initializable {
         movieDialogController = fxmlLoader.getController();
         return stage;
     }
+     */
 
 
+    public void editMovie(ActionEvent actionEvent) throws IOException {
+        Stage swich = (Stage) ButtonEditMovie.getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddMovie.fxml"));
+        Scene scene = new Scene(parent);
+        swich.setScene(scene);
+    }
 
 
     /*å
