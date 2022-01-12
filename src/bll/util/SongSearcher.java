@@ -13,7 +13,8 @@ public class SongSearcher {
     public List<Movie> SearchSongs(List<Movie> searchBase, String searchQuery) throws Exception {
         ArrayList<Movie> searchedMovies = new ArrayList<>();
         for (Movie movie : searchBase) {
-            if (compareToArtistName(searchQuery, movie)
+            if (compareToPublicRating(searchQuery, movie)
+                    || compareToPrivateRating(searchQuery, movie)
                     || compareToSongName(searchQuery, movie)){
                 searchedMovies.add(movie);
             }
@@ -25,9 +26,18 @@ public class SongSearcher {
      * Compares input to artist names
      * @return true if a match is found
      */
-    private boolean compareToArtistName(String query, Movie movie)
+    private boolean compareToPublicRating(String query, Movie movie)
     {
         return movie.getPublicRating().toLowerCase().contains(query.toLowerCase());
+    }
+
+    /**
+     * Compares input to artist names
+     * @return true if a match is found
+     */
+    private boolean compareToPrivateRating(String query, Movie movie)
+    {
+        return movie.getPrivateRating().toLowerCase().contains(query.toLowerCase());
     }
 
     /**
