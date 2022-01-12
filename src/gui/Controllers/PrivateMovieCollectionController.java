@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -67,7 +68,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
 
 
-
+    public Movie selectedMovie;
     private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
     private MovieDialogController movieDialogController;
 
@@ -201,13 +202,6 @@ public class PrivateMovieCollectionController implements Initializable {
         swich.setScene(scene);
     }
 
-    public void editMovie(ActionEvent actionEvent) throws IOException {
-        Stage swich = (Stage) ButtonEditMovie.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddMovie.fxml"));
-        Scene scene = new Scene(parent);
-        swich.setScene(scene);
-    }
-
     /**
      * Initializes MOVIE AND PLAYLIST
      */
@@ -216,6 +210,7 @@ public class PrivateMovieCollectionController implements Initializable {
         setTvMovieTable();
         setTcGenreTable();
         setTcEntertainmentTable();
+        selectedSong();
 
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
@@ -322,4 +317,33 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 */
+    public void editMovie(ActionEvent actionEvent) throws IOException {
+        if(selectedMovie != null) {
+            Movie selectedMovie = tvMovieTable.getSelectionModel().getSelectedItem();
+            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/FXML/MovieUpdate.fxml"));
+            Scene mainWindowScene = null;
+            try {
+                mainWindowScene = new Scene(parent.load());
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+            Stage editMovieStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            editMovieStage.setScene(mainWindowScene);
+            EditMovieController editMovieController = parent.getController();
+            editMovieController.setSelectedMovie(selectedMovie);
+            editMovieStage.show();
+        }else{
+            System.out.println("No movies are selected");
+        }
+    }
+    /**
+     * Changes selected Movie to the movie clicked in the tvMovieTable
+     */
+    private void selectedSong() {
+        this.tvMovieTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            this.selectedMovie = (Movie) newValue;
+            if (selectedMovie != null) {
+            }
+        }));
+    }
 }

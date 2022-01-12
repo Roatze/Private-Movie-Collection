@@ -125,25 +125,6 @@ public class AddMovieController {
         return imdbRaringBarTemp;
     }
 
-    public void chooseFile(ActionEvent actionEvent) throws FileNotFoundException {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("src/dal/db/MovieFiles"));
-        File selectedFile1 = fileChooser.showOpenDialog(null);
-        fileChooser.setTitle("Select Movie");
-        fileBar.appendText("src/dal/db/MovieFiles" + selectedFile1.getName());
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
-                new FileChooser.ExtensionFilter("All Files", "*.*")
-        );
-
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            //insert data from file
-            fileBar.setText(selectedFile.getAbsolutePath());
-        }
-    }
-
-
     /*
     Error metode.
      */
@@ -160,4 +141,21 @@ public class AddMovieController {
     }
 
 
+    public void chooseMP4Button(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("src/dal/db/MovieFiles"));
+        File selectedFile1 = fileChooser.showOpenDialog(null);
+        fileChooser.setTitle("Select Movie");
+        fileBar.appendText("src/dal/db/MovieFiles" + selectedFile1.getName());
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
+                new FileChooser.ExtensionFilter("All Files", "*.*")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            //insert data from file
+            fileBar.setText(selectedFile.getAbsolutePath());
+        }
+    }
 }

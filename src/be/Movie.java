@@ -19,6 +19,15 @@ public class Movie
     private String fileLink;
     private Timestamp lastview;
 
+    public Movie(IntegerProperty songId, StringProperty movieName, StringProperty publicRating, StringProperty privateRating, String fileLink, Timestamp lastview) {
+        this.songId = songId;
+        this.movieName = movieName;
+        this.publicRating = publicRating;
+        this.privateRating = privateRating;
+        this.fileLink = fileLink;
+        this.lastview = lastview;
+    }
+
     public Movie(int songID, String movieName, String publicRating, String privateRating, String fileLink)
     {
         this.songId.set(songID);
