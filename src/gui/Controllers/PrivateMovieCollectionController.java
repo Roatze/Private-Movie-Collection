@@ -201,7 +201,7 @@ public class PrivateMovieCollectionController implements Initializable {
         Scene scene = new Scene(parent);
         swich.setScene(scene);
     }
-
+    
     /**
      * Initializes MOVIE AND PLAYLIST
      */
