@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * This class handles searching for songs through a list of songs - mainly for All Songs.
  */
-public class SongSearcher {
+public class MovieSearcher {
     public List<Movie> SearchSongs(List<Movie> searchBase, String searchQuery) throws Exception {
         ArrayList<Movie> searchedMovies = new ArrayList<>();
         for (Movie movie : searchBase) {

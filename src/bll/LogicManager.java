@@ -5,14 +5,13 @@ import be.Category;
 
 import be.Movie;
 
-import bll.util.SongSearcher;
+import bll.util.MovieSearcher;
 import dal.db.dao.CategoryDAO;
 import dal.db.dao.MovieDAO;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.TimerTask;
 
 /**
  * This is the class where we handle input from the Gui and  use methods from the dal and be, to return the right output.
@@ -21,7 +20,7 @@ public class LogicManager
 {
     MovieDAO movieDAO = new MovieDAO();
     CategoryDAO categoryDAO = new CategoryDAO();
-    SongSearcher songSearcher = new SongSearcher();
+    MovieSearcher movieSearcher = new MovieSearcher();
 
     public LogicManager() throws IOException
     {
@@ -57,7 +56,7 @@ public class LogicManager
 
     public List<Movie> searchMovie(String query) throws Exception {
         List<Movie> allMovies = getAllSongs();
-        List<Movie> searchedMovies = songSearcher.SearchSongs(allMovies, query);
+        List<Movie> searchedMovies = movieSearcher.SearchSongs(allMovies, query);
         return searchedMovies;
     }
 

@@ -158,4 +158,7 @@ public class AddMovieController {
             fileBar.setText(selectedFile.getAbsolutePath());
         }
     }
+
+    public void chooseFile(ActionEvent actionEvent) {
+    }
 }
