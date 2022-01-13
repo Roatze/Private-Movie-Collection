@@ -1,5 +1,6 @@
 package gui.Controllers;
 
+import be.Category;
 import be.Movie;
 import gui.Model.PrivateMovieCollectionModel;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
@@ -33,7 +35,8 @@ public class EditMovieController implements Initializable {
     private TextField fileBar;
     @FXML
     private TextField textFieldId;
-
+    @FXML
+    private Button returnMainMenu;
     @FXML
     private Button movieSaveButton;
     private PrivateMovieCollectionModel privateMovieCollectionModel;
@@ -106,12 +109,26 @@ public class EditMovieController implements Initializable {
         fileBar.setText(movie.getFileLink());
     }
 
-    public void goReturnMainMenu(ActionEvent actionEvent) {
+    public void goReturnMainMenu(ActionEvent actionEvent) throws IOException {
+            Stage swich = (Stage) returnMainMenu.getScene().getWindow();
+            Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
+            Scene scene = new Scene(parent);
+            swich.setScene(scene);
     }
 
     public void getMovieInfo(ActionEvent actionEvent) {
+        
     }
 
+
     public void chooseFile(ActionEvent actionEvent) {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setInitialDirectory(new File("src/dal/db/MovieFiles"));
+            File selectedFile1 = fileChooser.showOpenDialog(null);
+            fileChooser.setTitle("Select Movie");
+            fileBar.appendText("src/dal/db/MovieFiles" + selectedFile1.getName());
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
+                    new FileChooser.ExtensionFilter("All Files", "*.*"));
     }
 }
