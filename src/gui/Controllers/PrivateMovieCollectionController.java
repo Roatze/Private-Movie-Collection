@@ -23,7 +23,6 @@ import java.io.IOException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.TimerTask;
 
 public class PrivateMovieCollectionController implements Initializable {
 
@@ -258,7 +257,7 @@ public class PrivateMovieCollectionController implements Initializable {
         tcPersonalRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("privateRating"));
         tcIMDBRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("publicRating"));
         try {
-            tvMovieTable.setItems(PrivateMovieCollectionModel.getSonglist());
+            tvMovieTable.setItems(PrivateMovieCollectionModel.getMovielist());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -320,7 +319,7 @@ public class PrivateMovieCollectionController implements Initializable {
     public void editMovie(ActionEvent actionEvent) throws IOException {
         if(selectedMovie != null) {
             Movie selectedMovie = tvMovieTable.getSelectionModel().getSelectedItem();
-            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/FXML/MovieUpdate.fxml"));
+            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/FXML/EditMovie.fxml"));
             Scene mainWindowScene = null;
             try {
                 mainWindowScene = new Scene(parent.load());

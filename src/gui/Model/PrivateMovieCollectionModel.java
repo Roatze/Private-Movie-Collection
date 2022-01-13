@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.TimerTask;
 
 /**
  * In this class we acces the bll, to handle the connection from gui to bll.
@@ -18,43 +17,43 @@ import java.util.TimerTask;
 public class PrivateMovieCollectionModel
 {
 
-     private ObservableList<Movie> songlist;
+     private ObservableList<Movie> movielist;
     private ObservableList<Category> playlistlist;
     private ObservableList<Movie> playlistWithMovies;
     private LogicManager lm;
 
     public PrivateMovieCollectionModel() throws Exception{
         lm = new LogicManager();
-        songlist= FXCollections.observableArrayList();
-        songlist.addAll(lm.getAllSongs());
+        movielist = FXCollections.observableArrayList();
+        movielist.addAll(lm.getAllSongs());
         playlistlist = FXCollections.observableArrayList();
         playlistlist.addAll(lm.getAllPlaylists());
         playlistWithMovies = FXCollections.observableArrayList();
     }
 
     public void createMovie(String name, String artistName, String filePath, String songLength) throws Exception {
-        songlist.add(lm.createMovie(name, artistName, filePath, songLength));
+        movielist.add(lm.createMovie(name, artistName, filePath, songLength));
     }
 
-    public ObservableList<Movie> getSonglist() {
-        return songlist;
+    public ObservableList<Movie> getMovielist() {
+        return movielist;
     }
 
     public void searchedMovies(String query) throws Exception {
         List<Movie> searchedMovies = lm.searchMovie(query);
-        songlist.clear();
-        songlist.addAll(searchedMovies);
+        movielist.clear();
+        movielist.addAll(searchedMovies);
     }
 
     public void deleteMovie(Movie movie) throws Exception {
         lm.removeMovie(movie);
-        songlist.remove(movie);
+        movielist.remove(movie);
     }
 
     public void updateSong(Movie movie) throws SQLException {
         lm.updateSong(movie);
-        songlist.clear();
-        songlist.addAll(lm.getAllSongs());
+        movielist.clear();
+        movielist.addAll(lm.getAllSongs());
     }
 
     public ObservableList<Category> getAllPlaylists() throws Exception {

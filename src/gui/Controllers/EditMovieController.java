@@ -8,7 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
@@ -103,5 +104,14 @@ public class EditMovieController implements Initializable {
         personalRatingBar.setText(String.valueOf(movie.getPrivateRating()));
         imdbRatingBar.setText(String.valueOf(movie.getPublicRating()));
         fileBar.setText(movie.getFileLink());
+    }
+
+    public void goReturnMainMenu(ActionEvent actionEvent) {
+    }
+
+    public void getMovieInfo(ActionEvent actionEvent) {
+    }
+
+    public void chooseFile(ActionEvent actionEvent) {
     }
 }
