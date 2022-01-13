@@ -32,25 +32,6 @@ public class PrivateMovieCollectionModel
         playlistWithMovies = FXCollections.observableArrayList();
     }
 
-    public void playSong(Movie movie) {
-        lm.playSong(movie);
-    }
-
-    public void stopPlaying() {
-        lm.stopPlaying();
-    }
-
-    public boolean isPlaying() {
-        return lm.isPlaying();
-    }
-
-    public void nextSong(Movie movie){
-        lm.nextSong(movie);}
-
-    public void previousSong(Movie movie) {
-        lm.previousSong(movie);
-    }
-
     public void createMovie(String name, String artistName, String filePath, String songLength) throws Exception {
         songlist.add(lm.createMovie(name, artistName, filePath, songLength));
     }
@@ -123,26 +104,8 @@ public class PrivateMovieCollectionModel
         playlistlist.addAll(lm.getAllPlaylists());
     }
 
-
-    public void timer(TimerTask t) {
-        lm.timer(t);
-    }
-
     public void swapMoviesInGenre(Category selectedItem, int selectedIndex, int i){
 
-    }
-
-    public boolean isSongFinished() {
-        return lm.isSongFinished();
-    }
-
-    public void setSongFinished(boolean b) {
-        lm.setSongFinished(b);
-    }
-
-    public void setVolume(double volume)
-    {
-        lm.setVolume(volume);
     }
 
 }

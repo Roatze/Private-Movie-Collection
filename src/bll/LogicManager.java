@@ -5,7 +5,6 @@ import be.Category;
 
 import be.Movie;
 
-import bll.util.MusicPlayer;
 import bll.util.SongSearcher;
 import dal.db.dao.CategoryDAO;
 import dal.db.dao.MovieDAO;
@@ -23,49 +22,10 @@ public class LogicManager
     MovieDAO movieDAO = new MovieDAO();
     CategoryDAO categoryDAO = new CategoryDAO();
     SongSearcher songSearcher = new SongSearcher();
-    MusicPlayer mp;
 
     public LogicManager() throws IOException
     {
-        mp = new MusicPlayer();
-    }
 
-    public void setSongFinished(boolean b)
-    {
-        mp.setSongFinished(b);
-    }
-    public boolean isSongFinished() {
-        return mp.isSongFinished();
-    }
-    public void timer(TimerTask t)
-    {
-        mp.timer(t);
-    }
-    /**
-     * Methods for playing Songs
-     */
-    public void playSong(Movie movie)
-    {
-      mp.playSong(movie.getFileLink());
-
-
-    }
-    public void stopPlaying()
-    {
-        mp.stopPlaying();
-    }
-    public boolean isPlaying()
-    {
-        return mp.isPlaying();
-    }
-
-    public void nextSong(Movie movie)
-    {
-        mp.nextSong(movie.getFileLink());
-    }
-    public void previousSong(Movie movie)
-    {
-        mp.previousSong(movie.getFileLink());
     }
 
     /**
@@ -144,11 +104,5 @@ public class LogicManager
     {
         categoryDAO.updateCategory(category);
     }
-
-    public void setVolume(double volume)
-    {
-        mp.setMusicVolume(volume);
-    }
-
 }
 
