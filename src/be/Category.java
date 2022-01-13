@@ -24,6 +24,9 @@ public class Category
 
     }
 
+    public Category(String updatePlaylistName) {
+    }
+
     public void addMovieToList(Movie movie)
     {
         listOfMovies.add(movie);

@@ -1,6 +1,7 @@
 package gui.Controllers;
 
 import be.Category;
+import be.Movie;
 import gui.Model.PrivateMovieCollectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -24,10 +25,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class GenreEditController {
+
     @FXML
     public Button genreEditCancel;
     public TextField editGenre;
-    public TextField genreId;
+
 
     PrivateMovieCollectionModel privateMovieCollectionModel = new PrivateMovieCollectionModel();
 
@@ -49,13 +51,16 @@ public class GenreEditController {
      * @throws IOException
      */
     public void genreSaveEditBtn(ActionEvent actionEvent) throws Exception {
-        int updatePlaylistId = Integer.parseInt(genreId.getText());
         String updatePlaylistName = editGenre.getText();
-
-        Category category = new Category(updatePlaylistId, updatePlaylistName);
+        Category category = new Category(updatePlaylistName);
         privateMovieCollectionModel.updatePlaylist(category);
 
         genreCancelEditBtn(actionEvent);
+    }
+
+    public void setSelectedGenre(Category category) {
+        editGenre.setText(category.getCategoryName());
+
     }
 
     public void newGenreEditTxt(ActionEvent actionEvent) {
