@@ -249,7 +249,7 @@ public class PrivateMovieCollectionController implements Initializable {
         setTvMovieTable();
         setTcGenreTable();
         setTcEntertainmentTable();
-        selectedSong();
+        selectedMovie();
         selectedGenre();
 
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -303,6 +303,28 @@ public class PrivateMovieCollectionController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Changes selected Movie to the movie clicked in the tvMovieTable
+     */
+    private void selectedMovie() {
+        this.tvMovieTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            this.selectedMovie = (Movie) newValue;
+            if (selectedMovie != null) {
+            }
+        }));
+    }
+    /**
+     * Changes selected Genre to the movie clicked in the tvMovieTable
+     */
+    private void selectedGenre() {
+        this.tvGenreTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            this.selectedCategory = (Category) newValue;
+            if (selectedCategory != null) {
+            }
+        }));
+    }
+
     /*
     /**
      * Opens the dialog to get user input to name a new playlist, then creates playlist with that name
@@ -358,24 +380,4 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 */
 
-    /**
-     * Changes selected Movie to the movie clicked in the tvMovieTable
-     */
-    private void selectedSong() {
-        this.tvMovieTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            this.selectedMovie = (Movie) newValue;
-            if (selectedMovie != null) {
-            }
-        }));
-    }
-    /**
-     * Changes selected Genre to the movie clicked in the tvMovieTable
-     */
-    private void selectedGenre() {
-        this.tvGenreTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            this.selectedCategory = (Category) newValue;
-            if (selectedCategory != null) {
-            }
-        }));
-    }
 }
