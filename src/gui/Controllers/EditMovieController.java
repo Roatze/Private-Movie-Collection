@@ -53,24 +53,8 @@ public class EditMovieController implements Initializable {
 
     }
 
-    /**
-     * FileChooser for adding a Mp3 file
-     * Add the new song to database.
-     */
-    public void chooseMP4Button() {
-        FileChooser fileChooser = new FileChooser();
-        File selectedFile = fileChooser.showOpenDialog(null);
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music files", "*.mp4", "*.mpeg4"));
-        Media f = new Media(selectedFile.toURI().toString());
-        if (selectedFile != null){
-            Media media = new Media(new File(selectedFile.getAbsolutePath()).toURI().toString());
-            new MediaPlayer(media);
-        }else {
-            System.out.println("File is invalid");
-        }
-    }
-    /**
-     * Saves the newly added song.
+
+     /* Saves the newly added song.
      */
     public void movieSaveButton(ActionEvent actionEvent) throws Exception {
         String title = titleBar.getText();
