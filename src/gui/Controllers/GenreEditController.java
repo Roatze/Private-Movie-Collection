@@ -30,6 +30,7 @@ public class GenreEditController {
     public Button genreEditCancel;
     public TextField editGenre;
 
+    private Category selectedGenre;
 
     PrivateMovieCollectionModel privateMovieCollectionModel = new PrivateMovieCollectionModel();
 
@@ -51,15 +52,16 @@ public class GenreEditController {
      * @throws IOException
      */
     public void genreSaveEditBtn(ActionEvent actionEvent) throws Exception {
-        String updatePlaylistName = editGenre.getText();
-        Category category = new Category(updatePlaylistName);
-        privateMovieCollectionModel.updatePlaylist(category);
+        String updateGenreName = editGenre.getText();
+        this.selectedGenre.setCategoryName(updateGenreName);
+        privateMovieCollectionModel.updatePlaylist(this.selectedGenre);
 
         genreCancelEditBtn(actionEvent);
     }
 
-    public void setSelectedGenre(Category category) {
-        editGenre.setText(category.getCategoryName());
+    public void setSelectedGenre(Category genre) {
+        this.selectedGenre = genre;
+        editGenre.setText(genre.getCategoryName());
 
     }
 
