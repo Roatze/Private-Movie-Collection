@@ -141,7 +141,7 @@ public class AddMovieController {
     }
 
 
-    public void chooseMP4Button(ActionEvent actionEvent) {
+    public void chooseFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("src/dal/db/MovieFiles"));
         File selectedFile1 = fileChooser.showOpenDialog(null);
@@ -159,6 +159,5 @@ public class AddMovieController {
         }
     }
 
-    public void chooseFile(ActionEvent actionEvent) {
-    }
+
 }
