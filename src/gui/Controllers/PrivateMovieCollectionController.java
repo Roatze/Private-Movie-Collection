@@ -58,11 +58,12 @@ public class PrivateMovieCollectionController implements Initializable {
     private Button ButtonAddGenre;
     @FXML
     private Button ButtonAddMovie;
-
     @FXML
     private Button ButtonEditMovie;
     @FXML
     private Button ButtonEditGenre;
+    @FXML
+    private Button search;
 
 
 
