@@ -328,7 +328,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     public void buttonSearch(ActionEvent actionEvent) {
-
+    //For Visuals
     }
 
     /*
