@@ -75,7 +75,7 @@ public class MovieDialogController implements Initializable {
 
         } else {
             Movie movie = new Movie(songID, txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
-            privateMovieCollectionModel.updateSong(movie);
+            privateMovieCollectionModel.updateMovie(movie);
         }
         ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow())).close();
     }

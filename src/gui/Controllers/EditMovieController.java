@@ -12,15 +12,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class EditMovieController implements Initializable {
@@ -40,6 +38,7 @@ public class EditMovieController implements Initializable {
     @FXML
     private Button movieSaveButton;
     private PrivateMovieCollectionModel privateMovieCollectionModel;
+    private Movie selectedMovie;
 
     public EditMovieController() throws Exception {
          privateMovieCollectionModel = new PrivateMovieCollectionModel();
@@ -50,7 +49,6 @@ public class EditMovieController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
 
@@ -64,7 +62,7 @@ public class EditMovieController implements Initializable {
         int id = Integer.parseInt(textFieldId.getText());
 
         Movie movie = new Movie(id, title, personalRating, imbdRating , url);
-        privateMovieCollectionModel.updateSong(movie);
+        privateMovieCollectionModel.updateMovie(movie);
         cancelButton(actionEvent);
     }
 
@@ -90,7 +88,8 @@ public class EditMovieController implements Initializable {
         titleBar.setText(movie.getMovieName());
         personalRatingBar.setText(String.valueOf(movie.getPrivateRating()));
         imdbRatingBar.setText(String.valueOf(movie.getPublicRating()));
-        fileBar.setText(movie.getFileLink());
+        fileBar.setText(movie.getFileLink().replaceAll("file:/", ""));
+        this.selectedMovie = movie;
     }
 
     public void goReturnMainMenu(ActionEvent actionEvent) throws IOException {
@@ -100,8 +99,18 @@ public class EditMovieController implements Initializable {
             swich.setScene(scene);
     }
 
-    public void getMovieInfo(ActionEvent actionEvent) {
-        
+    public void getMovieInfo(ActionEvent actionEvent) throws SQLException, IOException {
+        String updateMovieName = titleBar.getText();
+        String updatePublicRating = imdbRatingBar.getText();
+        String updatePrivateRating = personalRatingBar.getText();
+        String updateFileLink = fileBar.getText();
+        this.selectedMovie.setMovieName(updateMovieName);
+        this.selectedMovie.setPrivateRating(updatePrivateRating);
+        this.selectedMovie.setPublicRating(updatePublicRating);
+        this.selectedMovie.setFileLink(updateFileLink);
+        privateMovieCollectionModel.updateMovie(this.selectedMovie);
+
+        goReturnMainMenu(actionEvent);
     }
 
 

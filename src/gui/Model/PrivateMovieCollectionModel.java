@@ -50,7 +50,7 @@ public class PrivateMovieCollectionModel
         movielist.remove(movie);
     }
 
-    public void updateSong(Movie movie) throws SQLException {
+    public void updateMovie(Movie movie) throws SQLException {
         lm.updateSong(movie);
         movielist.clear();
         movielist.addAll(lm.getAllSongs());

@@ -57,4 +57,12 @@ public class Movie
         return fileLink;
     }
 
+    public void setMovieName(String name) { movieName.set(name); }
+
+    public void setPublicRating(String val) { this.publicRating.set(val); }
+
+    public void setPrivateRating(String val) { this.privateRating.set(val); }
+
+    public void setFileLink(String val) { this.fileLink = val; }
+
 }

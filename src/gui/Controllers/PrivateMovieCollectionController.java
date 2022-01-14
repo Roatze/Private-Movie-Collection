@@ -78,6 +78,26 @@ public class PrivateMovieCollectionController implements Initializable {
 
     }
 
+    /**
+     * Initializes MOVIE AND PLAYLIST
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setTvMovieTable();
+        setTcGenreTable();
+        setTcEntertainmentTable();
+        selectedMovie();
+        selectedGenre();
+
+        txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            try {
+                PrivateMovieCollectionModel.searchedMovies(newValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
     public void addMovie(ActionEvent actionEvent) throws IOException {
         Stage swich = (Stage) ButtonAddMovie.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddMovie.fxml"));
@@ -114,6 +134,7 @@ public class PrivateMovieCollectionController implements Initializable {
      */
     public void addToGenre(ActionEvent actionEvent) throws Exception {
         PrivateMovieCollectionModel.addToPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(), tvMovieTable.getSelectionModel().getSelectedItem());
+        tvEntertainmentTable.refresh();
     }
 
     public void addGenre(ActionEvent actionEvent) throws Exception {
@@ -121,6 +142,7 @@ public class PrivateMovieCollectionController implements Initializable {
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/Genre.fxml"));
         Scene scene = new Scene(parent);
         swich.setScene(scene);
+
     }
 
     /**
@@ -240,26 +262,6 @@ public class PrivateMovieCollectionController implements Initializable {
             System.out.println("No movies are selected");
         }
     }
-    
-    /**
-     * Initializes MOVIE AND PLAYLIST
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        setTvMovieTable();
-        setTcGenreTable();
-        setTcEntertainmentTable();
-        selectedMovie();
-        selectedGenre();
-
-        txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            try {
-                PrivateMovieCollectionModel.searchedMovies(newValue);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
     /**
      * Method used for initializing the genre table
@@ -274,7 +276,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     /**
-     * Method used for initializing the genre table
+     * Method used for initializing the entertainment table
      */
     public void setTcEntertainmentTable() {
         tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieName"));
@@ -323,6 +325,10 @@ public class PrivateMovieCollectionController implements Initializable {
             if (selectedCategory != null) {
             }
         }));
+    }
+
+    public void buttonSearch(ActionEvent actionEvent) {
+
     }
 
     /*
