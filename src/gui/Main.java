@@ -13,7 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXML/PrivateMovieCollection.fxml"));
 
         primaryStage.setTitle("PrivateMovieCollection");
-        primaryStage.setScene(new Scene(root, 900, 580));
+        primaryStage.setScene(new Scene(root, 920, 500));
         primaryStage.show();
 
     }
