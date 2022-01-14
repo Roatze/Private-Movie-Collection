@@ -42,8 +42,6 @@
       <Button fx:id="buttonAddToGenre" layoutX="529.0" layoutY="31.0" mnemonicParsing="false" onAction="#addToGenre" rotate="90.0" text="▼" />
       <Button fx:id="ButtonRemoveFromGenre" layoutX="194.0" layoutY="423.0" mnemonicParsing="false" onAction="#removeFromGenre" prefHeight="25.0" prefWidth="150.0" text="Remove from Genre" />
       <Label layoutX="416.0" layoutY="13.0" text="Rating" />
-      <Button fx:id="ButtonpositionDown" layoutX="497.0" layoutY="423.0" mnemonicParsing="false" onAction="#positionDown" text="▼" />
-      <Button fx:id="ButtonpositionUp" layoutX="461.0" layoutY="423.0" mnemonicParsing="false" onAction="#positionUp" text="▲" />
       <Button fx:id="ButtonEditMovie" layoutX="741.0" layoutY="423.0" mnemonicParsing="false" onAction="#editMovie" prefHeight="25.0" prefWidth="150.0" text="Edit Movie" />
       <Button fx:id="ButtonEditGenre" layoutX="194.0" layoutY="459.0" mnemonicParsing="false" onAction="#editGenre" prefHeight="25.0" prefWidth="150.0" text="Edit Genre" />
       <Button fx:id="search" layoutX="741.0" layoutY="460.0" mnemonicParsing="false" onAction="#buttonSearch" prefHeight="25.0" prefWidth="27.0" text="🔍">

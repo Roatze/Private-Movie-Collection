@@ -102,11 +102,6 @@ public class PrivateMovieCollectionModel
         playlistlist.clear();
         playlistlist.addAll(lm.getAllPlaylists());
     }
-
-    public void swapMoviesInGenre(Category selectedItem, int selectedIndex, int i){
-
-    }
-
 }
 
 

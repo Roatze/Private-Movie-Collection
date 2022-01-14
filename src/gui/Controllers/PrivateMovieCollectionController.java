@@ -165,20 +165,6 @@ public class PrivateMovieCollectionController implements Initializable {
         tvGenreTable.refresh();
     }
 
-
-    public void positionUp(ActionEvent actionEvent) throws Exception {
-        changeOrderInPlaylist(-1);
-    }
-
-    public void positionDown(ActionEvent actionEvent) throws Exception {
-        changeOrderInPlaylist(+1);
-    }
-
-    private void changeOrderInPlaylist(int upOrDown) throws Exception {
-        PrivateMovieCollectionModel.swapMoviesInGenre(tvGenreTable.getSelectionModel().getSelectedItem(), tvEntertainmentTable.getSelectionModel().getSelectedIndex(),
-                tvEntertainmentTable.getSelectionModel().getSelectedIndex() + upOrDown);
-    }
-
     public void removeFromGenre(ActionEvent actionEvent) throws Exception {
         if (SimpleDialog.delete()) {
             PrivateMovieCollectionModel.removeFromPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(),
@@ -186,7 +172,7 @@ public class PrivateMovieCollectionController implements Initializable {
                     tvEntertainmentTable.getSelectionModel().getSelectedIndex());
         }
     }
-    /**å
+    /**
      * When a playlist is clicked then songs on the playlist are shown in the middle table
      */
     public void showGenre(MouseEvent mouseEvent) {
