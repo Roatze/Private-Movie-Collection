@@ -7,6 +7,7 @@ import be.Movie;
 import gui.Model.PrivateMovieCollectionModel;
 import gui.SimpleDialog;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import java.net.URL;
+import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ResourceBundle;
 
 public class PrivateMovieCollectionController implements Initializable {
@@ -105,6 +108,7 @@ public class PrivateMovieCollectionController implements Initializable {
         Scene scene = new Scene(parent);
         swich.setScene(scene);
     }
+
     /**
      * Creates the Movie Dialog window for New song and Edit song
      */
@@ -156,6 +160,7 @@ public class PrivateMovieCollectionController implements Initializable {
             PrivateMovieCollectionModel.updatePlaylist(pl);
         }
     }
+
     /**
      * Creates a dialog to ask the user to confirm the deletion, then deletes the selected playlist
      */
@@ -172,6 +177,7 @@ public class PrivateMovieCollectionController implements Initializable {
                     tvEntertainmentTable.getSelectionModel().getSelectedIndex());
         }
     }
+
     /**
      * When a playlist is clicked then songs on the playlist are shown in the middle table
      */
@@ -203,7 +209,6 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-
     public void editGenre(ActionEvent actionEvent) throws IOException {
         if(selectedCategory != null) {
             Category selectedCategory = tvGenreTable.getSelectionModel().getSelectedItem();
@@ -223,12 +228,6 @@ public class PrivateMovieCollectionController implements Initializable {
             System.out.println("No Genre are selected");
         }
     }
-
-      /*  Stage swich = (Stage) ButtonEditGenre.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/GenreEdit.fxml"));
-        Scene scene = new Scene(parent);
-        swich.setScene(scene); */
-
 
     public void editMovie(ActionEvent actionEvent) throws IOException {
         if(selectedMovie != null) {
@@ -314,63 +313,22 @@ public class PrivateMovieCollectionController implements Initializable {
         }));
     }
 
+    /**
+     * Virker ikke endnu...
+     * @param mouseEvent
+     */
+        public void handle(MouseEvent mouseEvent) {
+            if (mouseEvent.getClickCount() == 2 && selectedMovie != null) {
+                this.tvMovieTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+                    this.selectedMovie = (Movie) newValue;
+                    if (selectedMovie != null) {
+                        System.out.println("yoo");
+                    }
+                }));
+            }
+        }
+
     public void buttonSearch(ActionEvent actionEvent) {
     //For Visuals
     }
-
-    /*
-    /**
-     * Opens the dialog to get user input to name a new playlist, then creates playlist with that name
-     */
-    /*
-    public void newPlaylist(ActionEvent actionEvent) throws Exception {
-        String name = SimpleDialog.playlist();
-        PrivateMovieCollectionModel.createCategory(name);
-    }
-
-
-
-
-    /**å
-     * Creates a dialog to ask the user to confirm the deletion, then removes the selected song from the current playlist
-     */
-    /*
-    public void removeFromCategory(ActionEvent actionEvent) throws Exception {
-        if(SimpleDialog.delete())
-        {
-            PrivateMovieCollectionModel.removeFromCategory(tvPlaylists.getSelectionModel().getSelectedItem(),
-                 tvPlaylistSongTable.getSelectionModel().getSelectedItem(),
-                 tvPlaylistSongTable.getSelectionModel().getSelectedIndex());
-        }
-    }
-
-    /**
-     * Opens a new Movie Dialog window
-     */
-    /*
-    public void newSong(ActionEvent actionEvent) throws IOException, InterruptedException {
-        Stage stage = createSongDialog("New Movie");
-        Stage mainStage = ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow()));
-        stage.initOwner(mainStage);
-        stage.showAndWait();
-    }
-
-    /**
-     * Opens a new Movie Dialog window with the current info of the selected song already in the text fields
-     */
-    /*
-    public void editSong(ActionEvent actionEvent) throws IOException, InterruptedException {
-        if(tvSongTable.getSelectionModel().getSelectedItem() != null) {
-            Stage stage = createSongDialog("Edit Movie");
-            Stage mainStage = ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow()));
-            stage.initOwner(mainStage);
-
-            Movie movie = tvSongTable.getSelectionModel().getSelectedItem();
-            String filepath = movie.getFileLink().replace("file:/", "");
-            songController.setSongValues(movie.getMovieId(), movie.getMovieName(), movie.getPublicRating(), movie.getPrivateRating(), filepath);
-            stage.showAndWait();
-        }
-    }
-*/
-
 }
