@@ -88,7 +88,7 @@ public class EditMovieController implements Initializable {
         titleBar.setText(movie.getMovieName());
         personalRatingBar.setText(String.valueOf(movie.getPrivateRating()));
         imdbRatingBar.setText(String.valueOf(movie.getPublicRating()));
-        fileBar.setText(movie.getFileLink().replaceAll("file:/", ""));
+        //fileBar.setText(movie.getFileLink().replaceAll("file:/", ""));
         this.selectedMovie = movie;
     }
 
