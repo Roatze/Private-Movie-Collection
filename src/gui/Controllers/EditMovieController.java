@@ -104,14 +104,12 @@ public class EditMovieController implements Initializable {
         String updatePublicRating = imdbRatingBar.getText();
         String updatePrivateRating = personalRatingBar.getText();
         String updateFileLink = fileBar.getText();
-        int id = Integer.parseInt(textFieldId.getText());
         this.selectedMovie.setMovieName(updateMovieName);
         this.selectedMovie.setPrivateRating(updatePrivateRating);
         this.selectedMovie.setPublicRating(updatePublicRating);
         this.selectedMovie.setFileLink(updateFileLink);
-
-        Movie movie = new Movie(id, updateMovieName, updatePublicRating, updatePrivateRating , updateFileLink);
-        privateMovieCollectionModel.updateMovie(movie);
+        
+        privateMovieCollectionModel.updateMovie(this.selectedMovie);
 
         goReturnMainMenu(actionEvent);
     }
