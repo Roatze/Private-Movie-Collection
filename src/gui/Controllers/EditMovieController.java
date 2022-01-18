@@ -116,11 +116,12 @@ public class EditMovieController implements Initializable {
 
 
     public void chooseFile(ActionEvent actionEvent) {
+        fileBar.setText("");
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setInitialDirectory(new File("src/dal/db/MovieFiles"));
+        fileChooser.setInitialDirectory(new File("src/dal/db/MovieFiles/"));
         File selectedFile1 = fileChooser.showOpenDialog(null);
         fileChooser.setTitle("Select Movie");
-        fileBar.appendText("src/dal/db/MovieFiles" + selectedFile1.getName());
+        fileBar.appendText("src/dal/db/MovieFiles/" + selectedFile1.getName());
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
                 new FileChooser.ExtensionFilter("All Files", "*.*")

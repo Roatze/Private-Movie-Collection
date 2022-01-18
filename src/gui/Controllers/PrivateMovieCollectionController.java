@@ -20,7 +20,9 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.awt.Desktop;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.net.URL;
@@ -93,6 +95,7 @@ public class PrivateMovieCollectionController implements Initializable {
         selectedMovie();
         selectedGenre();
 
+
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 PrivateMovieCollectionModel.searchedMovies(newValue);
@@ -100,6 +103,31 @@ public class PrivateMovieCollectionController implements Initializable {
                 e.printStackTrace();
             }
         });
+
+        tvEntertainmentTable.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() == 2) {
+                System.out.println("ur mom");
+                try {
+                    OpenMovie();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+    }
+
+    public void OpenMovie() throws IOException {
+        if(tvEntertainmentTable.getSelectionModel().getSelectedItem() != null) {
+            Movie selectedMovie = tvEntertainmentTable.getSelectionModel().getSelectedItem();
+            String fileLink = selectedMovie.getFileLink().replace("\\", "/");
+            File movieFile = new File(System.getProperty("user.dir") + fileLink.replace("file:", ""));
+            Desktop desktop = Desktop.getDesktop();
+            if(movieFile.exists()){
+                desktop.open(movieFile);
+            }
+        }
     }
 
     public void addMovie(ActionEvent actionEvent) throws IOException {
@@ -147,7 +175,6 @@ public class PrivateMovieCollectionController implements Initializable {
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/Genre.fxml"));
         Scene scene = new Scene(parent);
         swich.setScene(scene);
-
     }
 
     /**
@@ -314,21 +341,6 @@ public class PrivateMovieCollectionController implements Initializable {
             }
         }));
     }
-
-    /**
-     * Virker ikke endnu...
-     * @param mouseEvent
-     */
-        public void handle(MouseEvent mouseEvent) {
-            if (mouseEvent.getClickCount() == 2 && selectedMovie != null) {
-                this.tvMovieTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-                    this.selectedMovie = (Movie) newValue;
-                    if (selectedMovie != null) {
-                        System.out.println("yoo");
-                    }
-                }));
-            }
-        }
 
     public void buttonSearch(ActionEvent actionEvent) {
     //For Visuals
