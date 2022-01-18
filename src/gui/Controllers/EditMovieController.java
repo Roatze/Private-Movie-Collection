@@ -125,11 +125,5 @@ public class EditMovieController implements Initializable {
                 new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
                 new FileChooser.ExtensionFilter("All Files", "*.*")
         );
-
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            //insert data from file
-            fileBar.setText(selectedFile.getAbsolutePath());
-        }
     }
 }
