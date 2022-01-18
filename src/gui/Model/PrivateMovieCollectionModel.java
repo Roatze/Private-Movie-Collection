@@ -17,7 +17,7 @@ import java.util.List;
 public class PrivateMovieCollectionModel
 {
 
-     private ObservableList<Movie> movielist;
+    private ObservableList<Movie> movielist;
     private ObservableList<Category> playlistlist;
     private ObservableList<Movie> playlistWithMovies;
     private LogicManager lm;

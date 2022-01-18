@@ -1,7 +1,6 @@
 package bll.util;
 
 import java.util.List;
-
 public class ConvertUtil {
 
     public static String secToTime(int sec)
@@ -182,3 +181,5 @@ public class ConvertUtil {
         return combined;
     }
 }
+
+

@@ -37,6 +37,7 @@ public class Movie
         this.fileLink = fileLink;
     }
 
+
     public String getMovieName() {
         return movieName.get();
     }

@@ -21,7 +21,6 @@ public class Category
     {
         this.categoryId = playlistID;
         this.categoryName.setValue(playlistName);
-
     }
 
     public Category(String updatePlaylistName) {
