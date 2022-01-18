@@ -62,7 +62,6 @@ public class GenreEditController {
     public void setSelectedGenre(Category genre) {
         this.selectedGenre = genre;
         editGenre.setText(genre.getCategoryName());
-
     }
 
     public void newGenreEditTxt(ActionEvent actionEvent) {
