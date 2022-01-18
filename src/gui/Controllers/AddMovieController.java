@@ -95,9 +95,9 @@ public class AddMovieController {
      * @throws SQLException
      */
     public void getMovieInfo(ActionEvent actionEvent) throws Exception {
-        String uploadTitle = title();
-        String uploadPersonalRatng = personalRatng();
-        String uploadImdbRaring = imdbRaring();
+        String uploadTitle = titleBar.getText();
+        String uploadPersonalRatng = personalRatngBar.getText();
+        String uploadImdbRaring = imdbRaringBar.getText();
         uploadMovieInfo(uploadTitle, uploadPersonalRatng, uploadImdbRaring);
 
         Stage swich = (Stage) returnMainMenu.getScene().getWindow();
@@ -106,29 +106,7 @@ public class AddMovieController {
         swich.setScene(scene);
 
     }
-
-    /**
-     * Metoder til at få texten fra textfields.
-     *
-     * @return "Txtfield".getTet();
-     */
-
-    public String title() {
-        String titleTemp = titleBar.getText();
-        return titleTemp;
-
-    }
-
-    public String personalRatng() {
-        String personalRatngBarTemp = personalRatngBar.getText();
-        return personalRatngBarTemp;
-    }
-
-    public String imdbRaring() {
-        String imdbRaringBarTemp = imdbRaringBar.getText();
-        return imdbRaringBarTemp;
-    }
-
+    
     /*
     Error metode.
      */
