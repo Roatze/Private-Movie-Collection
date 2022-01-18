@@ -85,9 +85,9 @@ public class PrivateMovieCollectionModel
         updatePlaylist(category);
     }
 
-    public void removeFromPlaylist(Category category, Movie movie, int i) throws  Exception {
+    public void removeFromPlaylist(Category category, Movie movie) throws  Exception {
 
-        lm.removeFromPlaylist(category, i);
+        lm.removeFromPlaylist(category, movie);
         playlistWithMovies.remove(movie);
         updatePlaylist(category);
     }

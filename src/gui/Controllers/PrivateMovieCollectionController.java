@@ -174,8 +174,7 @@ public class PrivateMovieCollectionController implements Initializable {
     public void removeFromGenre(ActionEvent actionEvent) throws Exception {
         if (SimpleDialog.delete()) {
             PrivateMovieCollectionModel.removeFromPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(),
-                    tvEntertainmentTable.getSelectionModel().getSelectedItem(),
-                    tvEntertainmentTable.getSelectionModel().getSelectedIndex());
+                    tvEntertainmentTable.getSelectionModel().getSelectedItem());
             tvEntertainmentTable.getItems().remove(tvEntertainmentTable.getSelectionModel().getSelectedItem());
             tvEntertainmentTable.refresh();
         }

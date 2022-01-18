@@ -89,9 +89,9 @@ public class LogicManager
     }
 
     //deleteCategory
-    public void removeFromPlaylist (Category category, int i) throws Exception
+    public void removeFromPlaylist (Category category, Movie movie) throws Exception
     {
-        //categoryDAO.removeFromCategory(category, i);
+        categoryDAO.removeFromCategory(category, movie);
     }
 
 
