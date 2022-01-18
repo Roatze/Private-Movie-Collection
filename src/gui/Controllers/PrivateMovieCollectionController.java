@@ -176,6 +176,8 @@ public class PrivateMovieCollectionController implements Initializable {
             PrivateMovieCollectionModel.removeFromPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(),
                     tvEntertainmentTable.getSelectionModel().getSelectedItem(),
                     tvEntertainmentTable.getSelectionModel().getSelectedIndex());
+            tvEntertainmentTable.getItems().remove(tvEntertainmentTable.getSelectionModel().getSelectedItem());
+            tvEntertainmentTable.refresh();
         }
     }
 
