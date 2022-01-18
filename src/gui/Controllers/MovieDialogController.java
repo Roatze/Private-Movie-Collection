@@ -54,7 +54,6 @@ public class MovieDialogController implements Initializable {
         File selectedFile = fc.showOpenDialog(null);
         if (selectedFile != null) {
             txtPath.setText(selectedFile.getPath());
-            setTxtTime(selectedFile.getPath());
         }
     }
 

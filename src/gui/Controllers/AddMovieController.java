@@ -61,11 +61,13 @@ public class AddMovieController {
         CategoryDAO categoryDAO = new CategoryDAO();
 
         addMovieController = new AddMovieController();
-       
+
 
     }
+
     /**
      * her uploades vores data til vores model layer, dataen får den fra LogicManger.
+     *
      * @param title
      * @param artist
      * @param category
@@ -88,6 +90,7 @@ public class AddMovieController {
 
     /**
      * her bliver songInfo læst og sendt videre til upload metoden ovenfor.
+     *
      * @throws IOException
      * @throws SQLException
      */
@@ -106,6 +109,7 @@ public class AddMovieController {
 
     /**
      * Metoder til at få texten fra textfields.
+     *
      * @return "Txtfield".getTet();
      */
 
@@ -147,17 +151,10 @@ public class AddMovieController {
         File selectedFile1 = fileChooser.showOpenDialog(null);
         fileChooser.setTitle("Select Movie");
         fileBar.appendText("src/dal/db/MovieFiles" + selectedFile1.getName());
+
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"),
                 new FileChooser.ExtensionFilter("All Files", "*.*")
         );
-
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if (selectedFile != null) {
-            //insert data from file
-            fileBar.setText(selectedFile.getAbsolutePath());
-        }
     }
-
-
 }
