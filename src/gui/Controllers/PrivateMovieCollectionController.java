@@ -163,7 +163,6 @@ public class PrivateMovieCollectionController implements Initializable {
     public void removeCategory(ActionEvent actionEvent) {
         if (SimpleDialog.delete())
             PrivateMovieCollectionModel.removeCategory(tvCategoryTable.getSelectionModel().getSelectedItem());
-            tvCategoryTable.getItems().remove(tvCategoryTable.getSelectionModel().getSelectedItem());
             tvCategoryTable.refresh();
     }
 
