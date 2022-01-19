@@ -13,11 +13,9 @@ import java.io.IOException;
 
 public class AddCategoryController {
     @FXML
-    public Button cancel;
+    private Button cancel;
     @FXML
-    public TextField addGenre;
-    @FXML
-    public Button save;
+    private TextField addGenre;
 
     public void cancel(ActionEvent event) throws IOException {
         Stage switchScene = (Stage) cancel.getScene().getWindow();
@@ -31,22 +29,22 @@ public class AddCategoryController {
     public void save(ActionEvent actionEvent) throws Exception {
         String uploadTitle = addCategory();
         uploadCategoryInfo(uploadTitle);
-        Stage swich = (Stage) cancel.getScene().getWindow();
+        Stage switchScene = (Stage) cancel.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../View/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
-        swich.setScene(scene);
+        switchScene.setScene(scene);
 
     }
 
-    private void uploadCategoryInfo(String genre) throws Exception {
+    private void uploadCategoryInfo(String category) throws Exception {
         PrivateMovieCollectionModel privateMovieCollectionModel = new PrivateMovieCollectionModel();
 
-        privateMovieCollectionModel.addCategory(genre);
+        privateMovieCollectionModel.addCategory(category);
 
     }
 
     public String addCategory() {
-        String genreTemp = addGenre.getText();
-        return genreTemp;
+        String categoryTemp = addGenre.getText();
+        return categoryTemp;
     }
 }

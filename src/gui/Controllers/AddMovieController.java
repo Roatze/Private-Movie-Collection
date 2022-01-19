@@ -19,22 +19,19 @@ public class AddMovieController {
 
 
     @FXML
-    public Button cancel;
+    private Button cancel;
 
     @FXML
-    public TextField titleBar;
+    private TextField titleBar;
 
     @FXML
-    public TextField personalRatingBar;
+    private TextField personalRatingBar;
 
     @FXML
-    public TextField imdbRatingBar;
+    private TextField imdbRatingBar;
 
     @FXML
-    public Button SaveButton;
-
-    @FXML
-    public TextField fileBar;
+    private TextField fileBar;
 
     AddMovieController addMovieController;
 

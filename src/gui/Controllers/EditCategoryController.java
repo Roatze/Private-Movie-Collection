@@ -15,9 +15,9 @@ import java.io.IOException;
 public class EditCategoryController {
 
     @FXML
-    public Button cancel;
+    private Button cancel;
     @FXML
-    public TextField edit;
+    private TextField edit;
 
     private Category selectedCategory;
 
@@ -42,8 +42,8 @@ public class EditCategoryController {
         cancel(actionEvent);
     }
 
-    public void setSelectedCategory(Category genre) {
-        this.selectedCategory = genre;
-        edit.setText(genre.getCategoryName());
+    public void setSelectedCategory(Category category) {
+        this.selectedCategory = category;
+        edit.setText(category.getCategoryName());
     }
 }
