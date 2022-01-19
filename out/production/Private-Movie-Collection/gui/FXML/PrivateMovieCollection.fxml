@@ -8,22 +8,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="920.0" stylesheets="@DarkOrLight.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
+<AnchorPane prefHeight="500.0" prefWidth="920.0" stylesheets="@DarkOrLight.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
 
    <children>
       <Label layoutX="194.0" layoutY="13.0" text="Movies in Category" />
-      <TableView fx:id="tvMoviesInCategoryTable" layoutX="194.0" layoutY="30.0" onMouseClicked="#clearMoviesInCategoryTableSelection" prefHeight="382.0" prefWidth="330.0">
+      <TableView fx:id="tvMoviesInCategoryTable" layoutX="194.0" layoutY="30.0" prefHeight="382.0" prefWidth="330.0">
         <columns>
           <TableColumn fx:id="tcTitleInCategory" prefWidth="223.0" text="Titel" />
-            <TableColumn fx:id="tcPersonalRatingInCategory" minWidth="0.0" prefWidth="53.0" text="Personal" />
-            <TableColumn fx:id="tcIMDBRatingInCategory" minWidth="0.0" prefWidth="53.0" text="IMDB" />
+            <TableColumn fx:id="tcPersonalRatingInCategory" minWidth="0.0" prefWidth="53.0" text="IMDb" />
+            <TableColumn fx:id="tcIMDBRatingInCategory" minWidth="0.0" prefWidth="53.0" text="Personal" />
         </columns>
       </TableView>
-      <TableView fx:id="tvMovieTable" layoutX="561.0" layoutY="30.0" onMouseClicked="#clearMovieTable" prefHeight="382.0" prefWidth="330.0">
+      <TableView fx:id="tvMovieTable" layoutX="561.0" layoutY="30.0" prefHeight="382.0" prefWidth="330.0">
          <columns>
             <TableColumn fx:id="tcTitle" prefWidth="223.0" text="Titel" />
-            <TableColumn fx:id="tcPersonalRating" minWidth="0.0" prefWidth="53.0" text="Personal" />
-            <TableColumn fx:id="tcIMDBRating" minWidth="0.0" prefWidth="53.0" text="IMDB" />
+            <TableColumn fx:id="tcPersonalRating" minWidth="0.0" prefWidth="53.0" text="IMDb" />
+            <TableColumn fx:id="tcIMDBRating" minWidth="0.0" prefWidth="53.0" text="Personal" />
          </columns>
       </TableView>
       <TextField fx:id="txtSearchBar" layoutX="772.0" layoutY="459.0" prefHeight="26.0" prefWidth="119.0" />
@@ -34,7 +34,7 @@
       <Button fx:id="ButtonRemoveMovie" layoutX="562.0" layoutY="459.0" mnemonicParsing="false" onAction="#removeMovie" prefHeight="25.0" prefWidth="150.0" text="Remove Movie" />
       <Button fx:id="buttonAddCategory" layoutX="29.0" layoutY="423.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="25.0" prefWidth="150.0" text="Add Category" />
       <Button fx:id="ButtonRemoveGenre" layoutX="29.0" layoutY="459.0" mnemonicParsing="false" onAction="#removeCategory" prefHeight="25.0" prefWidth="150.0" text="Remove Category" />
-      <TableView fx:id="tvCategoryTable" layoutX="29.0" layoutY="30.0" onMouseClicked="#clearCategoryTableSelection" prefHeight="382.0" prefWidth="150.0">
+      <TableView fx:id="tvCategoryTable" layoutX="29.0" layoutY="30.0" prefHeight="382.0" prefWidth="150.0">
          <columns>
             <TableColumn fx:id="tcCategory" prefWidth="150.0" text="Categories" />
          </columns>

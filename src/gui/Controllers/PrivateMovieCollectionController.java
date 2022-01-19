@@ -59,6 +59,7 @@ public class PrivateMovieCollectionController implements Initializable {
     private Button ButtonEditCategory;
 
     public Category selectedCategory;
+    public Movie selectedCatMovie;
     public Movie selectedMovie;
     private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
     private MovieDialogController movieDialogController;
@@ -77,8 +78,9 @@ public class PrivateMovieCollectionController implements Initializable {
         setTvMovieTable();
         setTcCategoryTable();
         setTcMoviesInCategoryTable();
-        selectedMovie();
-        selectedCategory();
+        //selectedMovie();
+        //selectedCatMovie();
+        //selectedCategory();
 
 
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -90,6 +92,7 @@ public class PrivateMovieCollectionController implements Initializable {
         });
 
         tvMoviesInCategoryTable.setOnMouseClicked((MouseEvent event) -> {
+            setSelectedItems();
             if (event.getClickCount() == 2) {
                 System.out.println("ur mom");
                 try {
@@ -97,6 +100,23 @@ public class PrivateMovieCollectionController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        tvMovieTable.setOnMouseClicked((MouseEvent event) -> {
+            setSelectedItems();
+            if (event.getClickCount() == 2) {
+                System.out.println("ur mom2");
+                try {
+                    OpenMovie();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        tvCategoryTable.setOnMouseClicked((MouseEvent event) -> {
+            setSelectedItems();
+            if (selectedCategory != null) {
+                tvMoviesInCategoryTable.setItems(selectedCategory.getCategoryMovies());
             }
         });
 
@@ -135,7 +155,11 @@ public class PrivateMovieCollectionController implements Initializable {
      * Adds the selected Movie to the selected Genre when then button is pressed
      */
     public void addMoviesInCategory(ActionEvent actionEvent) throws Exception {
-        PrivateMovieCollectionModel.addMoviesInCategory(tvCategoryTable.getSelectionModel().getSelectedItem(), tvMovieTable.getSelectionModel().getSelectedItem());
+        setSelectedItems();
+        PrivateMovieCollectionModel.addMoviesInCategory(
+                selectedCategory,
+                selectedMovie);
+        tvMoviesInCategoryTable.getItems().add(selectedMovie);
         tvMoviesInCategoryTable.refresh();
     }
 
@@ -144,17 +168,6 @@ public class PrivateMovieCollectionController implements Initializable {
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddCategory.fxml"));
         Scene scene = new Scene(parent);
         switchScene.setScene(scene);
-    }
-
-    /**
-     * Opens the dialog to get user input for the name of the category, then updates the selected category with the new name
-     */
-    public void updateCategory(ActionEvent actionEvent) throws Exception {
-        if (tvCategoryTable.getSelectionModel().getSelectedItem() != null) {
-            String name = SimpleDialog.Category();
-            Category pl = new Category(tvCategoryTable.getSelectionModel().getSelectedItem().getCategoryId(), name);
-            PrivateMovieCollectionModel.updateCategory(pl);
-        }
     }
 
     /**
@@ -175,22 +188,8 @@ public class PrivateMovieCollectionController implements Initializable {
         }
     }
 
-    public void clearMoviesInCategoryTableSelection(MouseEvent mouseEvent) {
-        tvMoviesInCategoryTable.getSelectionModel();
-    }
-
-    public void clearMovieTable(MouseEvent mouseEvent) {
-        tvMovieTable.getSelectionModel();
-    }
-
-    public void clearCategoryTableSelection(MouseEvent mouseEvent) {
-        tvCategoryTable.getSelectionModel();
-        if (tvCategoryTable.getSelectionModel().getSelectedItem() != null) {
-            tvMoviesInCategoryTable.setItems(tvCategoryTable.getSelectionModel().getSelectedItem().getCategoryMovies());
-        }
-    }
-
     public void editCategory(ActionEvent actionEvent) throws IOException {
+        setSelectedItems();
         if(selectedCategory != null) {
             Category selectedCategory = tvCategoryTable.getSelectionModel().getSelectedItem();
             FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/FXML/EditCategory.fxml"));
@@ -211,6 +210,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     public void editMovie(ActionEvent actionEvent) throws IOException {
+        setSelectedItems();
         if(selectedMovie != null) {
             Movie selectedMovie = tvMovieTable.getSelectionModel().getSelectedItem();
             FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/FXML/EditMovie.fxml"));
@@ -277,8 +277,19 @@ public class PrivateMovieCollectionController implements Initializable {
      */
     private void selectedMovie() {
         this.tvMovieTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            this.selectedMovie = (Movie) newValue;
             if (selectedMovie != null) {
+                this.selectedMovie = (Movie) newValue;
+            }
+        }));
+    }
+
+    /**
+     * Changes selectedCatMovie to the movie clicked in the tvMoviesInCategoryTable
+     */
+    private void selectedCatMovie() {
+        this.tvMoviesInCategoryTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+            if (selectedCatMovie != null) {
+                this.selectedCatMovie = (Movie) newValue;
             }
         }));
     }
@@ -288,9 +299,27 @@ public class PrivateMovieCollectionController implements Initializable {
      */
     private void selectedCategory() {
         this.tvCategoryTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            this.selectedCategory = (Category) newValue;
             if (selectedCategory != null) {
+                this.selectedCategory = (Category) newValue;
             }
         }));
+    }
+
+    /**
+     * Changes selected Genre to the movie clicked in the tvMovieTable
+     */
+    private void setSelectedItems() {
+        if (tvCategoryTable.getSelectionModel().getSelectedItem() != null)
+        {
+            selectedCategory = tvCategoryTable.getSelectionModel().getSelectedItem();
+        }
+        if (tvMoviesInCategoryTable.getSelectionModel().getSelectedItem() != null)
+        {
+            selectedCatMovie = tvMoviesInCategoryTable.getSelectionModel().getSelectedItem();
+        }
+        if (tvMovieTable.getSelectionModel().getSelectedItem() != null)
+        {
+            selectedMovie = tvMovieTable.getSelectionModel().getSelectedItem();
+        }
     }
 }
