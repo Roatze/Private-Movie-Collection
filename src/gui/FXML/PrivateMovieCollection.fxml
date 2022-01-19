@@ -15,15 +15,15 @@
       <TableView fx:id="tvMoviesInCategoryTable" layoutX="194.0" layoutY="30.0" onMouseClicked="#clearMoviesInCategoryTableSelection" prefHeight="382.0" prefWidth="330.0">
         <columns>
           <TableColumn fx:id="tcTitleInCategory" prefWidth="223.0" text="Titel" />
-            <TableColumn fx:id="tcPersonalRatingInCategory" minWidth="0.0" prefWidth="53.0" text="Personal" />
-            <TableColumn fx:id="tcIMDBRatingInCategory" minWidth="0.0" prefWidth="53.0" text="IMDB" />
+            <TableColumn fx:id="tcPersonalRatingInCategory" minWidth="0.0" prefWidth="53.0" text="IMDb" />
+            <TableColumn fx:id="tcIMDBRatingInCategory" minWidth="0.0" prefWidth="53.0" text="Personal" />
         </columns>
       </TableView>
       <TableView fx:id="tvMovieTable" layoutX="561.0" layoutY="30.0" onMouseClicked="#clearMovieTable" prefHeight="382.0" prefWidth="330.0">
          <columns>
             <TableColumn fx:id="tcTitle" prefWidth="223.0" text="Titel" />
-            <TableColumn fx:id="tcPersonalRating" minWidth="0.0" prefWidth="53.0" text="Personal" />
-            <TableColumn fx:id="tcIMDBRating" minWidth="0.0" prefWidth="53.0" text="IMDB" />
+            <TableColumn fx:id="tcPersonalRating" minWidth="0.0" prefWidth="53.0" text="IMDb" />
+            <TableColumn fx:id="tcIMDBRating" minWidth="0.0" prefWidth="53.0" text="Personal" />
          </columns>
       </TableView>
       <TextField fx:id="txtSearchBar" layoutX="772.0" layoutY="459.0" prefHeight="26.0" prefWidth="119.0" />
