@@ -21,7 +21,7 @@ public class AddCategoryController {
 
     public void cancel(ActionEvent event) throws IOException {
         Stage switchScene = (Stage) cancel.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../View/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
         switchScene.setScene(scene);
     }
@@ -32,7 +32,7 @@ public class AddCategoryController {
         String uploadTitle = addCategory();
         uploadCategoryInfo(uploadTitle);
         Stage swich = (Stage) cancel.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../View/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
         swich.setScene(scene);
 

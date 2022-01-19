@@ -5,7 +5,6 @@ import be.Category;
 import be.Movie;
 
 import gui.Model.PrivateMovieCollectionModel;
-import gui.SimpleDialog;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -129,7 +128,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     public void addMovie(ActionEvent actionEvent) throws IOException {
         Stage switchScene = (Stage) buttonAddMovie.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddMovie.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../View/AddMovie.fxml"));
         Scene scene = new Scene(parent);
         switchScene.setScene(scene);
     }
@@ -138,7 +137,7 @@ public class PrivateMovieCollectionController implements Initializable {
      * Creates a dialog to ask the user to confirm the deletion, then deletes the selected song
      */
     public void removeMovie(ActionEvent actionEvent) throws Exception {
-        if (SimpleDialog.delete() && selectedMovie != null) {
+        if (SimpleDialogController.delete() && selectedMovie != null) {
             PrivateMovieCollectionModel.removeMovie(selectedMovie);
         }
     }
@@ -157,7 +156,7 @@ public class PrivateMovieCollectionController implements Initializable {
 
     public void addCategory(ActionEvent actionEvent) throws Exception {
         Stage switchScene = (Stage) buttonAddCategory.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddCategory.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../View/AddCategory.fxml"));
         Scene scene = new Scene(parent);
         switchScene.setScene(scene);
     }
@@ -166,13 +165,13 @@ public class PrivateMovieCollectionController implements Initializable {
      * Creates a dialog to ask the user to confirm the deletion, then deletes the selected category
      */
     public void removeCategory(ActionEvent actionEvent) {
-        if (SimpleDialog.delete())
+        if (SimpleDialogController.delete())
             PrivateMovieCollectionModel.removeCategory(selectedCategory);
             tvCategoryTable.refresh();
     }
 
     public void removeFromCategory(ActionEvent actionEvent) throws Exception {
-        if (SimpleDialog.delete()) {
+        if (SimpleDialogController.delete()) {
             PrivateMovieCollectionModel.removeMoviesInCategory(selectedCategory,
                     selectedCatMovie);
             tvMoviesInCategoryTable.getItems().remove(selectedCatMovie);
@@ -184,7 +183,7 @@ public class PrivateMovieCollectionController implements Initializable {
         setSelectedItems();
         if(selectedCategory != null) {
             //Category selectedCategory = tvCategoryTable.getSelectionModel().getSelectedItem();
-            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/FXML/EditCategory.fxml"));
+            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/View/EditCategory.fxml"));
             Scene mainWindowScene = null;
             try {
                 mainWindowScene = new Scene(parent.load());
@@ -205,7 +204,7 @@ public class PrivateMovieCollectionController implements Initializable {
         setSelectedItems();
         if(selectedMovie != null) {
             //Movie selectedMovie = tvMovieTable.getSelectionModel().getSelectedItem();
-            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/FXML/EditMovie.fxml"));
+            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/View/EditMovie.fxml"));
             Scene mainWindowScene = null;
             try {
                 mainWindowScene = new Scene(parent.load());

@@ -63,7 +63,7 @@ public class EditMovieController implements Initializable {
 
     public void cancel(ActionEvent actionEvent) throws IOException {
             Stage switchScene = (Stage) cancel.getScene().getWindow();
-            Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
+            Parent parent = FXMLLoader.load(getClass().getResource("../View/PrivateMovieCollection.fxml"));
             Scene scene = new Scene(parent);
             switchScene.setScene(scene);
     }

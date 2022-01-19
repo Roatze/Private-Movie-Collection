@@ -69,7 +69,7 @@ public class AddMovieController {
 
     public void cancel(ActionEvent actionEvent) throws IOException {
         Stage swich = (Stage) cancel.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../View/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
         swich.setScene(scene);
     }
@@ -87,7 +87,7 @@ public class AddMovieController {
         uploadMovieInfo(uploadTitle, uploadPersonalRating, uploadImdbRaring);
 
         Stage switchScene = (Stage) cancel.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("../View/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
         switchScene.setScene(scene);
     }

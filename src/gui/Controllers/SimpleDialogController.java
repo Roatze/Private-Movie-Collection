@@ -1,14 +1,14 @@
-package gui;
+package gui.Controllers;
 
 import javax.swing.*;
 
 /**
  * Class handles the "delete" confirmation and playlist windows
  */
-public class SimpleDialog {
+public class SimpleDialogController {
     JFrame f;
 
-    public SimpleDialog(){f = new JFrame();}
+    public SimpleDialogController(){f = new JFrame();}
 
     /**
      * Opens a window to ask user to confirm deletion
