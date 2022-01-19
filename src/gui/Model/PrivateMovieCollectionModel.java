@@ -14,15 +14,14 @@ import java.util.List;
 /**
  * In this class we acces the bll, to handle the connection from gui to bll.
  */
-public class PrivateMovieCollectionModel
-{
+public class PrivateMovieCollectionModel {
 
     private ObservableList<Movie> movieList;
     private ObservableList<Category> CategoryList;
     private ObservableList<Movie> MoviesInCategoryList;
     private LogicManager lm;
 
-    public PrivateMovieCollectionModel() throws Exception{
+    public PrivateMovieCollectionModel() throws Exception {
         lm = new LogicManager();
         movieList = FXCollections.observableArrayList();
         movieList.addAll(lm.getAllMovies());
@@ -85,7 +84,7 @@ public class PrivateMovieCollectionModel
         updateCategory(category);
     }
 
-    public void removeMoviesInCategory(Category category, Movie movie) throws  Exception {
+    public void removeMoviesInCategory(Category category, Movie movie) throws Exception {
 
         lm.removeMoviesInCategory(category, movie);
         MoviesInCategoryList.remove(movie);
@@ -97,7 +96,7 @@ public class PrivateMovieCollectionModel
         MoviesInCategoryList.clear();
     }
 
-    public void updateCategory(Category category) throws  Exception {
+    public void updateCategory(Category category) throws Exception {
         lm.updateCategory(category);
         CategoryList.clear();
         CategoryList.addAll(lm.getAllCategory());
