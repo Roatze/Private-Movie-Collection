@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="920.0" stylesheets="@DarkOrLight.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
+<AnchorPane prefHeight="500.0" prefWidth="920.0" stylesheets="@DarkOrLight.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controllers.PrivateMovieCollectionController">
 
    <children>
       <Label layoutX="194.0" layoutY="13.0" text="Movies in Category" />
@@ -42,8 +42,8 @@
       <Button fx:id="buttonAddToGenre" layoutX="529.0" layoutY="31.0" mnemonicParsing="false" onAction="#addMoviesInCategory" rotate="90.0" text="▼" />
       <Button fx:id="ButtonRemoveFromGenre" layoutX="194.0" layoutY="423.0" mnemonicParsing="false" onAction="#removeFromCategory" prefHeight="25.0" prefWidth="150.0" text="Remove from Category" />
       <Label layoutX="416.0" layoutY="13.0" text="Rating" />
-      <Button fx:id="ButtonEditMovie" layoutX="741.0" layoutY="423.0" mnemonicParsing="false" onAction="#editMovie" prefHeight="25.0" prefWidth="150.0" text="Edit Movie" />
-      <Button fx:id="ButtonEditCategory" layoutX="194.0" layoutY="459.0" mnemonicParsing="false" onAction="#editCategory" prefHeight="25.0" prefWidth="150.0" text="Edit Category" />
+      <Button layoutX="741.0" layoutY="423.0" mnemonicParsing="false" onAction="#editMovie" prefHeight="25.0" prefWidth="150.0" text="Edit Movie" />
+      <Button layoutX="194.0" layoutY="459.0" mnemonicParsing="false" onAction="#editCategory" prefHeight="25.0" prefWidth="150.0" text="Edit Category" />
       <Button fx:id="search" layoutX="741.0" layoutY="460.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="🔍">
          <font>
             <Font size="11.0" />

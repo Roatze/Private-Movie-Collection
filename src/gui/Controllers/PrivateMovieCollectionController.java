@@ -57,7 +57,6 @@ public class PrivateMovieCollectionController implements Initializable {
     public Movie selectedCatMovie;
     public Movie selectedMovie;
     private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
-    private MovieDialogController movieDialogController;
 
 
     public PrivateMovieCollectionController() throws Exception {
@@ -257,39 +256,6 @@ public class PrivateMovieCollectionController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Changes selected Movie to the movie clicked in the tvMovieTable
-     */
-    private void selectedMovie() {
-        this.tvMovieTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (selectedMovie != null) {
-                this.selectedMovie = (Movie) newValue;
-            }
-        }));
-    }
-
-    /**
-     * Changes selectedCatMovie to the movie clicked in the tvMoviesInCategoryTable
-     */
-    private void selectedCatMovie() {
-        this.tvMoviesInCategoryTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (selectedCatMovie != null) {
-                this.selectedCatMovie = (Movie) newValue;
-            }
-        }));
-    }
-
-    /**
-     * Changes selected Genre to the movie clicked in the tvMovieTable
-     */
-    private void selectedCategory() {
-        this.tvCategoryTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (selectedCategory != null) {
-                this.selectedCategory = (Category) newValue;
-            }
-        }));
     }
 
     /**
