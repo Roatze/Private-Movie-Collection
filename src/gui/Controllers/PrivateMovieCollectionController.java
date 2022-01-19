@@ -72,11 +72,7 @@ public class PrivateMovieCollectionController implements Initializable {
         setTvMovieTable();
         setTcCategoryTable();
         setTcMoviesInCategoryTable();
-        //selectedMovie();
-        //selectedCatMovie();
-        //selectedCategory();
-
-
+        
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 PrivateMovieCollectionModel.searchedMovies(newValue);
