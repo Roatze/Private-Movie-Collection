@@ -13,11 +13,11 @@ import java.io.IOException;
 
 public class AddCategoryController {
     @FXML
-    private Button cancel;
+    public Button cancel;
     @FXML
-    private TextField addGenre;
+    public TextField addGenre;
     @FXML
-    private Button save;
+    public Button save;
 
     public void cancel(ActionEvent event) throws IOException {
         Stage switchScene = (Stage) cancel.getScene().getWindow();
