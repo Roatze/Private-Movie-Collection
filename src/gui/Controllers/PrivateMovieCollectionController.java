@@ -7,7 +7,6 @@ import be.Movie;
 import gui.Model.PrivateMovieCollectionModel;
 import gui.SimpleDialog;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.awt.Desktop;
 
@@ -26,19 +23,16 @@ import java.io.File;
 import java.io.IOException;
 
 import java.net.URL;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ResourceBundle;
 
 public class PrivateMovieCollectionController implements Initializable {
 
     @FXML
-    private TableView<Movie> tvEntertainmentTable;
+    private TableView<Movie> tvMoviesInCategoryTable;
     @FXML
-    private TableColumn<Category, String> tcEntertainment;
+    private TableView<Category> tvCategoryTable;
     @FXML
-    private TableView<Category> tvGenreTable;
-    @FXML
-    private TableColumn<Category, String> tcGenre;
+    private TableColumn<Category, String> tcCategory;
     @FXML
     private TableView<Movie> tvMovieTable;
     @FXML
@@ -48,30 +42,21 @@ public class PrivateMovieCollectionController implements Initializable {
     @FXML
     private TableColumn<Movie, Integer> tcIMDBRating;
     @FXML
-    private TableColumn<Movie, String> tcTitleCat;
+    private TableColumn<Movie, String> tcTitleInCategory;
     @FXML
-    private TableColumn<Movie, Integer> tcPersonalRatingCat;
+    private TableColumn<Movie, Integer> tcPersonalRatingInCategory;
     @FXML
-    private TableColumn<Movie, Integer> tcIMDBRatingCat;
+    private TableColumn<Movie, Integer> tcIMDBRatingInCategory;
     @FXML
     private TextField txtSearchBar;
     @FXML
-    private TextField txtNowPlaying;
+    private Button buttonAddCategory;
     @FXML
-    private Button addMovie;
-    @FXML
-    private Button ButtonAddGenre;
-    @FXML
-    private Button ButtonAddMovie;
+    private Button buttonAddMovie;
     @FXML
     private Button ButtonEditMovie;
     @FXML
-    private Button ButtonEditGenre;
-    @FXML
-    private Button search;
-
-
-
+    private Button ButtonEditCategory;
 
     public Category selectedCategory;
     public Movie selectedMovie;
@@ -85,15 +70,15 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     /**
-     * Initializes MOVIE AND PLAYLIST
+     * Initializes MOVIE AND CATEGORY
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setTvMovieTable();
-        setTcGenreTable();
-        setTcEntertainmentTable();
+        setTcCategoryTable();
+        setTcMoviesInCategoryTable();
         selectedMovie();
-        selectedGenre();
+        selectedCategory();
 
 
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -104,7 +89,7 @@ public class PrivateMovieCollectionController implements Initializable {
             }
         });
 
-        tvEntertainmentTable.setOnMouseClicked((MouseEvent event) -> {
+        tvMoviesInCategoryTable.setOnMouseClicked((MouseEvent event) -> {
             if (event.getClickCount() == 2) {
                 System.out.println("ur mom");
                 try {
@@ -119,8 +104,8 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     public void OpenMovie() throws IOException {
-        if(tvEntertainmentTable.getSelectionModel().getSelectedItem() != null) {
-            Movie selectedMovie = tvEntertainmentTable.getSelectionModel().getSelectedItem();
+        if(tvMoviesInCategoryTable.getSelectionModel().getSelectedItem() != null) {
+            Movie selectedMovie = tvMoviesInCategoryTable.getSelectionModel().getSelectedItem();
             String fileLink = selectedMovie.getFileLink().replace("\\", "/");
             File movieFile = new File(System.getProperty("user.dir") + fileLink.replace("file:", ""));
             Desktop desktop = Desktop.getDesktop();
@@ -131,26 +116,10 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     public void addMovie(ActionEvent actionEvent) throws IOException {
-        Stage swich = (Stage) ButtonAddMovie.getScene().getWindow();
+        Stage switchScene = (Stage) buttonAddMovie.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddMovie.fxml"));
         Scene scene = new Scene(parent);
-        swich.setScene(scene);
-    }
-
-    /**
-     * Creates the Movie Dialog window for New song and Edit song
-     */
-    public Stage createMovieDialog(String windowTitle) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("MovieDialog.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.setTitle(windowTitle);
-        stage.initModality(Modality.WINDOW_MODAL);
-        movieDialogController = fxmlLoader.getController();
-        movieDialogController.setModel(PrivateMovieCollectionModel);
-        return stage;
+        switchScene.setScene(scene);
     }
 
     /**
@@ -158,90 +127,74 @@ public class PrivateMovieCollectionController implements Initializable {
      */
     public void removeMovie(ActionEvent actionEvent) throws Exception {
         if (SimpleDialog.delete() && tvMovieTable.getSelectionModel().getSelectedItem() != null) {
-            PrivateMovieCollectionModel.deleteMovie(tvMovieTable.getSelectionModel().getSelectedItem());
+            PrivateMovieCollectionModel.removeMovie(tvMovieTable.getSelectionModel().getSelectedItem());
         }
     }
 
     /**
      * Adds the selected Movie to the selected Genre when then button is pressed
      */
-    public void addToGenre(ActionEvent actionEvent) throws Exception {
-        PrivateMovieCollectionModel.addToPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(), tvMovieTable.getSelectionModel().getSelectedItem());
-        tvEntertainmentTable.refresh();
+    public void addMoviesInCategory(ActionEvent actionEvent) throws Exception {
+        PrivateMovieCollectionModel.addMoviesInCategory(tvCategoryTable.getSelectionModel().getSelectedItem(), tvMovieTable.getSelectionModel().getSelectedItem());
+        tvMoviesInCategoryTable.refresh();
     }
 
-    public void addGenre(ActionEvent actionEvent) throws Exception {
-        Stage swich = (Stage) ButtonAddGenre.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/Genre.fxml"));
+    public void addCategory(ActionEvent actionEvent) throws Exception {
+        Stage switchScene = (Stage) buttonAddCategory.getScene().getWindow();
+        Parent parent = FXMLLoader.load(getClass().getResource("../FXML/AddCategory.fxml"));
         Scene scene = new Scene(parent);
-        swich.setScene(scene);
+        switchScene.setScene(scene);
     }
 
     /**
-     * Opens the dialog to get user input for the name of the playlist, then updates the selected playlist with the new name
+     * Opens the dialog to get user input for the name of the category, then updates the selected category with the new name
      */
     public void updateCategory(ActionEvent actionEvent) throws Exception {
-        if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {
-            String name = SimpleDialog.playlist();
-            Category pl = new Category(tvGenreTable.getSelectionModel().getSelectedItem().getCategoryId(), name);
-            PrivateMovieCollectionModel.updatePlaylist(pl);
+        if (tvCategoryTable.getSelectionModel().getSelectedItem() != null) {
+            String name = SimpleDialog.Category();
+            Category pl = new Category(tvCategoryTable.getSelectionModel().getSelectedItem().getCategoryId(), name);
+            PrivateMovieCollectionModel.updateCategory(pl);
         }
     }
 
     /**
-     * Creates a dialog to ask the user to confirm the deletion, then deletes the selected playlist
+     * Creates a dialog to ask the user to confirm the deletion, then deletes the selected category
      */
-    public void removeGenre(ActionEvent actionEvent) {
+    public void removeCategory(ActionEvent actionEvent) {
         if (SimpleDialog.delete())
-            PrivateMovieCollectionModel.deletePlaylist(tvGenreTable.getSelectionModel().getSelectedItem());
-            tvGenreTable.getItems().remove(tvGenreTable.getSelectionModel().getSelectedItem());
-            tvGenreTable.refresh();
+            PrivateMovieCollectionModel.removeCategory(tvCategoryTable.getSelectionModel().getSelectedItem());
+            tvCategoryTable.getItems().remove(tvCategoryTable.getSelectionModel().getSelectedItem());
+            tvCategoryTable.refresh();
     }
 
-    public void removeFromGenre(ActionEvent actionEvent) throws Exception {
+    public void removeFromCategory(ActionEvent actionEvent) throws Exception {
         if (SimpleDialog.delete()) {
-            PrivateMovieCollectionModel.removeFromPlaylist(tvGenreTable.getSelectionModel().getSelectedItem(),
-                    tvEntertainmentTable.getSelectionModel().getSelectedItem());
-            tvEntertainmentTable.getItems().remove(tvEntertainmentTable.getSelectionModel().getSelectedItem());
-            tvEntertainmentTable.refresh();
+            PrivateMovieCollectionModel.removeMoviesInCategory(tvCategoryTable.getSelectionModel().getSelectedItem(),
+                    tvMoviesInCategoryTable.getSelectionModel().getSelectedItem());
+            tvMoviesInCategoryTable.getItems().remove(tvMoviesInCategoryTable.getSelectionModel().getSelectedItem());
+            tvMoviesInCategoryTable.refresh();
         }
     }
 
-    /**
-     * When a playlist is clicked then songs on the playlist are shown in the middle table
-     */
-    public void showGenre(MouseEvent mouseEvent) {
-        tvEntertainmentTable.getItems().clear();
-        try {
-            if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {
-                tvEntertainmentTable.setItems(PrivateMovieCollectionModel.getPlaylist(tvGenreTable.getSelectionModel().getSelectedItem()));
-                tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("name"));
-                tvGenreTable.getItems();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void clearEntertainmentTableSelection(MouseEvent mouseEvent) {
-        tvEntertainmentTable.getSelectionModel();
+    public void clearMoviesInCategoryTableSelection(MouseEvent mouseEvent) {
+        tvMoviesInCategoryTable.getSelectionModel();
     }
 
     public void clearMovieTable(MouseEvent mouseEvent) {
         tvMovieTable.getSelectionModel();
     }
 
-    public void clearGenreTableSelection(MouseEvent mouseEvent) {
-        tvGenreTable.getSelectionModel();
-        if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {
-            tvEntertainmentTable.setItems(tvGenreTable.getSelectionModel().getSelectedItem().getCategoryMovies());
+    public void clearCategoryTableSelection(MouseEvent mouseEvent) {
+        tvCategoryTable.getSelectionModel();
+        if (tvCategoryTable.getSelectionModel().getSelectedItem() != null) {
+            tvMoviesInCategoryTable.setItems(tvCategoryTable.getSelectionModel().getSelectedItem().getCategoryMovies());
         }
     }
 
-    public void editGenre(ActionEvent actionEvent) throws IOException {
+    public void editCategory(ActionEvent actionEvent) throws IOException {
         if(selectedCategory != null) {
-            Category selectedCategory = tvGenreTable.getSelectionModel().getSelectedItem();
-            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/FXML/GenreEdit.fxml"));
+            Category selectedCategory = tvCategoryTable.getSelectionModel().getSelectedItem();
+            FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/FXML/EditCategory.fxml"));
             Scene mainWindowScene = null;
             try {
                 mainWindowScene = new Scene(parent.load());
@@ -250,8 +203,8 @@ public class PrivateMovieCollectionController implements Initializable {
             }
             Stage editGenreStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             editGenreStage.setScene(mainWindowScene);
-            GenreEditController genreEditController = parent.getController();
-            genreEditController.setSelectedGenre(selectedCategory);
+            EditCategoryController editCategoryController = parent.getController();
+            editCategoryController.setSelectedCategory(selectedCategory);
             editGenreStage.show();
         }else{
             System.out.println("No Genre are selected");
@@ -281,10 +234,10 @@ public class PrivateMovieCollectionController implements Initializable {
     /**
      * Method used for initializing the genre table
      */
-    public void setTcGenreTable() {
-        tcGenre.setCellValueFactory(new PropertyValueFactory<Category, String>("categoryName"));
+    public void setTcCategoryTable() {
+        tcCategory.setCellValueFactory(new PropertyValueFactory<Category, String>("categoryName"));
         try {
-            tvGenreTable.setItems(PrivateMovieCollectionModel.getAllPlaylists());
+            tvCategoryTable.setItems(PrivateMovieCollectionModel.getAllCategories());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -293,13 +246,13 @@ public class PrivateMovieCollectionController implements Initializable {
     /**
      * Method used for initializing the entertainment table
      */
-    public void setTcEntertainmentTable() {
-        tcTitleCat.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieName"));
-        tcPersonalRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("privateRating"));
-        tcIMDBRatingCat.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("publicRating"));
+    public void setTcMoviesInCategoryTable() {
+        tcTitleInCategory.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieName"));
+        tcPersonalRatingInCategory.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("privateRating"));
+        tcIMDBRatingInCategory.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("publicRating"));
         try {
-            if (tvGenreTable.getSelectionModel().getSelectedItem() != null) {
-                tvEntertainmentTable.setItems(tvGenreTable.getSelectionModel().getSelectedItem().getCategoryMovies());
+            if (tvCategoryTable.getSelectionModel().getSelectedItem() != null) {
+                tvMoviesInCategoryTable.setItems(tvCategoryTable.getSelectionModel().getSelectedItem().getCategoryMovies());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -309,13 +262,12 @@ public class PrivateMovieCollectionController implements Initializable {
     /**
      * Method used for initializing the movie table.
      */
-
     private void setTvMovieTable() {
         tcTitle.setCellValueFactory(new PropertyValueFactory<Movie, String>("movieName"));
         tcPersonalRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("privateRating"));
         tcIMDBRating.setCellValueFactory(new PropertyValueFactory<Movie, Integer>("publicRating"));
         try {
-            tvMovieTable.setItems(PrivateMovieCollectionModel.getMovielist());
+            tvMovieTable.setItems(PrivateMovieCollectionModel.getMovieList());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -331,18 +283,15 @@ public class PrivateMovieCollectionController implements Initializable {
             }
         }));
     }
+
     /**
      * Changes selected Genre to the movie clicked in the tvMovieTable
      */
-    private void selectedGenre() {
-        this.tvGenreTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
+    private void selectedCategory() {
+        this.tvCategoryTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             this.selectedCategory = (Category) newValue;
             if (selectedCategory != null) {
             }
         }));
-    }
-
-    public void buttonSearch(ActionEvent actionEvent) {
-    //For Visuals
     }
 }

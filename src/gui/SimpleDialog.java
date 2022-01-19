@@ -26,10 +26,10 @@ public class SimpleDialog {
     }
 
     /**
-     * Opens window to ask user to input playlist name
+     * Opens window to ask user to input category name
      * @return user input
      */
-    public static String playlist(){
+    public static String Category(){
         return JOptionPane.showInputDialog(null,"Category name: ", "New/Edit Category", JOptionPane.PLAIN_MESSAGE);
     }
 }

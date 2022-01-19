@@ -29,7 +29,7 @@ public class MovieDAO {
         return "file:/" + filePath.replace("\\", "/");
     }
 
-    // This is the method to create a song in the Database. This is also where the song gets an ID.
+    // This is the method to create a movie in the Database. This is also where the movie gets an ID.
     public Movie addMovie(String movieName, String publicRating, String privateRating, String fileLink) throws Exception
     {
         Connection con = DC.getConnection();

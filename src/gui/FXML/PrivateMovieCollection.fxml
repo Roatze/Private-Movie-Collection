@@ -12,11 +12,11 @@
 
    <children>
       <Label layoutX="194.0" layoutY="13.0" text="Movies in Category" />
-      <TableView fx:id="tvEntertainmentTable" layoutX="194.0" layoutY="30.0" onMouseClicked="#clearEntertainmentTableSelection" prefHeight="382.0" prefWidth="330.0">
+      <TableView fx:id="tvMoviesInCategoryTable" layoutX="194.0" layoutY="30.0" onMouseClicked="#clearMoviesInCategoryTableSelection" prefHeight="382.0" prefWidth="330.0">
         <columns>
-          <TableColumn fx:id="tcTitleCat" prefWidth="223.0" text="Titel" />
-            <TableColumn fx:id="tcPersonalRatingCat" minWidth="0.0" prefWidth="53.0" text="Personal" />
-            <TableColumn fx:id="tcIMDBRatingCat" minWidth="0.0" prefWidth="53.0" text="IMDB" />
+          <TableColumn fx:id="tcTitleInCategory" prefWidth="223.0" text="Titel" />
+            <TableColumn fx:id="tcPersonalRatingInCategory" minWidth="0.0" prefWidth="53.0" text="Personal" />
+            <TableColumn fx:id="tcIMDBRatingInCategory" minWidth="0.0" prefWidth="53.0" text="IMDB" />
         </columns>
       </TableView>
       <TableView fx:id="tvMovieTable" layoutX="561.0" layoutY="30.0" onMouseClicked="#clearMovieTable" prefHeight="382.0" prefWidth="330.0">
@@ -30,21 +30,21 @@
       <Label layoutX="29.0" layoutY="13.0" text="Category" />
       <Label layoutX="562.0" layoutY="13.0" text="Movies" />
       <Label layoutX="784.0" layoutY="13.0" text="Rating" />
-      <Button fx:id="ButtonAddMovie" layoutX="562.0" layoutY="423.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="150.0" text="Add Movie" />
+      <Button fx:id="buttonAddMovie" layoutX="562.0" layoutY="423.0" mnemonicParsing="false" onAction="#addMovie" prefHeight="25.0" prefWidth="150.0" text="Add Movie" />
       <Button fx:id="ButtonRemoveMovie" layoutX="562.0" layoutY="459.0" mnemonicParsing="false" onAction="#removeMovie" prefHeight="25.0" prefWidth="150.0" text="Remove Movie" />
-      <Button fx:id="ButtonAddGenre" layoutX="29.0" layoutY="423.0" mnemonicParsing="false" onAction="#addGenre" prefHeight="25.0" prefWidth="150.0" text="Add Genre" />
-      <Button fx:id="ButtonRemoveGenre" layoutX="29.0" layoutY="459.0" mnemonicParsing="false" onAction="#removeGenre" prefHeight="25.0" prefWidth="150.0" text="Remove Genre" />
-      <TableView fx:id="tvGenreTable" layoutX="29.0" layoutY="30.0" onMouseClicked="#clearGenreTableSelection" prefHeight="382.0" prefWidth="150.0">
+      <Button fx:id="buttonAddCategory" layoutX="29.0" layoutY="423.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="25.0" prefWidth="150.0" text="Add Category" />
+      <Button fx:id="ButtonRemoveGenre" layoutX="29.0" layoutY="459.0" mnemonicParsing="false" onAction="#removeCategory" prefHeight="25.0" prefWidth="150.0" text="Remove Category" />
+      <TableView fx:id="tvCategoryTable" layoutX="29.0" layoutY="30.0" onMouseClicked="#clearCategoryTableSelection" prefHeight="382.0" prefWidth="150.0">
          <columns>
-            <TableColumn fx:id="tcGenre" prefWidth="150.0" text="Genre" />
+            <TableColumn fx:id="tcCategory" prefWidth="150.0" text="Categories" />
          </columns>
       </TableView>
-      <Button fx:id="buttonAddToGenre" layoutX="529.0" layoutY="31.0" mnemonicParsing="false" onAction="#addToGenre" rotate="90.0" text="▼" />
-      <Button fx:id="ButtonRemoveFromGenre" layoutX="194.0" layoutY="423.0" mnemonicParsing="false" onAction="#removeFromGenre" prefHeight="25.0" prefWidth="150.0" text="Remove from Genre" />
+      <Button fx:id="buttonAddToGenre" layoutX="529.0" layoutY="31.0" mnemonicParsing="false" onAction="#addMoviesInCategory" rotate="90.0" text="▼" />
+      <Button fx:id="ButtonRemoveFromGenre" layoutX="194.0" layoutY="423.0" mnemonicParsing="false" onAction="#removeFromCategory" prefHeight="25.0" prefWidth="150.0" text="Remove from Category" />
       <Label layoutX="416.0" layoutY="13.0" text="Rating" />
       <Button fx:id="ButtonEditMovie" layoutX="741.0" layoutY="423.0" mnemonicParsing="false" onAction="#editMovie" prefHeight="25.0" prefWidth="150.0" text="Edit Movie" />
-      <Button fx:id="ButtonEditGenre" layoutX="194.0" layoutY="459.0" mnemonicParsing="false" onAction="#editGenre" prefHeight="25.0" prefWidth="150.0" text="Edit Genre" />
-      <Button fx:id="search" layoutX="741.0" layoutY="460.0" mnemonicParsing="false" onAction="#buttonSearch" prefHeight="25.0" prefWidth="27.0" text="🔍">
+      <Button fx:id="ButtonEditCategory" layoutX="194.0" layoutY="459.0" mnemonicParsing="false" onAction="#editCategory" prefHeight="25.0" prefWidth="150.0" text="Edit Category" />
+      <Button fx:id="search" layoutX="741.0" layoutY="460.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="27.0" text="🔍">
          <font>
             <Font size="11.0" />
          </font>

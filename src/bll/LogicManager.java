@@ -31,13 +31,13 @@ public class LogicManager
      *Methods for MovieDAO.
      */
 
-    // here we create a song with the input from the gui, sending it to Dal.
+    // here we create a movie with the input from the gui, sending it to Dal.
     public Movie addMovie(String name, String publicRating, String privateRating, String fileLink) throws Exception
     {
        return(movieDAO.addMovie(name, publicRating, privateRating, fileLink));
     }
 
-    //Here we get all songs from the dal.
+    //Here we get all movies from the dal.
     public List<Movie> getAllMovies() throws SQLException
     {
         return (movieDAO.getAllMovie());
@@ -90,19 +90,16 @@ public class LogicManager
         categoryDAO.updateCategory(category);
     }
 
-    public void addToMoviesInCategory(Category category, Movie movie) throws Exception
+    public void addMoviesInCategory(Category category, Movie movie) throws Exception
 
     {
-        categoryDAO.addToCategory(category, movie);
+        categoryDAO.addMovieInCategory(category, movie);
     }
 
     //deleteCategory
     public void removeMoviesInCategory(Category category, Movie movie) throws Exception
     {
-        categoryDAO.removeFromCategory(category, movie);
+        categoryDAO.removeMovieInCategory(category, movie);
     }
-
-
-
 }
 

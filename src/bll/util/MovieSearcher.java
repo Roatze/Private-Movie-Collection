@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class handles searching for songs through a list of songs - mainly for All Songs.
+ * This class handles searching for Movies through a list of Movies - mainly for All Movies.
  */
 public class MovieSearcher {
     public List<Movie> SearchMovies(List<Movie> searchBase, String searchQuery) throws Exception {
@@ -14,7 +14,7 @@ public class MovieSearcher {
         for (Movie movie : searchBase) {
             if (compareToPublicRating(searchQuery, movie)
                     || compareToPrivateRating(searchQuery, movie)
-                    || compareToSongName(searchQuery, movie)){
+                    || compareToMovieName(searchQuery, movie)){
                 searchedMovies.add(movie);
             }
         }
@@ -22,7 +22,7 @@ public class MovieSearcher {
     }
 
     /**
-     * Compares input to artist names
+     * Compares input to the Public Rating
      * @return true if a match is found
      */
     private boolean compareToPublicRating(String query, Movie movie)
@@ -31,7 +31,7 @@ public class MovieSearcher {
     }
 
     /**
-     * Compares input to artist names
+     * Compares input to the private rating
      * @return true if a match is found
      */
     private boolean compareToPrivateRating(String query, Movie movie)
@@ -43,7 +43,7 @@ public class MovieSearcher {
      * Compares input to movie titles
      * @return true if a match is found
      */
-    private boolean compareToSongName(String query, Movie movie)
+    private boolean compareToMovieName(String query, Movie movie)
     {
         return movie.getMovieName().toLowerCase().contains(query.toLowerCase());
     }

@@ -1,13 +1,11 @@
 package gui.Controllers;
 
-import be.Category;
 import be.Movie;
 import gui.Model.PrivateMovieCollectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -32,11 +30,9 @@ public class EditMovieController implements Initializable {
     @FXML
     private TextField fileBar;
     @FXML
-    private TextField textFieldId;
+    private Button cancel;
     @FXML
-    private Button returnMainMenu;
-    @FXML
-    private Button movieSaveButton;
+
     private PrivateMovieCollectionModel privateMovieCollectionModel;
     private Movie selectedMovie;
 
@@ -51,38 +47,8 @@ public class EditMovieController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-
-     /* Saves the newly added song.
-     */
-    public void movieSaveButton(ActionEvent actionEvent) throws Exception {
-        String title = titleBar.getText();
-        String personalRating = personalRatingBar.getText();
-        String imbdRating = imdbRatingBar.getText();
-        String url = fileBar.getText();
-        int id = Integer.parseInt(textFieldId.getText());
-
-        Movie movie = new Movie(id, title, personalRating, imbdRating , url);
-        privateMovieCollectionModel.updateMovie(movie);
-        cancelButton(actionEvent);
-    }
-
     /**
-     * Pressing the cancel button takes you back to the main window.
-     */
-    public void cancelButton(ActionEvent actionEvent) {
-        FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/view/PrivateMovieCollection.fxml"));
-        Scene mainWindowScene = null;
-        try{
-            mainWindowScene = new Scene(parent.load());
-        } catch (IOException exception) {
-            exception.printStackTrace();
-        }
-        Stage editMovieStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        editMovieStage.setScene(mainWindowScene);
-    }
-
-    /**
-     * Gets the values of the selected song.
+     * Gets the values of the selected movie.
      */
     public void setSelectedMovie(Movie movie) {
         titleBar.setText(movie.getMovieName());
@@ -91,15 +57,21 @@ public class EditMovieController implements Initializable {
         fileBar.setText(movie.getFileLink());
         this.selectedMovie = movie;
     }
+    /**
+     * Pressing the cancel button takes you back to the main window.
+     */
 
-    public void goReturnMainMenu(ActionEvent actionEvent) throws IOException {
-            Stage swich = (Stage) returnMainMenu.getScene().getWindow();
+    public void cancel(ActionEvent actionEvent) throws IOException {
+            Stage switchScene = (Stage) cancel.getScene().getWindow();
             Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
             Scene scene = new Scene(parent);
-            swich.setScene(scene);
+            switchScene.setScene(scene);
     }
+    /**
+     * Pressing the save button saves your changes.
+     */
 
-    public void getMovieInfo(ActionEvent actionEvent) throws SQLException, IOException {
+    public void Save(ActionEvent actionEvent) throws SQLException, IOException {
         String updateMovieName = titleBar.getText();
         String updatePublicRating = imdbRatingBar.getText();
         String updatePrivateRating = personalRatingBar.getText();
@@ -111,7 +83,7 @@ public class EditMovieController implements Initializable {
         
         privateMovieCollectionModel.updateMovie(this.selectedMovie);
 
-        goReturnMainMenu(actionEvent);
+        cancel(actionEvent);
     }
 
 

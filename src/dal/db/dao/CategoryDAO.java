@@ -25,7 +25,7 @@ public class CategoryDAO {
         DC = new DatabaseConnector();
     }
 
-    //creates a new playlist
+    //creates a new Category
     //@param name
     //@return Category
     public Category addCategory(String name) throws Exception
@@ -60,10 +60,10 @@ public class CategoryDAO {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(sql);
 
-            // new empty list to hold all playlists
+            // new empty list to hold all Categories
             ObservableList<Category> allCategory = FXCollections.observableArrayList();
 
-            // get all playlists from database and put them in the list of playlists
+            // get all categories from database and put them in the list of categories
             while (rs.next())
             {
                 int id = rs.getInt("categoryID");
@@ -72,12 +72,12 @@ public class CategoryDAO {
                 // save the category data in a new category object
                 Category category = new Category(id, name);
 
-                // get songs in the category and put them in the playlists songlist
+                // get Movies in the category and put them in the category movielist
                 for (Movie movie : getCategory(category)) {
                     category.addMovieToList(movie);
                 }
 
-                // add the complete category to the list of playlists
+                // add the complete category to the list of categories
                 allCategory.add(category);
             }
 
@@ -98,7 +98,7 @@ public class CategoryDAO {
 
         Statement ps = connection.createStatement();
         ResultSet rs = ps.executeQuery(sql);
-        ArrayList<Movie> playlistWithMovies = new ArrayList<>();
+        ArrayList<Movie> categoryWithMovies = new ArrayList<>();
         while (rs.next())
         {
             int id = rs.getInt("movieID");
@@ -110,9 +110,9 @@ public class CategoryDAO {
 
             Movie med = new Movie(id, name, publicRating, privateRating, source);
 
-            playlistWithMovies.add(med);
+            categoryWithMovies.add(med);
         }
-        return playlistWithMovies;
+        return categoryWithMovies;
     }
 
     //Deletes a category
@@ -145,7 +145,7 @@ public class CategoryDAO {
     //Adds a movie to a category
     //@param category
     //@Param movie
-    public void addToCategory(Category category, Movie movie) throws Exception
+    public void addMovieInCategory(Category category, Movie movie) throws Exception
 
     {
         Connection connection = DC.getConnection();
@@ -166,7 +166,7 @@ public class CategoryDAO {
     //removes a movie from a single category
     //@param category
     //@param movie
-    public void removeFromCategory(Category category, Movie movie) throws Exception
+    public void removeMovieInCategory(Category category, Movie movie) throws Exception
     {
         Connection connection = DC.getConnection();
         int cId = category.getCategoryId();
@@ -225,8 +225,8 @@ public class CategoryDAO {
 
         if (false) //Set to true to run
         {
-            DAO.removePlaylistTable();
-            DAO.addPlaylistTable();
+            DAO.removeCategoryTable();
+            DAO.addCategoryTable();
         }
         if (false)
         {
@@ -240,8 +240,8 @@ public class CategoryDAO {
         }
     }
 
-    //removes old playlistTable
-    public void removePlaylistTable() throws Exception
+    //removes old categoryTable
+    public void removeCategoryTable() throws Exception
     {
         Connection connection = DC.getConnection();
 
@@ -250,7 +250,7 @@ public class CategoryDAO {
         ps.executeUpdate();
     }
 
-    //removes old playlistContentTable
+    //removes old CategoryContentTable
     public void removeMovieCategoryTable() throws Exception
     {
         Connection connection = DC.getConnection();
@@ -259,7 +259,7 @@ public class CategoryDAO {
         ps.executeUpdate();
     }
 
-    //removes old songsTable
+    //removes old MovieTable
     public void removeMovieTable() throws Exception
     {
         Connection connection = DC.getConnection();
@@ -269,8 +269,8 @@ public class CategoryDAO {
         ps.executeUpdate();
     }
 
-    //creates a new playlistTable
-    public void addPlaylistTable() throws Exception
+    //creates a new categoryTable
+    public void addCategoryTable() throws Exception
     {
         Connection connection = DC.getConnection();
 
@@ -282,7 +282,7 @@ public class CategoryDAO {
         ps.executeUpdate();
     }
 
-    //creates a new playlistContentTable
+    //creates a new categoryContentTable
     public void addMovieCategoryTable() throws Exception
     {
         Connection connection = DC.getConnection();
@@ -291,7 +291,7 @@ public class CategoryDAO {
         ps.executeUpdate();
     }
 
-    //creates a new songsTable
+    //creates a new movieTable
     public void addMovieTable() throws Exception
     {
         Connection connection = DC.getConnection();

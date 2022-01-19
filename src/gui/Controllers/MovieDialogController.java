@@ -1,19 +1,14 @@
 package gui.Controllers;
 
 import be.Movie;
-import bll.util.ConvertUtil;
 import gui.Model.PrivateMovieCollectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -32,29 +27,22 @@ public class MovieDialogController implements Initializable {
     @FXML
     private TextField txtPath;
 
-    private int songID;
+    private int movieID;
     private boolean edit;
     private PrivateMovieCollectionModel privateMovieCollectionModel;
 
 
     public MovieDialogController() throws Exception {
-        songID = 0;
+        movieID = 0;
     }
 
-    /**
-     * Opens a new window for the user to pick which file to use. Only allows for .mp3 and .wav files.
-     * Initial directory is the project folder.
-     */
-    public void choosePath(ActionEvent actionEvent) {
-        FileChooser fc = new FileChooser();
-        fc.setInitialDirectory(new java.io.File("."));
-        fc.setTitle("Choose a song");
-
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Musik filer", "*.mp3", "*.wav"));
-        File selectedFile = fc.showOpenDialog(null);
-        if (selectedFile != null) {
-            txtPath.setText(selectedFile.getPath());
-        }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        txtTitle.setText("");
+        txtArtist.setText("");
+        txtTime.setText("");
+        txtPath.setText("");
+        edit = false;
     }
 
     /**
@@ -65,41 +53,18 @@ public class MovieDialogController implements Initializable {
     }
 
     /**
-     * When the Save button is clicked the user inputs are sent on to either create a new song or update the info of
-     * an already existing song, depending on which of the "New" or "Edit" button was clicked in the main view.
+     * When the Save button is clicked the user inputs are sent on to either create a new movie or update the info of
+     * an already existing movie, depending on which of the "New" or "Edit" button was clicked in the main view.
      */
     public void save(ActionEvent actionEvent) throws Exception {
         if (!edit) {
-            privateMovieCollectionModel.createMovie(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
+            privateMovieCollectionModel.addMovie(txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
 
         } else {
-            Movie movie = new Movie(songID, txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
+            Movie movie = new Movie(movieID, txtTitle.getText(), txtArtist.getText(), txtPath.getText(), txtTime.getText());
             privateMovieCollectionModel.updateMovie(movie);
         }
         ((Stage) (((Button) actionEvent.getSource()).getScene().getWindow())).close();
-    }
-
-    /**
-     * Sets the fields to contain the current information of the song that is being edited
-     */
-    public void setSongValues(int id, String movieName, String publicRating, String privateRating, String fileLink) {
-        txtTitle.setText(movieName);
-        txtArtist.setText(publicRating);
-        txtTime.setText(privateRating);
-        txtPath.setText(fileLink);
-        songID = id;
-        edit = true;
-    }
-
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        txtTitle.setText("");
-        txtArtist.setText("");
-        txtTime.setText("");
-        txtPath.setText("");
-        edit = false;
     }
 
     public void setModel(PrivateMovieCollectionModel model) {

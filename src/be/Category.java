@@ -17,10 +17,10 @@ public class Category
     private List<Movie> listOfMovies = new ArrayList();
     private int categoryId;
 
-    public Category(int playlistID, String playlistName)
+    public Category(int categoryID, String categoryName)
     {
-        this.categoryId = playlistID;
-        this.categoryName.setValue(playlistName);
+        this.categoryId = categoryID;
+        this.categoryName.setValue(categoryName);
     }
 
     public Category(String updateCategoryName) {

@@ -1,6 +1,5 @@
 package gui.Controllers;
 
-import dal.db.dao.CategoryDAO;
 import gui.Model.PrivateMovieCollectionModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,34 +44,30 @@ public class AddMovieController {
     }
 
     /**
-     * Initialize metode, der instancierer songModel, men også sætter kategorierne i vores comboBox
+     * Initialize metode, der instancierer MovieModel, men også sætter kategorierne i vores comboBox
      */
     public void initialize() throws Exception {
 
-        CategoryDAO categoryDAO = new CategoryDAO();
-
         addMovieController = new AddMovieController();
-
-
     }
 
     /**
      * her uploades vores data til vores model layer, dataen får den fra LogicManger.
      *
      * @param title
-     * @param artist
-     * @param category
+     * @param personalRating
+     * @param privateRating
      * @throws IOException
      * @throws SQLException
      */
-    public void uploadMovieInfo(String title, String artist, String category) throws Exception {
+    public void uploadMovieInfo(String title, String personalRating, String privateRating) throws Exception {
         PrivateMovieCollectionModel privateMovieCollectionModel = new PrivateMovieCollectionModel();
 
-        privateMovieCollectionModel.createMovie(title, artist, category, fileBar.getText());
+        privateMovieCollectionModel.addMovie(title, personalRating, privateRating, fileBar.getText());
     }
 
 
-    public void goReturnMainMenu(ActionEvent actionEvent) throws IOException {
+    public void cancel(ActionEvent actionEvent) throws IOException {
         Stage swich = (Stage) cancel.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
@@ -80,22 +75,21 @@ public class AddMovieController {
     }
 
     /**
-     * her bliver songInfo læst og sendt videre til upload metoden ovenfor.
+     * her bliver MovieInfo læst og sendt videre til upload metoden ovenfor.
      *
      * @throws IOException
      * @throws SQLException
      */
-    public void saveButton(ActionEvent actionEvent) throws Exception {
+    public void save(ActionEvent actionEvent) throws Exception {
         String uploadTitle = titleBar.getText();
         String uploadPersonalRating = personalRatingBar.getText();
         String uploadImdbRaring = imdbRatingBar.getText();
         uploadMovieInfo(uploadTitle, uploadPersonalRating, uploadImdbRaring);
 
-        Stage swich = (Stage) cancel.getScene().getWindow();
+        Stage switchScene = (Stage) cancel.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
-        swich.setScene(scene);
-
+        switchScene.setScene(scene);
     }
 
     public void chooseFile(ActionEvent actionEvent) {

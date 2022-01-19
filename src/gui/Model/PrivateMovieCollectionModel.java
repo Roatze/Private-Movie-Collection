@@ -17,90 +17,90 @@ import java.util.List;
 public class PrivateMovieCollectionModel
 {
 
-    private ObservableList<Movie> movielist;
-    private ObservableList<Category> playlistlist;
-    private ObservableList<Movie> playlistWithMovies;
+    private ObservableList<Movie> movieList;
+    private ObservableList<Category> CategoryList;
+    private ObservableList<Movie> MoviesInCategoryList;
     private LogicManager lm;
 
     public PrivateMovieCollectionModel() throws Exception{
         lm = new LogicManager();
-        movielist = FXCollections.observableArrayList();
-        movielist.addAll(lm.getAllMovies());
-        playlistlist = FXCollections.observableArrayList();
-        playlistlist.addAll(lm.getAllCategory());
-        playlistWithMovies = FXCollections.observableArrayList();
+        movieList = FXCollections.observableArrayList();
+        movieList.addAll(lm.getAllMovies());
+        CategoryList = FXCollections.observableArrayList();
+        CategoryList.addAll(lm.getAllCategory());
+        MoviesInCategoryList = FXCollections.observableArrayList();
     }
 
-    public void createMovie(String name, String artistName, String filePath, String songLength) throws Exception {
-        movielist.add(lm.addMovie(name, artistName, filePath, songLength));
+    public void addMovie(String name, String artistName, String filePath, String movieLength) throws Exception {
+        movieList.add(lm.addMovie(name, artistName, filePath, movieLength));
     }
 
-    public ObservableList<Movie> getMovielist() {
-        return movielist;
+    public ObservableList<Movie> getMovieList() {
+        return movieList;
     }
 
     public void searchedMovies(String query) throws Exception {
         List<Movie> searchedMovies = lm.searchMovie(query);
-        movielist.clear();
-        movielist.addAll(searchedMovies);
+        movieList.clear();
+        movieList.addAll(searchedMovies);
     }
 
-    public void deleteMovie(Movie movie) throws Exception {
+    public void removeMovie(Movie movie) throws Exception {
         lm.removeMovie(movie);
-        movielist.remove(movie);
+        movieList.remove(movie);
     }
 
     public void updateMovie(Movie movie) throws SQLException {
         lm.updateMovie(movie);
-        movielist.clear();
-        movielist.addAll(lm.getAllMovies());
+        movieList.clear();
+        movieList.addAll(lm.getAllMovies());
     }
 
-    public ObservableList<Category> getAllPlaylists() throws Exception {
-        return playlistlist;
+    public ObservableList<Category> getAllCategories() throws Exception {
+        return CategoryList;
     }
 
-    public void createGenre (String genre) throws Exception {
+    public void addCategory(String genre) throws Exception {
         lm.addCategory(genre);
-        playlistlist.clear();
-        playlistlist.addAll(lm.getAllCategory());
+        CategoryList.clear();
+        CategoryList.addAll(lm.getAllCategory());
     }
 
 
-    public ObservableList<Movie> getPlaylist (Category category) throws Exception {
-        playlistWithMovies.addAll(lm.getCategory(category));
-        return playlistWithMovies;
+    public ObservableList<Movie> getCategory(Category category) throws Exception {
+        MoviesInCategoryList.addAll(lm.getCategory(category));
+        return MoviesInCategoryList;
 
     }
 
-    public void deletePlaylist (Category category) {
-        playlistlist.remove(category);
+    public void removeCategory(Category category) {
+        CategoryList.remove(category);
         lm.removeCategory(category);
     }
 
 
-    public void addToPlaylist(Category category, Movie movie) throws Exception {
-        lm.addToMoviesInCategory(category, movie);
-        playlistWithMovies.add(movie);
-        updatePlaylist(category);
+    public void addMoviesInCategory(Category category, Movie movie) throws Exception {
+        lm.addMoviesInCategory(category, movie);
+        MoviesInCategoryList.add(movie);
+        updateCategory(category);
     }
 
-    public void removeFromPlaylist(Category category, Movie movie) throws  Exception {
+    public void removeMoviesInCategory(Category category, Movie movie) throws  Exception {
 
         lm.removeMoviesInCategory(category, movie);
-        playlistWithMovies.remove(movie);
-        updatePlaylist(category);
+        MoviesInCategoryList.remove(movie);
+        updateCategory(category);
     }
 
-    public void clearPlaylist(Category category) throws Exception {
+    public void clearCategory(Category category) throws Exception {
         lm.clearCategory(category);
-        playlistWithMovies.clear();
+        MoviesInCategoryList.clear();
     }
 
-    public void updatePlaylist(Category category) throws  Exception {
+    public void updateCategory(Category category) throws  Exception {
         lm.updateCategory(category);
-        playlistlist.clear();
-        playlistlist.addAll(lm.getAllCategory());
+        CategoryList.clear();
+        CategoryList.addAll(lm.getAllCategory());
     }
 }
 
