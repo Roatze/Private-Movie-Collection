@@ -32,31 +32,30 @@ public class LogicManager
      */
 
     // here we create a song with the input from the gui, sending it to Dal.
-    public Movie createMovie (String name, String publicRating, String privateRating, String fileLink) throws Exception
+    public Movie addMovie(String name, String publicRating, String privateRating, String fileLink) throws Exception
     {
-       return(movieDAO.createMovie(name, publicRating, privateRating, fileLink));
+       return(movieDAO.addMovie(name, publicRating, privateRating, fileLink));
     }
 
-
     //Here we get all songs from the dal.
-    public List<Movie> getAllSongs() throws SQLException
+    public List<Movie> getAllMovies() throws SQLException
     {
         return (movieDAO.getAllMovie());
     }
     // here we delete a movie from the database.
     public void removeMovie(Movie movie)
     {
-        movieDAO.deleteMovie(movie);
+        movieDAO.removeMovie(movie);
     }
     //here we update a movie in the database.
-    public void updateSong(Movie movie)
+    public void updateMovie(Movie movie)
     {
         movieDAO.updateMovie(movie);
     }
 
     public List<Movie> searchMovie(String query) throws Exception {
-        List<Movie> allMovies = getAllSongs();
-        List<Movie> searchedMovies = movieSearcher.SearchSongs(allMovies, query);
+        List<Movie> allMovies = getAllMovies();
+        List<Movie> searchedMovies = movieSearcher.SearchMovies(allMovies, query);
         return searchedMovies;
     }
 
@@ -64,44 +63,46 @@ public class LogicManager
      * Methods for CategoryDAO.
      */
 
-    public List<Category> getAllPlaylists() throws Exception {
+    public List<Category> getAllCategory() throws Exception {
         return categoryDAO.getAllCategory();
     }
-    public Category createPlaylist(String name) throws Exception
+    public Category addCategory(String name) throws Exception
     {
-       return categoryDAO.createCategory(name);
+       return categoryDAO.addCategory(name);
     }
 
-    public List<Movie> getPlaylist (Category category) throws Exception
+    public List<Movie> getCategory(Category category) throws Exception
     {
         return categoryDAO.getCategory(category);
     }
 
-    public void deletePlaylist(Category category)
+    public void removeCategory(Category category)
     {
-        categoryDAO.deleteCategory(category);
+        categoryDAO.removeCategory(category);
     }
 
-    public void addToPlaylist(Category category, Movie movie) throws Exception
+    public void clearCategory(Category category) throws Exception
+    {
+        categoryDAO.clearCategory(category);
+    }
+    public void updateCategory(Category category) throws Exception
+    {
+        categoryDAO.updateCategory(category);
+    }
+
+    public void addToMoviesInCategory(Category category, Movie movie) throws Exception
 
     {
         categoryDAO.addToCategory(category, movie);
     }
 
     //deleteCategory
-    public void removeFromPlaylist (Category category, Movie movie) throws Exception
+    public void removeMoviesInCategory(Category category, Movie movie) throws Exception
     {
         categoryDAO.removeFromCategory(category, movie);
     }
 
 
-    public void clearPlaylist(Category category) throws Exception
-    {
-        categoryDAO.clearCategory(category);
-    }
-    public void updatePlaylist (Category category) throws Exception
-    {
-        categoryDAO.updateCategory(category);
-    }
+
 }
 

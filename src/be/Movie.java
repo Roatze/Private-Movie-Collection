@@ -12,25 +12,23 @@ import java.sql.Timestamp;
  */
 public class Movie
 {
-    private IntegerProperty songId = new SimpleIntegerProperty();
+    private IntegerProperty movieId = new SimpleIntegerProperty();
     private StringProperty movieName = new SimpleStringProperty();
     private StringProperty publicRating = new SimpleStringProperty();
     private StringProperty privateRating = new SimpleStringProperty();
     private String fileLink;
-    private Timestamp lastview;
 
-    public Movie(IntegerProperty songId, StringProperty movieName, StringProperty publicRating, StringProperty privateRating, String fileLink, Timestamp lastview) {
-        this.songId = songId;
+    public Movie(IntegerProperty movieId, StringProperty movieName, StringProperty publicRating, StringProperty privateRating, String fileLink, Timestamp lastview) {
+        this.movieId = movieId;
         this.movieName = movieName;
         this.publicRating = publicRating;
         this.privateRating = privateRating;
         this.fileLink = fileLink;
-        this.lastview = lastview;
     }
 
-    public Movie(int songID, String movieName, String publicRating, String privateRating, String fileLink)
+    public Movie(int movieId, String movieName, String publicRating, String privateRating, String fileLink)
     {
-        this.songId.set(songID);
+        this.movieId.set(movieId);
         this.movieName.set(movieName);
         this.publicRating.set(publicRating);
         this.privateRating.set(privateRating);
@@ -43,7 +41,7 @@ public class Movie
     }
 
     public int getMovieId() {
-        return songId.get();
+        return movieId.get();
     }
 
     public String getPublicRating() {

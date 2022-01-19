@@ -1,23 +1,17 @@
 package gui.Controllers;
 
-import be.Category;
-import be.Movie;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.db.dao.CategoryDAO;
 import gui.Model.PrivateMovieCollectionModel;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -26,22 +20,19 @@ public class AddMovieController {
 
 
     @FXML
-    public Button returnMainMenu;
+    public Button cancel;
 
     @FXML
     public TextField titleBar;
 
     @FXML
-    public TextField personalRatngBar;
+    public TextField personalRatingBar;
 
     @FXML
-    public TextField imdbRaringBar;
+    public TextField imdbRatingBar;
 
     @FXML
-    public Button movieSaveButton;
-
-    @FXML
-    public ComboBox genreMenu;
+    public Button SaveButton;
 
     @FXML
     public TextField fileBar;
@@ -82,7 +73,7 @@ public class AddMovieController {
 
 
     public void goReturnMainMenu(ActionEvent actionEvent) throws IOException {
-        Stage swich = (Stage) returnMainMenu.getScene().getWindow();
+        Stage swich = (Stage) cancel.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
         swich.setScene(scene);
@@ -94,34 +85,18 @@ public class AddMovieController {
      * @throws IOException
      * @throws SQLException
      */
-    public void getMovieInfo(ActionEvent actionEvent) throws Exception {
+    public void saveButton(ActionEvent actionEvent) throws Exception {
         String uploadTitle = titleBar.getText();
-        String uploadPersonalRatng = personalRatngBar.getText();
-        String uploadImdbRaring = imdbRaringBar.getText();
-        uploadMovieInfo(uploadTitle, uploadPersonalRatng, uploadImdbRaring);
+        String uploadPersonalRating = personalRatingBar.getText();
+        String uploadImdbRaring = imdbRatingBar.getText();
+        uploadMovieInfo(uploadTitle, uploadPersonalRating, uploadImdbRaring);
 
-        Stage swich = (Stage) returnMainMenu.getScene().getWindow();
+        Stage swich = (Stage) cancel.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../FXML/PrivateMovieCollection.fxml"));
         Scene scene = new Scene(parent);
         swich.setScene(scene);
 
     }
-    
-    /*
-    Error metode.
-     */
-    private void error(String text) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.YES);
-        alert.showAndWait();
-    }
-
-    public void moreGenreBtn(ActionEvent event) throws IOException {
-        Stage swich = (Stage) returnMainMenu.getScene().getWindow();
-        Parent parent = FXMLLoader.load(getClass().getResource("../view/Genre.fxml"));
-        Scene scene = new Scene(parent);
-        swich.setScene(scene);
-    }
-
 
     public void chooseFile(ActionEvent actionEvent) {
         fileBar.setText("");

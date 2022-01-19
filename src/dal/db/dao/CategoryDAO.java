@@ -28,7 +28,7 @@ public class CategoryDAO {
     //creates a new playlist
     //@param name
     //@return Category
-    public Category createCategory(String name) throws Exception
+    public Category addCategory(String name) throws Exception
     {
         Connection connection = DC.getConnection();
 
@@ -117,7 +117,7 @@ public class CategoryDAO {
 
     //Deletes a category
     //@param category
-    public void deleteCategory(Category category)
+    public void removeCategory(Category category)
     {
         int pId = category.getCategoryId();
 
@@ -225,23 +225,23 @@ public class CategoryDAO {
 
         if (false) //Set to true to run
         {
-            DAO.deletePlaylistTable();
-            DAO.createPlaylistTable();
+            DAO.removePlaylistTable();
+            DAO.addPlaylistTable();
         }
         if (false)
         {
-            DAO.deleteMovieCategoryTable();
-            DAO.createMovieCategoryTable();
+            DAO.removeMovieCategoryTable();
+            DAO.addMovieCategoryTable();
         }
         if (false)
         {
-            DAO.deleteMovieTable();
-            DAO.createMovieTable();
+            DAO.removeMovieTable();
+            DAO.addMovieTable();
         }
     }
 
     //removes old playlistTable
-    public void deletePlaylistTable() throws Exception
+    public void removePlaylistTable() throws Exception
     {
         Connection connection = DC.getConnection();
 
@@ -251,7 +251,7 @@ public class CategoryDAO {
     }
 
     //removes old playlistContentTable
-    public void deleteMovieCategoryTable() throws Exception
+    public void removeMovieCategoryTable() throws Exception
     {
         Connection connection = DC.getConnection();
         String sql = "DROP TABLE catMovie";
@@ -260,7 +260,7 @@ public class CategoryDAO {
     }
 
     //removes old songsTable
-    public void deleteMovieTable() throws Exception
+    public void removeMovieTable() throws Exception
     {
         Connection connection = DC.getConnection();
 
@@ -270,7 +270,7 @@ public class CategoryDAO {
     }
 
     //creates a new playlistTable
-    public void createPlaylistTable() throws Exception
+    public void addPlaylistTable() throws Exception
     {
         Connection connection = DC.getConnection();
 
@@ -283,7 +283,7 @@ public class CategoryDAO {
     }
 
     //creates a new playlistContentTable
-    public void createMovieCategoryTable() throws Exception
+    public void addMovieCategoryTable() throws Exception
     {
         Connection connection = DC.getConnection();
         String sql = "CREATE TABLE catMovie ( ID int IDENTITY(1,1) PRIMARY KEY, categoryID int, movieID int);";
@@ -292,7 +292,7 @@ public class CategoryDAO {
     }
 
     //creates a new songsTable
-    public void createMovieTable() throws Exception
+    public void addMovieTable() throws Exception
     {
         Connection connection = DC.getConnection();
 

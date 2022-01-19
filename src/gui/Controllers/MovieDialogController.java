@@ -80,23 +80,6 @@ public class MovieDialogController implements Initializable {
     }
 
     /**
-     * Method gets the duration from the media, creates a String from it
-     * and then inputs into the time text field automatically
-     */
-    public void setTxtTime(String file) {
-        String fileString = "file:/" + file.replace("\\", "/");
-        System.out.println(fileString);
-        Media media = new Media(fileString);
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnReady(new Runnable() {
-            @Override
-            public void run() {
-                txtTime.setText(ConvertUtil.doubleSecToTime(mediaPlayer.getMedia().getDuration().toSeconds()));
-            }
-        });
-    }
-
-    /**
      * Sets the fields to contain the current information of the song that is being edited
      */
     public void setSongValues(int id, String movieName, String publicRating, String privateRating, String fileLink) {

@@ -30,7 +30,7 @@ public class MovieDAO {
     }
 
     // This is the method to create a song in the Database. This is also where the song gets an ID.
-    public Movie createMovie(String movieName, String publicRating, String privateRating, String fileLink) throws Exception
+    public Movie addMovie(String movieName, String publicRating, String privateRating, String fileLink) throws Exception
     {
         Connection con = DC.getConnection();
         String rating = ConvertUtil.toCombined(publicRating,privateRating);
@@ -83,7 +83,7 @@ public class MovieDAO {
         }
     }
 
-    public void deleteMovie(Movie movie)
+    public void removeMovie(Movie movie)
     {
         String sql1 = "DELETE FROM catMovie WHERE movieID = (?);";
         String sql2 = "DELETE FROM movie WHERE movieID = (?);";

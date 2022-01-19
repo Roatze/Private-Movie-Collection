@@ -23,7 +23,7 @@ public class Category
         this.categoryName.setValue(playlistName);
     }
 
-    public Category(String updatePlaylistName) {
+    public Category(String updateCategoryName) {
     }
 
     public void addMovieToList(Movie movie)
