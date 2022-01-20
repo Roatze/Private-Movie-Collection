@@ -17,24 +17,21 @@ import java.sql.SQLException;
 
 public class AddMovieController {
 
+    //here we call the Button/Textfield from FXML that we use
+    @FXML
+    private Button cancel;
 
     @FXML
-    public Button cancel;
+    private TextField titleBar;
 
     @FXML
-    public TextField titleBar;
+    private TextField personalRatingBar;
 
     @FXML
-    public TextField personalRatingBar;
+    private TextField imdbRatingBar;
 
     @FXML
-    public TextField imdbRatingBar;
-
-    @FXML
-    public Button SaveButton;
-
-    @FXML
-    public TextField fileBar;
+    private TextField fileBar;
 
     AddMovieController addMovieController;
 
@@ -66,7 +63,11 @@ public class AddMovieController {
         privateMovieCollectionModel.addMovie(title, personalRating, privateRating, fileBar.getText());
     }
 
-
+    /**
+     * Her har vi vores cancel knap, den tager en tilbage til vores main window
+     * @param actionEvent
+     * @throws IOException
+     */
     public void cancel(ActionEvent actionEvent) throws IOException {
         Stage swich = (Stage) cancel.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../View/PrivateMovieCollection.fxml"));
@@ -75,7 +76,7 @@ public class AddMovieController {
     }
 
     /**
-     * her bliver MovieInfo læst og sendt videre til upload metoden ovenfor.
+     * her bliver vores film info læst og sendt videre til upload metoden ovenfor.
      *
      * @throws IOException
      * @throws SQLException
@@ -92,6 +93,10 @@ public class AddMovieController {
         switchScene.setScene(scene);
     }
 
+    /**
+     * Her åbner vi en FileChooser og finder stien/fil-link til vores film
+     * @param actionEvent
+     */
     public void chooseFile(ActionEvent actionEvent) {
         fileBar.setText("");
         FileChooser fileChooser = new FileChooser();

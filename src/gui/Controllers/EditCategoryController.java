@@ -14,10 +14,11 @@ import java.io.IOException;
 
 public class EditCategoryController {
 
+    //here we call the Button/Textfield from FXML that we use
     @FXML
-    public Button cancel;
+    private Button cancel;
     @FXML
-    public TextField edit;
+    private TextField edit;
 
     private Category selectedCategory;
 
@@ -26,7 +27,11 @@ public class EditCategoryController {
     public EditCategoryController() throws Exception {
     }
 
-
+    /**
+     * This is our cancel button, it cancels the act of editing a category and takes us to the main window again
+     * @param actionEvent
+     * @throws IOException
+     */
     public void cancel(ActionEvent actionEvent) throws IOException {
         Stage switchScene = (Stage) cancel.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../View/PrivateMovieCollection.fxml"));
@@ -34,6 +39,11 @@ public class EditCategoryController {
         switchScene.setScene(scene);
     }
 
+    /**
+     * his is our save button, it saves the new name of the Category
+     * @param actionEvent
+     * @throws Exception
+     */
     public void save(ActionEvent actionEvent) throws Exception {
         String updateGenreName = edit.getText();
         this.selectedCategory.setCategoryName(updateGenreName);
@@ -42,8 +52,12 @@ public class EditCategoryController {
         cancel(actionEvent);
     }
 
-    public void setSelectedCategory(Category genre) {
-        this.selectedCategory = genre;
-        edit.setText(genre.getCategoryName());
+    /**
+     * this takes the selected category and changes the name
+     * @param category
+     */
+    public void setSelectedCategory(Category category) {
+        this.selectedCategory = category;
+        edit.setText(category.getCategoryName());
     }
 }

@@ -52,16 +52,11 @@ public class PrivateMovieCollectionController implements Initializable {
     private Button buttonAddCategory;
     @FXML
     private Button buttonAddMovie;
-    @FXML
-    private Button ButtonEditMovie;
-    @FXML
-    private Button ButtonEditCategory;
 
     public Category selectedCategory;
     public Movie selectedCatMovie;
     public Movie selectedMovie;
     private gui.Model.PrivateMovieCollectionModel PrivateMovieCollectionModel;
-    private MovieDialogController movieDialogController;
 
 
     public PrivateMovieCollectionController() throws Exception {
@@ -70,18 +65,14 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     /**
-     * Initializes MOVIE AND CATEGORY
+     * Initializes Movie, Category and MoviesInCategory
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setTvMovieTable();
         setTcCategoryTable();
         setTcMoviesInCategoryTable();
-        //selectedMovie();
-        //selectedCatMovie();
-        //selectedCategory();
-
-
+        
         txtSearchBar.textProperty().addListener((observableValue, oldValue, newValue) -> {
             try {
                 PrivateMovieCollectionModel.searchedMovies(newValue);
@@ -90,10 +81,10 @@ public class PrivateMovieCollectionController implements Initializable {
             }
         });
 
+        //Used for the openMovie method, detect a double click and collects information
         tvMoviesInCategoryTable.setOnMouseClicked((MouseEvent event) -> {
             setSelectedItems();
             if (event.getClickCount() == 2) {
-                System.out.println("ur mom");
                 try {
                     OpenMovie();
                 } catch (IOException e) {
@@ -113,7 +104,9 @@ public class PrivateMovieCollectionController implements Initializable {
 
 
     }
-
+    /**
+     * Method used for opening a movie
+     */
     public void OpenMovie() throws IOException {
         if(selectedCatMovie != null) {
             Movie selectedMovie = selectedCatMovie;
@@ -125,7 +118,9 @@ public class PrivateMovieCollectionController implements Initializable {
             }
         }
     }
-
+    /**
+     * Method used for adding a movie
+     */
     public void addMovie(ActionEvent actionEvent) throws IOException {
         Stage switchScene = (Stage) buttonAddMovie.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../View/AddMovie.fxml"));
@@ -134,6 +129,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     /**
+     * Method used to remove a movie
      * Creates a dialog to ask the user to confirm the deletion, then deletes the selected song
      */
     public void removeMovie(ActionEvent actionEvent) throws Exception {
@@ -143,7 +139,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     /**
-     * Adds the selected Movie to the selected Genre when then button is pressed
+     * Adds the selected Movie to the selected category when then button is pressed
      */
     public void addMoviesInCategory(ActionEvent actionEvent) throws Exception {
         setSelectedItems();
@@ -153,7 +149,9 @@ public class PrivateMovieCollectionController implements Initializable {
         tvMoviesInCategoryTable.getItems().add(selectedMovie);
         tvMoviesInCategoryTable.refresh();
     }
-
+    /**
+     * Method used for adding a category
+     */
     public void addCategory(ActionEvent actionEvent) throws Exception {
         Stage switchScene = (Stage) buttonAddCategory.getScene().getWindow();
         Parent parent = FXMLLoader.load(getClass().getResource("../View/AddCategory.fxml"));
@@ -162,6 +160,7 @@ public class PrivateMovieCollectionController implements Initializable {
     }
 
     /**
+     * Method used to remove a category
      * Creates a dialog to ask the user to confirm the deletion, then deletes the selected category
      */
     public void removeCategory(ActionEvent actionEvent) {
@@ -169,7 +168,9 @@ public class PrivateMovieCollectionController implements Initializable {
             PrivateMovieCollectionModel.removeCategory(selectedCategory);
             tvCategoryTable.refresh();
     }
-
+    /**
+     * Method used to remove a movie from a category
+     */
     public void removeFromCategory(ActionEvent actionEvent) throws Exception {
         if (SimpleDialogController.delete()) {
             PrivateMovieCollectionModel.removeMoviesInCategory(selectedCategory,
@@ -178,11 +179,12 @@ public class PrivateMovieCollectionController implements Initializable {
             tvMoviesInCategoryTable.refresh();
         }
     }
-
+    /**
+     * Method used to edit a category
+     */
     public void editCategory(ActionEvent actionEvent) throws IOException {
         setSelectedItems();
         if(selectedCategory != null) {
-            //Category selectedCategory = tvCategoryTable.getSelectionModel().getSelectedItem();
             FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/View/EditCategory.fxml"));
             Scene mainWindowScene = null;
             try {
@@ -190,20 +192,22 @@ public class PrivateMovieCollectionController implements Initializable {
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
-            Stage editGenreStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            editGenreStage.setScene(mainWindowScene);
+            Stage editCategoryStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            editCategoryStage.setScene(mainWindowScene);
             EditCategoryController editCategoryController = parent.getController();
             editCategoryController.setSelectedCategory(selectedCategory);
-            editGenreStage.show();
+            editCategoryStage.show();
         }else{
             System.out.println("No Genre are selected");
         }
     }
 
+    /**
+     * Method used to edit a movie
+     */
     public void editMovie(ActionEvent actionEvent) throws IOException {
         setSelectedItems();
         if(selectedMovie != null) {
-            //Movie selectedMovie = tvMovieTable.getSelectionModel().getSelectedItem();
             FXMLLoader parent = new FXMLLoader(getClass().getResource("/gui/View/EditMovie.fxml"));
             Scene mainWindowScene = null;
             try {
@@ -261,39 +265,6 @@ public class PrivateMovieCollectionController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Changes selected Movie to the movie clicked in the tvMovieTable
-     */
-    private void selectedMovie() {
-        this.tvMovieTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (selectedMovie != null) {
-                this.selectedMovie = (Movie) newValue;
-            }
-        }));
-    }
-
-    /**
-     * Changes selectedCatMovie to the movie clicked in the tvMoviesInCategoryTable
-     */
-    private void selectedCatMovie() {
-        this.tvMoviesInCategoryTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (selectedCatMovie != null) {
-                this.selectedCatMovie = (Movie) newValue;
-            }
-        }));
-    }
-
-    /**
-     * Changes selected Genre to the movie clicked in the tvMovieTable
-     */
-    private void selectedCategory() {
-        this.tvCategoryTable.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
-            if (selectedCategory != null) {
-                this.selectedCategory = (Category) newValue;
-            }
-        }));
     }
 
     /**

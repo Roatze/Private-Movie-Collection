@@ -82,7 +82,7 @@ public class MovieDAO {
             return allMovies;
         }
     }
-
+    //This is the method that removes a movie
     public void removeMovie(Movie movie)
     {
         String sql1 = "DELETE FROM catMovie WHERE movieID = (?);";
@@ -104,7 +104,7 @@ public class MovieDAO {
             throwables.printStackTrace();
         }
     }
-
+    //this is the method that updates the information our movie have
     public void updateMovie(Movie movie)
     {
 
