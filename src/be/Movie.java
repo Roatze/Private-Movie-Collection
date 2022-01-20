@@ -8,7 +8,7 @@ import javafx.beans.property.StringProperty;
 import java.sql.Timestamp;
 
 /**
- * This is the Movie class, here we specify what a Movie is.
+ * Here we describe the Movie class, and what it can do.
  */
 public class Movie
 {

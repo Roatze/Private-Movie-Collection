@@ -21,6 +21,7 @@ import java.util.ResourceBundle;
 
 public class EditMovieController implements Initializable {
 
+    //here we call the Button/Textfield from FXML that we use
     @FXML
     private TextField titleBar;
     @FXML
@@ -48,7 +49,7 @@ public class EditMovieController implements Initializable {
     }
 
     /**
-     * Gets the values of the selected movie.
+     * sets the values of the selected movie.
      */
     public void setSelectedMovie(Movie movie) {
         titleBar.setText(movie.getMovieName());
@@ -86,7 +87,10 @@ public class EditMovieController implements Initializable {
         cancel(actionEvent);
     }
 
-
+    /**
+     * Her åbner vi en FileChooser og finder stien/fil-link til vores film
+     * @param actionEvent
+     */
     public void chooseFile(ActionEvent actionEvent) {
         fileBar.setText("");
         FileChooser fileChooser = new FileChooser();
